@@ -7,6 +7,8 @@ import Bar from "./Bar/Bar.jsx";
 import Baz from "./Baz/Baz.jsx";
 import Error from "./Error/Error.jsx";
 
+import About from "./Pages/About.jsx";
+
 const externalContent = {
   id: "article-1",
   title: "An Article",
@@ -40,6 +42,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/foo" exact component={Foo} />
+        <Route path="/About" exact component={About} />
         <Route
           path="/bar/:categoryId/:productId"
           exact
