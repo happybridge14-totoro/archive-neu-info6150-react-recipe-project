@@ -55,6 +55,7 @@
 
 body {
   margin: 0px;
+  color: var(--color-solid);
 }
 h1 {
   font-size: 2em;

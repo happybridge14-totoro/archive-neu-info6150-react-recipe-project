@@ -1,0 +1,28 @@
+.error {
+  font-size: 16px;
+}
+.container {
+  max-width: 60rem;
+  margin: 0px auto 50px auto;
+}
+.error h1 {
+  font-size: 4rem;
+}
+.error p {
+  font-size: 2rem;
+}
+.error a {
+  color: var(--color-decorated);
+}
+.imageContainer {
+  min-height: 320px;
+  margin-left: 0px;
+}
+.gap {
+  height: 30px;
+}
+.image  {
+  float: left;
+  height: 320px;
+  margin-right: 30px;
+}

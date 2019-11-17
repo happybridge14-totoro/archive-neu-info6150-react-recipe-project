@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Header from "./Widgets/Header.jsx";
 import Footer from "./Widgets/Footer.jsx";
@@ -8,10 +9,10 @@ import Home from "./Home/Home.jsx";
 import Foo from "./Foo/Foo.jsx";
 import Bar from "./Bar/Bar.jsx";
 import Baz from "./Baz/Baz.jsx";
-import Error from "./Error/Error.jsx";
 
 import About from "./Pages/About.jsx";
 import Contact from "./Pages/Contact.jsx";
+import Error from "./Pages/Error.jsx";
 
 import styles from "./App.css"
 
@@ -21,6 +22,7 @@ const externalContent = {
   author: "April Bingham",
   text: "Some text in the article"
 };
+
 
 function App() {
   return (

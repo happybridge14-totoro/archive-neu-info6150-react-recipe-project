@@ -3,7 +3,7 @@ import styles from "./Footer.module.css";
 
 const Footer = (props) => {
     return (
-      <footer>
+      <footer className={styles.footer}>
         <ul className={styles.container}>
           <li>
             <a className={`clickable ${styles.footerBtn}`} href="/about">About</a>
