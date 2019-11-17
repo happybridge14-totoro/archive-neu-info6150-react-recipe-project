@@ -5,15 +5,15 @@ const Footer = (props) => {
     return (
       <footer>
         <ul className={styles.container}>
-          <ui>
+          <li>
             <a className={`clickable ${styles.footerBtn}`} href="/about">About</a>
-          </ui>
-          <ui>
+          </li>
+          <li>
             <a className={`clickable ${styles.footerBtn}`} href="/contact">Contact Us</a>
-          </ui>
-          <ui>
+          </li>
+          <li>
             <span>© 2019 INFO6150-Team3</span>
-          </ui>
+          </li>
         </ul>
       </footer>
     )

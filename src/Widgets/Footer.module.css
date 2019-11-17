@@ -5,6 +5,10 @@
   max-width: 60rem;
   text-align: center;
   margin: auto;
+  list-style: none;
+}
+.container li {
+  display: inline-block;
 }
 .footerBtn {
   font-size: 18px;
