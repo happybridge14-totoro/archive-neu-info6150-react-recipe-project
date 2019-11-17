@@ -1,6 +1,18 @@
 import React from 'react'
 import styles from './About.module.css';
+import {getContractInfo} from '../Proxy/Data.js';
 
+const contactInfo = getContractInfo();
+const createNodes = () => {
+  let result = [];
+  contactInfo.forEach((v, i) => {
+    result.push(<h2 key={2*i}>{v.name}</h2>);
+    result.push(<address key={2*i+1}>
+      <a href={`mailto:${v.email}`}>{v.email}</a>
+    </address>);
+  });
+  return result;
+}
 const About = () => {
     return (
         <div className={styles.contact}>
@@ -8,31 +20,8 @@ const About = () => {
             <h1>
               Contact Us:
             </h1>
-            <h2>
-              Yiji Huang:
-            </h2>
-            <address>
-              <a href="mailto:huang.yiji@husky.neu.edu">huang.yiji@husky.neu.edu</a>
-            </address>
-            <h2>
-              Yiyi Zhou:
-            </h2>
-            <address>
-              <a href="mailto:zhou.yiyi@husky.neu.edu">zhou.yiyi@husky.neu.edu</a>
-            </address>
-            <h2>
-              Yuwei Zhang:
-            </h2>
-            <address>
-              <a href="mailto:zhang.yuwei1@husky.neu.edu">zhang.yuwei1@husky.neu.edu</a>
-            </address>
-            <h2>
-              Zhong Zheng:
-            </h2>
-            <address>
-              <a href="mailto:zheng.zho@husky.neu.edu">zheng.zho@husky.neu.edu</a>
-            </address>
-          </section>
+            {createNodes()}
+            </section>
         </div>
     )
 }
