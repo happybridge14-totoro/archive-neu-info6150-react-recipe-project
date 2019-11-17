@@ -28,6 +28,31 @@
 .button-background-color {
   background-color: var(--color-decorated);
 }
+.clickable {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-solid);
+  position: relative;
+  box-sizing: border-box;
+}
+.clickable.selected,
+.clickable:focus {
+  color: var(--color-solid);
+}
+.clickable:after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0px;
+  left: 0px;
+  background-color: var(--color-decorated);
+  transition: width 0.3s;
+}
+.clickable:hover:after {
+  width: 100%;
+}
+
 body {
   margin: 0px;
 }

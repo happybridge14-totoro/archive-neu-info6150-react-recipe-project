@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Header from "./Widgets/Header.jsx";
+import Footer from "./Widgets/Footer.jsx";
 
 import Home from "./Home/Home.jsx";
 import Foo from "./Foo/Foo.jsx";
@@ -23,25 +24,7 @@ const externalContent = {
 function App() {
   return (
     <Router className={styles.container}>
-      <Header></Header>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/foo">Foo</Link>
-            </li>
-            <li>
-              <Link to="/bar/hats/sombrero">Bar</Link>
-            </li>
-            <li>
-              <Link to="/baz">Baz</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Header/>
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
@@ -65,6 +48,7 @@ function App() {
         />
         <Route component={Error} />
       </Switch>
+      <Footer/>
     </Router>
   );
 }

@@ -4,7 +4,7 @@ import Header from '../Widgets/Header';
 const About = () => {
     return (
         <div>
-            <Header></Header>
+          hello
         </div>
     )
 }

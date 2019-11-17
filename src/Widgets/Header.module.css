@@ -8,7 +8,7 @@
   padding-top: 20px;
 }
 .nav {
-  max-width: 80rem;
+  max-width: 60rem;
   /* width: 500px; */
   line-height: 40px;
   height: 40px;
@@ -16,33 +16,11 @@
   margin: auto;
   text-align: left;
 }
-.clickable {
+.navButton {
   font-size: 24px;
   display: inline-block;
   line-height: var(--nav-size);
   height: var(--nav-size);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--color-solid);
-  position: relative;
-  box-sizing: border-box;
-}
-.clickable.selected,
-.clickable:focus {
-  color: var(--color-solid);
-}
-.clickable:after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: 0px;
-  left: 0px;
-  background-color: var(--color-decorated);
-  transition: width 0.3s;
-}
-.clickable:hover:after {
-  width: 100%;
 }
 .home {
   margin-right: 20px;

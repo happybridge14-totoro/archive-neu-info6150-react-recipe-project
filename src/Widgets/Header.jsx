@@ -21,8 +21,8 @@ export default class Header extends Component {
     return (
       <header className={`${styles.header} background-color`}>
         <nav className={styles.nav}>
-          <a className={`${styles.home} ${styles.clickable}`} href="/">Home</a>
-          <a className={`${styles.category} ${styles.clickable}`} href="/">Category</a>
+          <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
+          <a className={`clickable ${styles.category} ${styles.clickable} ${styles.navButton}`} href="/">Category</a>
           <img className={styles.logo} src="../../images/logo.png" alt="logo"/>
           <div className={styles.search}>
             <input type="text" value={this.state.value} onChange={this.handleChange} maxLength="16"/>

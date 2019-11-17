@@ -1,0 +1,14 @@
+.footer {
+  width: 100%;
+}
+.container {
+  max-width: 60rem;
+  text-align: center;
+  margin: auto;
+}
+.footerBtn {
+  font-size: 18px;
+  margin-right: 20px;
+  height: 40px;
+  line-height: 40px;
+}
