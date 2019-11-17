@@ -1,27 +1,35 @@
 import React, { Component } from "react";
+import styles from "./Header.module.css";
 
 export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      submittedForm: null
+      value: ""
     };
   }
 
-  onSubmit = async e => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    this.setState({ submittedForm: data });
-  };
+  onSearch = (e) => {
+    console.log("hello");
+  }
+
+  handleChange = (e) => {
+    this.setState({value: e.target.value});
+  }
 
   render() {
-    return this.state.submittedForm ? (
-      <div>Your form entry was {this.state.submittedForm.get("myText")}</div>
-    ) : (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" name="myText" />
-        <input type="submit" value="Send it" />
-      </form>
-    );
+    return (
+      <header className={`${styles.header} background-color`}>
+        <nav className={styles.nav}>
+          <a className={`${styles.home} ${styles.clickable}`} href="/">Home</a>
+          <a className={`${styles.category} ${styles.clickable}`} href="/">Category</a>
+          <img className={styles.logo} src="../../images/logo.png" alt="logo"/>
+          <div className={styles.search}>
+            <input type="text" value={this.state.value} onChange={this.handleChange} maxLength="16"/>
+            <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={this.onSearch}/>
+          </div>
+        </nav>
+      </header>
+    )
   }
 }

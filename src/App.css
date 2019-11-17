@@ -1,0 +1,33 @@
+/* Css templates */
+:root {
+  --color-surface: white;
+  --color-solid: #232323;
+  --color-decorated: teal;
+  --color-minor: #727272;
+  --color-striking: #f05000;
+}
+
+.main-text-color {
+  color: var(--color-solid);
+}
+.minior-text-color {
+  color: var(--color-minor);
+}
+.striking-color {
+  color: var(--color-striking);
+}
+.decorated-color {
+  color: var(--color-decorated);
+}
+.text-color-with-colorful-background {
+  color: var(--color-surface);
+}
+.background-color {
+  background-color: var(--color-surface);
+}
+.button-background-color {
+  background-color: var(--color-decorated);
+}
+body {
+  margin: 0px;
+}

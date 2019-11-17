@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import Header from "./Widgets/Header.jsx";
+
 import Home from "./Home/Home.jsx";
 import Foo from "./Foo/Foo.jsx";
 import Bar from "./Bar/Bar.jsx";
@@ -8,6 +10,8 @@ import Baz from "./Baz/Baz.jsx";
 import Error from "./Error/Error.jsx";
 
 import About from "./Pages/About.jsx";
+
+import styles from "./App.css"
 
 const externalContent = {
   id: "article-1",
@@ -18,7 +22,8 @@ const externalContent = {
 
 function App() {
   return (
-    <Router>
+    <Router className={styles.container}>
+      <Header></Header>
       <header>
         <nav>
           <ul>
