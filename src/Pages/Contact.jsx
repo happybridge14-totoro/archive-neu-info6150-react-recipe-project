@@ -11,35 +11,27 @@ const About = () => {
             <h2>
               Yiji Huang:
             </h2>
-            <p>
-              <address>
-                <a href="mailto:huang.yiji@husky.neu.edu">huang.yiji@husky.neu.edu</a>
-              </address>
-            </p>
+            <address>
+              <a href="mailto:huang.yiji@husky.neu.edu">huang.yiji@husky.neu.edu</a>
+            </address>
             <h2>
               Yiyi Zhou:
             </h2>
-            <p>
-              <address>
-                <a href="mailto:zhou.yiyi@husky.neu.edu">zhou.yiyi@husky.neu.edu</a>
-              </address>
-            </p>
+            <address>
+              <a href="mailto:zhou.yiyi@husky.neu.edu">zhou.yiyi@husky.neu.edu</a>
+            </address>
             <h2>
               Yuwei Zhang:
             </h2>
-            <p>
-              <address>
-                <a href="mailto:zhang.yuwei1@husky.neu.edu">zhang.yuwei1@husky.neu.edu</a>
-              </address>
-            </p>
+            <address>
+              <a href="mailto:zhang.yuwei1@husky.neu.edu">zhang.yuwei1@husky.neu.edu</a>
+            </address>
             <h2>
               Zhong Zheng:
             </h2>
-            <p>
-              <address>
-                <a href="mailto:zheng.zho@husky.neu.edu">zheng.zho@husky.neu.edu</a>
-              </address>
-            </p>
+            <address>
+              <a href="mailto:zheng.zho@husky.neu.edu">zheng.zho@husky.neu.edu</a>
+            </address>
           </section>
         </div>
     )

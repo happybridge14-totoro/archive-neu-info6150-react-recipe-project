@@ -2,14 +2,13 @@ import React from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Header from "./Widgets/Header.jsx";
-import Footer from "./Widgets/Footer.jsx";
-
 import Home from "./Home/Home.jsx";
 import Foo from "./Foo/Foo.jsx";
 import Bar from "./Bar/Bar.jsx";
 import Baz from "./Baz/Baz.jsx";
 
+import Header from "./Pages/Header.jsx";
+import Footer from "./Pages/Footer.jsx";
 import About from "./Pages/About.jsx";
 import Contact from "./Pages/Contact.jsx";
 import Error from "./Pages/Error.jsx";
