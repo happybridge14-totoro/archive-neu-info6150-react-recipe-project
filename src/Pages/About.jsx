@@ -1,10 +1,26 @@
 import React from 'react'
-import Header from '../Widgets/Header';
+import styles from './About.module.css';
 
 const About = () => {
     return (
-        <div>
-          hello
+        <div className={styles.about}>
+          <section className={styles.container}>
+            <h1>
+              About
+            </h1>
+            <h2>
+              About the website
+            </h2>
+            <p>
+              hello
+            </p>
+            <h2>
+              About us
+            </h2>
+            <p>
+              We are
+            </p>
+          </section>
         </div>
     )
 }

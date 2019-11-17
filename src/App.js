@@ -11,6 +11,7 @@ import Baz from "./Baz/Baz.jsx";
 import Error from "./Error/Error.jsx";
 
 import About from "./Pages/About.jsx";
+import Contact from "./Pages/Contact.jsx";
 
 import styles from "./App.css"
 
@@ -30,7 +31,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/foo" exact component={Foo} />
-        <Route path="/About" exact component={About} />
+        <Route path="/about" exact component={About} />
+        <Route path="/contact" exact component={Contact} />
         <Route
           path="/bar/:categoryId/:productId"
           exact

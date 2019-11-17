@@ -1,0 +1,8 @@
+.about {
+  width: 100vw;
+}
+.container {
+  max-width: 60rem;
+  margin: 0px auto 50px auto;
+  min-height: 50vh;
+}
