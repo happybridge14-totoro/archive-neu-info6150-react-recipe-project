@@ -13,6 +13,7 @@ import About from "./Pages/About.jsx";
 import Contact from "./Pages/Contact.jsx";
 import Error from "./Pages/Error.jsx";
 import Search from "./Pages/Search.jsx";
+import AllCaterogies from "./Pages/AllCaterogies.jsx";
 
 import styles from "./App.css"
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/foo" exact component={Foo} />
         <Route path="/about" exact component={About} />
         <Route path="/contact" exact component={Contact} />
+        <Route path="/allcaterogies" exact component={AllCaterogies} />
         <Route path="/search/:keyword" exact render={({match})=> <Search keyword={match.params.keyword}/>}/>
         <Route
           path="/bar/:categoryId/:productId"
