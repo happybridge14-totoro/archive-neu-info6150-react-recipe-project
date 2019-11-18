@@ -1,6 +1,7 @@
 [{
   "id": "1",
   "title": "Pineapple – Topped New York Cheesecake",
+  "shortName": "Cheesecake",
   "categoryId": "1",
   "time": "6 Hrs 20 mins | 20mins Prep | 6Hrs Cook",
   "ingredients": ["7 graham crackers, finely crushed (about 1 cup)",
@@ -22,6 +23,7 @@
 }, {
   "id": "2",
   "title": "Chocolate Chip Ice Cream Sandwich",
+  "shortName": "Sandwich",
   "categoryId": "1",
   "time": "2 Hrs 45 mins | 15 mins Prep | 2 Hrs 30 mins Cook",
   "ingredients": ["2 cups vanilla ice cream, slightly softened",
@@ -35,6 +37,7 @@
 }, {
   "id": "3",
   "title": "Deep-Dish Layered Banana Pudding",
+  "shortName": "Pudding",
   "categoryId": "1",
   "time": "3 Hrs 45 mins | 30 mins Prep | 3 Hrs 15 Mins Cook",
   "ingredients": ["46 vanilla wafers, divided",
@@ -59,6 +62,7 @@
 }, {
   "id": "4",
   "title": "Chocolate Chip Cookies",
+  "shortName": "Cookies",
   "categoryId": "1",
   "time": "20 mins | 10mins Prep | 10mins Cook",
   "ingredients": ["2 1/2 sticks unsalted butter",
@@ -79,6 +83,7 @@
 }, {
   "id": "5",
   "title": "Chocolate Brownies",
+  "shortName": "Brownies",
   "categoryId": "1",
   "time": "40 mins | 10 mins prep | 30 mins cook",
   "ingredients": ["1 1/4 c. all-purpose flour",

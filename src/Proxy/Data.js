@@ -1,7 +1,6 @@
 import items from "../data/items.json";
 import contactInfo from "../data/contactInfo.json";
 import categories from "../data/categories.json";
-import error from "../data/404.json";
 
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
@@ -11,7 +10,15 @@ let getIDMaker = (id, target)=> {
   }
 }
 let getError = () => {
-  return error;
+  let luckyItem = items[Math.floor(Math.random() * items.length)];
+  let relatedCategory = getCategoryById(luckyItem.categoryId);
+  return {
+    "name": luckyItem.shortName,
+    "imageURL": luckyItem.imageURL,
+    "link": "/",
+    "category": relatedCategory.name,
+    "categoryLink": "/"
+  };
 }
 let getItem = () => {
   return items;
