@@ -2,6 +2,7 @@ import items from "../data/items.json";
 import contactInfo from "../data/contactInfo.json";
 import categories from "../data/categories.json";
 
+
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
     if (target[i].id === id) {
@@ -50,8 +51,14 @@ let search = (keyWord) => {
     let index = lruCacheAry.indexOf(keyWord);
     lruCacheAry.splice(index, 1);
   } else {
-    //todo
-    result = [];
+    let filteredCategories = categories.filter((v)=> {
+      return v.name.toLowerCase().indexOf(keyWord.toLowerCase()) > -1;
+    });
+    result = items.filter((v)=> {
+      return v.title.toLowerCase().indexOf(keyWord.toLowerCase()) > -1 || undefined !== filteredCategories.find((w) => {
+        return w.id === v.categoryId;
+      });
+    });
     if (lruCacheAry.length > 100) {
       lruCacheAry.unshift();
     }

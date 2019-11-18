@@ -5,27 +5,36 @@ export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      redirect: false
     };
   }
 
+  search = () => {
+    if (this.state.value !== "") {
+      this.setState({redirect: true});
+    }
+  }
+
   onSearch = (e) => {
-    console.log("todo");
+    this.search();
   }
 
   handleChange = (e) => {
-    console.log(e.target.value);
     this.setState({value: e.target.value});
   }
 
   handleKeyPress = (e) => {
     if(e.key === 'Enter'){
-      console.log('enter press here! ')
-      //this.search();
+      this.search();
     }
   }
 
   render() {
+    if (this.state.redirect) {
+      window.location.href = `/search/${this.state.value}`;
+      return;
+    }
     return (
       <header className={`${styles.header} background-color`}>
         <nav className={styles.nav}>

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import {getCategoryById} from "../Proxy/Data";
+import {getItemById} from "../Proxy/Data";
 
 export default class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: getCategoryById(this.props.id)
+      category: getItemById(this.props.id)
     };
   }
 
