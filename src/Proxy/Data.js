@@ -8,6 +8,7 @@ let getIDMaker = (id, target)=> {
       return target[i];
     }
   }
+  return null;
 }
 let getError = () => {
   let luckyItem = items[Math.floor(Math.random() * items.length)];
@@ -17,7 +18,7 @@ let getError = () => {
     "imageURL": luckyItem.imageURL,
     "link": "/",
     "category": relatedCategory.name,
-    "categoryLink": "/"
+    "categoryLink": `/category/${relatedCategory.id}`
   };
 }
 let getItem = () => {

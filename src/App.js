@@ -14,6 +14,7 @@ import Contact from "./Pages/Contact.jsx";
 import Error from "./Pages/Error.jsx";
 import Search from "./Pages/Search.jsx";
 import AllCategories from "./Pages/AllCategories.jsx";
+import Category from "./Pages/Category.jsx";
 
 import styles from "./App.css"
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/about" exact component={About} />
         <Route path="/contact" exact component={Contact} />
         <Route path="/allcategories" exact component={AllCategories} />
+        <Route path="/category/:categoryId" exact render={({match})=> <Category id={match.params.categoryId}/>}/>
         <Route path="/search/:keyword" exact render={({match})=> <Search keyword={match.params.keyword}/>}/>
         <Route
           path="/bar/:categoryId/:productId"
@@ -53,6 +55,7 @@ function App() {
           exact
           render={() => <Baz content={externalContent} />}
         />
+        <Route path="/error" exact component={Error}/>
         <Route component={Error} />
       </Switch>
       <Footer/>

@@ -23,9 +23,9 @@ const Error = () => {
                 <img className={styles.image} src={errorObj.imageURL} alt={errorObj.name}/>
               </a>
               <p>
-                <span>Or you can have a </span>
-                <a href={errorObj.link} className="clickable">{errorObj.name}</a>
-                <span>!</span>
+                <span>Do you like </span>
+                <a href={errorObj.categoryLink} className="clickable">{errorObj.category}</a>
+                <span>?</span>
               </p>
               <div className={styles.gap}></div>
               <p>

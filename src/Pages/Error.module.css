@@ -19,10 +19,11 @@
   margin-left: 0px;
 }
 .gap {
-  height: 30px;
+  height: 24px;
 }
 .image  {
   float: left;
   height: 320px;
   margin-right: 30px;
+  max-width: 500px;
 }
