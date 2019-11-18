@@ -2,7 +2,8 @@ import React from 'react';
 import styles from "./Error.module.css";
 import {getError} from "../Proxy/Data";
 
-let errorObj = getError();
+let errorAry = getError();
+let errorObj = errorAry[Math.floor(Math.random() * errorAry.length)];
 const Error = () => {
     return (
         <div className={styles.error}>
