@@ -10,11 +10,19 @@ export default class Header extends Component {
   }
 
   onSearch = (e) => {
-    console.log("hello");
+    console.log("todo");
   }
 
   handleChange = (e) => {
+    console.log(e.target.value);
     this.setState({value: e.target.value});
+  }
+
+  handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      console.log('enter press here! ')
+      //this.search();
+    }
   }
 
   render() {
@@ -23,9 +31,9 @@ export default class Header extends Component {
         <nav className={styles.nav}>
           <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
           <a className={`clickable ${styles.category} ${styles.clickable} ${styles.navButton}`} href="/">Category</a>
-          <img className={styles.logo} src="../../images/logo.png" alt="logo"/>
+          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
           <div className={styles.search}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} maxLength="16"/>
+            <input type="text" value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} maxLength="16"/>
             <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={this.onSearch}/>
           </div>
         </nav>

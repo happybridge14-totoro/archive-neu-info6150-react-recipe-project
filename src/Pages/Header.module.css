@@ -73,6 +73,6 @@
 }
 .logo {
   float: right;
-  width: var(--nav-size);
+  /* width: var(--nav-size); */
   height: var(--nav-size);
 }

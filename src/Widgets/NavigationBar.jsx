@@ -17,7 +17,6 @@ export default class Header extends Component {
     }];
     this.state = {
       value: "",
-
     };
   }
 
@@ -25,7 +24,7 @@ export default class Header extends Component {
     this.setState({value: e.target.value});
   }
 
-  renderNavbar = (ary) => {
+  renderNavbarItems = (ary) => {
     this.positions.forEach((v, i) => {
       if (i !== 0) {
         ary.push(<div className={styles.sign} key={2*i}>›</div>);
@@ -36,7 +35,7 @@ export default class Header extends Component {
 
   render() {
     let items = [];
-    this.renderNavbar(items);
+    this.renderNavbarItems(items);
     return (
       <div className={styles.container}>
         {items}

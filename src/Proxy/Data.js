@@ -1,6 +1,7 @@
 import items from "../data/items.json";
 import contactInfo from "../data/contactInfo.json";
 import categories from "../data/categories.json";
+import error from "../data/404.json";
 
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
@@ -9,7 +10,9 @@ let getIDMaker = (id, target)=> {
     }
   }
 }
-
+let getError = () => {
+  return error;
+}
 let getItem = () => {
   return items;
 };
@@ -30,8 +33,24 @@ let getItemsByCategoryId = (id) => {
     return v.id === id;
   });
 }
+let searchCache = {};
+let lruCacheAry = [];
 let search = (keyWord) => {
-  return "";
+  let result = [];
+  if (searchCache[keyWord]) {
+    result = searchCache[keyWord];
+    let index = lruCacheAry.indexOf(keyWord);
+    lruCacheAry.splice(index, 1);
+  } else {
+    //todo
+    result = [];
+    if (lruCacheAry.length > 100) {
+      lruCacheAry.unshift();
+    }
+    searchCache[keyWord] = result;
+  }
+  lruCacheAry.push(keyWord);
+  return result;
 };
 
-export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, search};
+export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, search, getError};
