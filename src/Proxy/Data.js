@@ -2,7 +2,6 @@ import items from "../data/items.json";
 import contactInfo from "../data/contactInfo.json";
 import categories from "../data/categories.json";
 
-
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
     if (target[i].id === id) {
