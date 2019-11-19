@@ -16,7 +16,7 @@ let getError = () => {
   return {
     "name": luckyItem.shortName,
     "imageURL": luckyItem.imageURL,
-    "link": "/",
+    "link": `/detail/${luckyItem.id}`,
     "category": relatedCategory.name,
     "categoryLink": `/category/${relatedCategory.id}`
   };
