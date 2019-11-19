@@ -50,7 +50,7 @@
   box-sizing: border-box;
 }
 .search:focus-within {
-  outline: -webkit-focus-ring-color auto 1px;
+  outline: -webkit-focus-ring-color auto 5px;
 
 }
 .search input {
