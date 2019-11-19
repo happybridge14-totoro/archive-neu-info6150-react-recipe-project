@@ -38,6 +38,10 @@
   max-height: 100px;
   justify-self: center;
 }
+.playSign {
+    margin-top: 20px;
+    width: 30px;
+}
 .text {
   font-size: 1.2rem;
   color: var(--color-decorated);
