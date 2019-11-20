@@ -7,10 +7,12 @@
   height: 100%;
 }
 .dropDown .title {
+  font-size: 1em;
   display: block;
   background-color: var(--color-surface);
 }
 .dropDown .item {
+  font-size: 0.8em;
   display: block;
   padding: 0px 10px;
 }
