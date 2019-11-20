@@ -21,7 +21,7 @@
   opacity: 0;
   transition: all 0.4s;
 }
-.dropDown:focus .contentContainer,
+.dropDown:focus-within .contentContainer,
 .dropDown:hover .contentContainer {
   transform: scaleY(1);
   opacity: 1;
