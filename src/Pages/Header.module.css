@@ -24,6 +24,7 @@
 }
 .home {
   margin-right: 20px;
+  vertical-align: top;
 }
 .category {
 
@@ -75,4 +76,10 @@
   float: right;
   /* width: var(--nav-size); */
   height: var(--nav-size);
+}
+.dropDownContainer {
+  display: inline-block;
+  font-size: 24px;
+  height: 50px;
+  line-height: 50px;
 }

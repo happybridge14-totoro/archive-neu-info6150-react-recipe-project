@@ -1,14 +1,30 @@
 .dropDown {
+  box-sizing: border-box;
+  width: fit-content;
+  position: relative;
+  z-index: 99;
+  display: inline-block;
+  height: 100%;
 }
-.title {
-    display: inline-block;
+.dropDown .title {
+  display: block;
+  background-color: var(--color-surface);
 }
-.item {
-    width: fit-content;
-}
-.dropDown:hover .contentContainer {
-    visibility: visible;
+.dropDown .item {
+  display: block;
+  padding: 0px 10px;
 }
 .contentContainer {
-    visibility: hidden;
+  background-color: var(--color-surface);
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: all 0.4s;
+}
+.dropDown:focus .contentContainer,
+.dropDown:hover .contentContainer {
+  transform: scaleY(1);
+  opacity: 1;
+  box-shadow: 0px 8px 8px var(--color-minor);
+  padding-bottom: 5px;
 }

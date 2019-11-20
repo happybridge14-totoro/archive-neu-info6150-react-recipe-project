@@ -1,37 +1,26 @@
-import React, { Component } from "react";
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from "./DropDown.module.css";
 
-export default class DropDown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
 
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({value: e.target.value});
-  }
-
-  render() {
-    return (
-      <div className={styles.dropDown}>
-        <div className={`clickable ${styles.title}`}>
-            title
-        </div>
-        <div className={styles.contentContainer}>
-            <div className={`clickable ${styles.item}`}>
-                hello 1
-            </div>
-            <div className={`clickable ${styles.item}`}>
-                hello 2
-            </div>
-            <div className={`clickable ${styles.item}`}>
-                hello 3
-            </div>
-        </div>
+const DropDown = (props) => {
+  const linkAry = props.data.items.map((v) => {
+    return (<a href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
+  });
+  return (
+    <div className={styles.dropDown}>
+      <a href={props.data.title.link} className={`clickable ${styles.title}`}>
+        {props.data.title.name}
+      </a>
+      <div className={styles.contentContainer}>
+        {linkAry}
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+DropDown.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+export default DropDown
