@@ -4,8 +4,9 @@ import styles from "./DropDown.module.css";
 
 
 const DropDown = (props) => {
+  let index = 0;
   const linkAry = props.data.items.map((v) => {
-    return (<a href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
+    return (<a key={index++} href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
   });
   return (
     <div className={styles.dropDown}>
