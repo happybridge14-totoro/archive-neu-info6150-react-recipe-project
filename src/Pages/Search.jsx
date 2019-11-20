@@ -36,13 +36,13 @@ export default class Search extends Component {
     let index = 0;
     if (keys.length === 0) {
       result.push(<div key={index++} className={styles.noresult}>Sorry, no results for "{this.props.keyword}".</div>);
-      result.push(<div key={index++} className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>);
+      result.push(<div tabIndex="0" key={index++} className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>);
     } else {
       keys.forEach((v) => {
         result.push(<h2 className={styles.category} key={index++}>{getCategoryById(v).name}</h2>);
         let items = this.state.data[v];
         items.forEach((v) => {
-          result.push(<div onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemContainer} key={index++}>
+          result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemContainer} key={index++}>
               <img className={styles.image} src={v.imageURL} alt={v.shortName}></img>
               <div className={styles.text}>
                   <div>{v.title}</div>
