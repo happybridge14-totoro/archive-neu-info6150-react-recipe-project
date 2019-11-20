@@ -1,6 +1,14 @@
 .dropDown {
-
 }
-.container {
-    
+.title {
+    display: inline-block;
+}
+.item {
+    width: fit-content;
+}
+.dropDown:hover .contentContainer {
+    visibility: visible;
+}
+.contentContainer {
+    visibility: hidden;
 }
