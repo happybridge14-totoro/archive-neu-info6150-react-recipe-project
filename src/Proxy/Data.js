@@ -4,7 +4,7 @@ import categories from "../data/categories.json";
 
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
-    if (target[i].id === id) {
+    if (target[i].id === id.toString()) {
       return target[i];
     }
   }
