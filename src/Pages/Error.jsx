@@ -23,7 +23,7 @@ const Error = () => {
                 <img className={styles.image} src={errorObj.imageURL} alt={errorObj.name}/>
               </a>
               <p>
-                <span>Do you like </span>
+                <span>Do you like to make your own </span>
                 <a href={errorObj.categoryLink} className="clickable">{errorObj.category}</a>
                 <span>?</span>
               </p>
