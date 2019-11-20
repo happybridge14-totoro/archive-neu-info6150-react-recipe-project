@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './About.module.css';
+import styles from './Contact.module.css';
 import {getContractInfo} from '../Proxy/Data.js';
 
 const contactInfo = getContractInfo();
@@ -13,7 +13,7 @@ const createNodes = () => {
   });
   return result;
 }
-const About = () => {
+const Contact = () => {
     return (
         <div className={styles.contact}>
           <section className={styles.container}>
@@ -26,4 +26,4 @@ const About = () => {
     )
 }
 
-export default About
+export default Contact

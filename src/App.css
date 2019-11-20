@@ -34,11 +34,12 @@
   color: var(--color-solid);
   position: relative;
   box-sizing: border-box;
+  width: fit-content;
 }
-.clickable.selected,
+/* .clickable.selected,
 .clickable:focus {
   color: var(--color-solid);
-}
+} */
 .clickable:after {
   content: "";
   position: absolute;

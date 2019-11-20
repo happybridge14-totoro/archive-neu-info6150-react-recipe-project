@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import styles from "./Header.module.css";
+import DropDown from "../Widgets/DropDown";
+import {getCategories} from "../Proxy/Data";
 
 export default class Header extends Component {
   constructor(props) {
@@ -8,6 +10,19 @@ export default class Header extends Component {
       value: "",
       redirect: false
     };
+    let categories = getCategories();
+    this.categoryDropdown = {
+      "title": {
+        "name": "Category",
+        "link": "/allcategories"
+      },
+      "items": categories.map((v) => {
+        return {
+          "name": v.name,
+          "link": `/category/${v.id}`
+        };
+      })
+    }
   }
 
   search = () => {
@@ -39,7 +54,9 @@ export default class Header extends Component {
       <header className={`${styles.header} background-color`}>
         <nav className={styles.nav}>
           <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
-          <a className={`clickable ${styles.category} ${styles.clickable} ${styles.navButton}`} href="/allcategories">Category</a>
+          <div className={styles.dropDownContainer}>
+            <DropDown data={this.categoryDropdown}/>
+          </div>
           <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
           <div className={styles.search}>
             <input type="text" value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} maxLength="16"/>

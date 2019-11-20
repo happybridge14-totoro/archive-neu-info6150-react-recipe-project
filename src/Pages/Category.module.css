@@ -1,0 +1,51 @@
+.playSign {
+    margin-top: 20px;
+    width: 30px;
+}
+
+.pic{
+    width: 200px;
+    height: 150px;
+    justify-self: center;
+}
+.picBox{
+    text-align: center;
+    margin-top:10px;
+}
+
+.picDessert{
+    width: 600px;
+    height: 200px;
+}
+
+.category{
+    max-width: 60rem;
+    margin: 0px auto 120px auto;
+    min-height: 50vh;
+}
+@media screen and (max-height: 600px) {
+    .category {
+        margin-bottom: 40px;
+    }
+}
+.itemBox{
+    display:grid;
+    grid-template-columns: 19rem 5rem 30rem;
+    margin-top: 20px;
+}
+
+.title{
+    text-align: center;
+    font-size:40px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.subtitle{
+   font-size:23px;
+   color:rgb(00, 80, 80);
+   text-decoration: none;
+}
+.text{
+    padding-top: 25px;
+    font-size: 15px;
+}
