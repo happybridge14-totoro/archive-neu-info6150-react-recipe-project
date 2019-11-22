@@ -4,7 +4,7 @@ import categories from "../data/categories.json";
 
 let getIDMaker = (id, target)=> {
   for (let i = 0; i < target.length; i++) {
-    if (target[i].id === id) {
+    if (target[i].id === id.toString()) {
       return target[i];
     }
   }
@@ -16,7 +16,7 @@ let getError = () => {
   return {
     "name": luckyItem.shortName,
     "imageURL": luckyItem.imageURL,
-    "link": "/",
+    "link": `/detail/${luckyItem.id}`,
     "category": relatedCategory.name,
     "categoryLink": `/category/${relatedCategory.id}`
   };

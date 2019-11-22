@@ -1,5 +1,21 @@
-.container {
+.about {
   max-width: 60rem;
-  margin: 0px auto 50px auto;
+  margin: 0px auto 120px auto;
   min-height: 50vh;
+}
+.about img {
+  width: 100%;
+}
+.about p {
+  font-size: 2rem;
+}
+.about a {
+  font-size: 1.5rem;
+  color: var(--color-decorated);
+}
+
+@media screen and (max-height: 600px) {
+  .container {
+    margin-bottom: 40px;
+  }
 }

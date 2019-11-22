@@ -2,7 +2,7 @@
   width: 100%;
   box-shadow: 0px -2px 8px;
   box-sizing: border-box;
-  font-family: "Chilanka";
+  font-family: Chilanka, "Lucida Console", Monaco;
   background-color: var(--color-surface);
   position: fixed;
   bottom: 0px;

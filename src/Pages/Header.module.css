@@ -6,7 +6,7 @@
   text-align: center;
   padding-top: 20px;
   box-shadow: 0px 2px 8px;
-  font-family: "monospace";
+  font-family: monospace, "Courier New", "Courier New";
   min-width: 540px;
 }
 .nav {
@@ -24,6 +24,7 @@
 }
 .home {
   margin-right: 20px;
+  vertical-align: top;
 }
 .category {
 
@@ -50,7 +51,7 @@
   box-sizing: border-box;
 }
 .search:focus-within {
-  outline: -webkit-focus-ring-color auto 1px;
+  outline: -webkit-focus-ring-color auto 5px;
 
 }
 .search input {
@@ -75,4 +76,10 @@
   float: right;
   /* width: var(--nav-size); */
   height: var(--nav-size);
+}
+.dropDownContainer {
+  display: inline-block;
+  font-size: 24px;
+  height: 50px;
+  line-height: 50px;
 }
