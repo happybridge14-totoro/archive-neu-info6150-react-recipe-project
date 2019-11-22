@@ -3,6 +3,7 @@ import styles from './About.module.css';
 import {getContractInfo} from '../Proxy/Data.js';
 
 const contactInfo = getContractInfo();
+
 const createNodes = () => {
   let result = [];
   contactInfo.forEach((v, i) => {
