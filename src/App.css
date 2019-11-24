@@ -53,6 +53,25 @@
 .clickable:hover:after {
   width: 100%;
 }
+.baseButton {
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-surface);
+  color: var(--color-decorated);
+  border: 2px solid var(--color-decorated)
+}
+.baseButton.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.baseButton:not(.disabled):hover {
+  background-color: var(--color-decorated);
+  color: var(--color-surface);
+  border-color: var(--color-surface);
+}
 
 body {
   margin: 0px;
