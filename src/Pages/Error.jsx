@@ -1,15 +1,11 @@
 import React from 'react';
 import styles from "./Error.module.css";
 import {getError} from "../Proxy/Data";
-import NavigationBar from "../Widgets/NavigationBar";
-
-const navbarPosition = [true, "error"];
 
 let errorObj = getError();
 const Error = () => {
     return (
         <div className={styles.error}>
-
           <section className={styles.container}>
             <h1>
               Sorry!

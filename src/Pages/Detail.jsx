@@ -4,15 +4,16 @@ import {getItemById} from "../Proxy/Data";
 import styles from "./Detail.module.css";
 import items from "../data/items.json";
 import NavigationBar from "../Widgets/NavigationBar"
-const navbarPosition = [true, true, 1, 1];
         // <items = {Object.values(items)}>
 
 export default class Category extends Component {
   constructor(props) {
     super(props);
+    let detail = getItemById(this.props.id);
     this.state = {
-      detail: getItemById(this.props.id)
+      detail: detail
     };
+    this.navbarPosition = [true, true, detail.categoryId, detail.id];
   }
 
   render() {
@@ -22,7 +23,7 @@ export default class Category extends Component {
     }
     return (
       <article className = {styles.container}>
-        <NavigationBar positions={navbarPosition}/>
+        <NavigationBar positions={this.navbarPosition}/>
         <div className = {styles.topleft}>
         <h1 >{this.state.detail.title}</h1>
         <h2>ratings: 4.6</h2>
