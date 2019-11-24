@@ -17,11 +17,24 @@ const createNodes = () => {
 const Contact = () => {
     return (
         <div className={styles.contact}>
-          <section className={styles.container}>
+          <section className={styles.leftContainer}>
             <h1>
-              Contact Us:
+              Contact Us
             </h1>
             {createNodes()}
+            </section>
+            <section className={styles.rightontainer}>
+              <h1>
+                Leave a message
+              </h1>
+              <form action="submit">
+                <div className={styles.formContainer}>
+                  <label className={styles.label} htmlFor="name">Name</label>
+                  <input className={styles.input} type="text" name="name" id="name"/>
+                  <label className={styles.label} htmlFor="email">E-mail</label>
+                  <input className={styles.input} type="text" name="email" id="email"/>
+                </div>
+              </form>
             </section>
         </div>
     )

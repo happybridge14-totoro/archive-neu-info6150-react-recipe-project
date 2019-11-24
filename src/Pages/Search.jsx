@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import styles from "./Search.module.css";
 import {search, getCategoryById} from "../Proxy/Data";
+import NavigationBar from "../Widgets/NavigationBar";
 
+const navbarPosition = [true, "search"];
 
 export default class Search extends Component {
   constructor(props) {
@@ -67,6 +69,7 @@ export default class Search extends Component {
     }
     return (
       <div className={styles.search}>
+        <NavigationBar positions={navbarPosition}/>
         <section className={styles.container}>
           {this.renderSearchResults()}
         </section>

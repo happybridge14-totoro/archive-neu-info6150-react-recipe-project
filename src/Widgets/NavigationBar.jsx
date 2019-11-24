@@ -7,20 +7,29 @@ export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayAllCategory: false,
+      secondLabelName: "",
       category: null,
       item: null
     }
   }
   componentDidMount() {
     let newState = {};
-    if (this.props.positions[1]) {
-      newState.displayAllCategory = true;
-    }
-    if (this.props.positions[2]) {
-      newState.category = getCategoryById(this.props.positions[2]);
-      if (this.props.positions[3]) {
-        newState.item = getItemById(this.props.positions[3]);
+    let secondParam = this.props.positions[1];
+    if (secondParam === "about") {
+      newState.secondLabelName = "About";
+    } else if (secondParam === "search") {
+      newState.secondLabelName = "Search";
+    } else if (secondParam === "contact") {
+      newState.secondLabelName = "Contact";
+    } else if (secondParam === "error") {
+      newState.secondLabelName = "Error";
+    } else if (this.props.positions[1]) {
+      newState.secondLabelName = "Categories";
+      if (this.props.positions[2]) {
+        newState.category = getCategoryById(this.props.positions[2]);
+        if (this.props.positions[3]) {
+          newState.item = getItemById(this.props.positions[3]);
+        }
       }
     }
     this.setState(newState);
@@ -32,16 +41,20 @@ export default class NavigationBar extends Component {
   renderNavbarItems = (ary) => {
     let index = 0;
     ary.push(<a className={`clickable ${styles.item}`} href="/" key={index++}>Home</a>);
-    if (this.state.displayAllCategory) {
+    if (this.state.secondLabelName !== "") {
       ary.push(<div className={styles.sign} key={index++}>›</div>);
-      ary.push(<a className={`clickable ${styles.item}`} href={`/allcategories`} key={index++}>Categories</a>);
-    }
-    if (this.state.category) {
-      ary.push(<div className={styles.sign} key={index++}>›</div>);
-      ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={index++}>{this.state.category.name}</a>);
-      if (this.state.item) {
+      if (this.state.category) {
+        ary.push(<a className={`clickable ${styles.item}`} href="/allcategories/" key={index++}>Categories</a>);
         ary.push(<div className={styles.sign} key={index++}>›</div>);
-        ary.push(<a className={`clickable ${styles.item}`} href={`/detail/${this.state.item.id}`} key={index++}>{this.state.item.title}</a>);
+        if (this.state.item) {
+          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={index++}>{this.state.category.name}</a>);
+          ary.push(<div className={styles.sign} key={index++}>›</div>);
+          ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.item.title}</span>);
+        } else {
+          ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.category.name}</span>);
+        }
+      } else {
+        ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.secondLabelName}</span>);
       }
     }
   }
