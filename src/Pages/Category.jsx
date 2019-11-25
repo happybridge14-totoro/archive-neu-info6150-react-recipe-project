@@ -10,7 +10,7 @@ export default class Category extends Component {
     this.state = {
       category: getCategoryById(this.props.id),
       detail: getItemsByCategoryId(this.props.id)
-  
+
     };
     this.navbarPosition = [true, true, this.state.category.id];
   }
@@ -39,7 +39,7 @@ export default class Category extends Component {
         });
     return result;
   }
-  
+
   render() {
     if (this.state.category === null) {
       window.location.href = '/error';

@@ -31,6 +31,9 @@ export default class Search extends Component {
   handleClick = (id) => {
     window.location.href = `/detail/${id}`;
   }
+  handleCategoryClick = (id) => {
+    window.location.href = `/category/${id}`;
+  }
 
   renderSearchResults = () => {
     let keys = Object.keys(this.state.data);
@@ -40,11 +43,11 @@ export default class Search extends Component {
       result.push(<div key={index++} className={styles.noresult}>Sorry, no results for "{this.props.keyword}".</div>);
       result.push(<div tabIndex="0" key={index++} className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>);
     } else {
-      keys.forEach((v) => {
-        result.push(<h2 className={styles.category} key={index++}>{getCategoryById(v).name}</h2>);
-        let items = this.state.data[v];
+      keys.forEach((cid) => {
+        result.push(<h2 className={styles.category} key={index++} tabIndex="0" onClick={e=>{e.preventDefault();this.handleCategoryClick(cid);}}>{getCategoryById(cid).name}</h2>);
+        let items = this.state.data[cid];
         items.forEach((v) => {
-          result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemContainer} key={index++}>
+          result.push(<div tabIndex="0" onClick={(e)=>{e.preventDefault();this.handleClick(v.id);}} className={styles.itemContainer} key={index++}>
               <img className={styles.image} src={v.imageURL} alt={v.shortName}></img>
               <div className={styles.text}>
                   <div>{v.title}</div>

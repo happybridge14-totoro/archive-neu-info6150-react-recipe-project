@@ -12,6 +12,7 @@ import Search from "./Pages/Search.jsx";
 import AllCategories from "./Pages/AllCategories.jsx";
 import Category from "./Pages/Category.jsx";
 import Detail from "./Pages/Detail.jsx";
+import Popup from "./Pages/Popup.jsx";
 
 import styles from "./App.css"
 
@@ -31,6 +32,7 @@ function App() {
         <Route component={Error} />
       </Switch>
       <Footer/>
+      <Popup/>
     </Router>
   );
 }

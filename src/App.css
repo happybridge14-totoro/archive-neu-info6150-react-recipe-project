@@ -5,9 +5,10 @@
   --color-decorated: teal;
   --color-minor: #727272;
   --color-striking: #f05000;
+  --color-opacity-black: rgba(0, 0, 0, 0.4);
 }
 
-.main-text-color {
+/* .main-text-color {
   color: var(--color-solid);
 }
 .minior-text-color {
@@ -27,7 +28,7 @@
 }
 .button-background-color {
   background-color: var(--color-decorated);
-}
+} */
 .clickable {
   cursor: pointer;
   text-decoration: none;
