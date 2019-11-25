@@ -38,7 +38,7 @@ let getCategoryById = (id) => {
 }
 let getItemsByCategoryId = (id) => {
   return items.filter((v)=>{
-    return v.id === id;
+    return v.categoryId === id;
   });
 }
 let searchCache = {};
