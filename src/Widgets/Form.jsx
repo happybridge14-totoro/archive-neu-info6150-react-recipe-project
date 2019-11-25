@@ -45,18 +45,11 @@ export default class Form extends Component {
       newState.isSubmitting = true;
       this.setState(newState);
       let result = await this.props.param.dataSubmit();
-      this.setState({isSubmitting: false});
       if (result) {
-      //// TODO:
-      // popup success;
+        this.reset();
       } else {
-      //// TODO:
-      // popup
-      // popup failure;
+        this.setState({isSubmitting: false});
       }
-      /////////////////
-      this.reset();
-      /////////////////
     } else {
       this.setState(newState);
     }
