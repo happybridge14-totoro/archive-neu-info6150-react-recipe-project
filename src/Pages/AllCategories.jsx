@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{ Component } from 'react'
 import styles from "./AllCategories.module.css"
 import NavigationBar from "../Widgets/NavigationBar"
-const positions = [true, true];
+import {getCategories, getItem} from "../Proxy/Data"
+
+const positions= [true,true]
 const AllCategories= () => {
     return (
       <div className={styles.allCategories}>
@@ -11,8 +13,8 @@ const AllCategories= () => {
         </div>
         <div className={styles.box}>
           <div className={styles.subbox}>
-            <img className={styles.picbox} src="https://image.freepik.com/free-vector/delicious-tasty-breakfast-cartoon_24640-53956.jpg" alt="Breakfast" />
-            <a className={` clickable ${styles.title}`} href="/">Breakfast</a>
+            <img className={styles.picbox} src="" alt="" />
+            <a className={` clickable ${styles.title}`} href="/">NAME</a>
             <ul className={styles.list}>
               <li>
                 <a className={`clickable ${styles.subtitle}`} href="/">Pineapple – Topped New York Cheesecake</a>
@@ -30,49 +32,7 @@ const AllCategories= () => {
                 <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Brownies</a>
               </li>
             </ul>
-          </div>
-          <div className={styles.subbox}>
-            <img className={styles.picbox} src="https://cdn.ruled.me/wp-content/uploads/2014/09/keto-diet-low-carb-cheat-sheet-desserts.png" alt="Dessert" />
-            <a className={` clickable ${styles.title}`} href="/">Dessert</a>
-            <ul className={styles.list}>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Pineapple – Topped New York Cheesecake</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Ice Cream Sandwich</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Deep-Dish Layered Banana Pudding</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Cookies</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Brownies</a>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.subbox}>
-            <img className={styles.picbox} src="https://www.nicepng.com/png/full/8-87107_hand-drawn-cartoon-new-year-s-rice-food.png" alt="Dinner" />  
-            <a className={`clickable ${styles.title}`} href="/">Dinner</a>
-            <ul className={styles.list}>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Pineapple – Topped New York Cheesecake</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Ice Cream Sandwich</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Deep-Dish Layered Banana Pudding</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Cookies</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Brownies</a>
-              </li>
-            </ul>
-          </div>
+          </div>  
         </div>
      </div>
     )
