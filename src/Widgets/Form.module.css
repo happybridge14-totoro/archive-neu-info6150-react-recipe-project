@@ -1,0 +1,78 @@
+.form {
+  --gap: 20px;
+  --min-width: 350px;
+}
+.formContainer {
+}
+.label {
+  /* display: inline-block; */
+  font-size: 1.4rem;
+  font-weight: bold;
+  /* margin-top: var(--gap);
+  margin-bottom: var(--gap); */
+}
+.input {
+  display: block;
+  border: 2px solid var(--color-minor);
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2rem;
+  padding: 0px 40px 0px 10px;
+  width: var(--min-width);
+  box-sizing: border-box;
+}
+.contact .mailto {
+  color: var(--color-decorated);
+  font-size: 1.2rem;
+}
+.textArea {
+  display: block;
+  resize: none;
+  width: var(--min-width);
+  box-sizing: border-box;
+  border: 2px solid var(--color-minor);
+  border-radius: 5px;
+  padding: 0px 40px 0px 10px;
+}
+.submitButton {
+  margin-top: var(--gap);
+  height: 50px;
+  line-height: 50px;
+  font-size: 1rem;
+  padding: 0px 10px;
+}
+.hiddenError {
+  visibility: hidden;
+}
+.error {
+  visibility: visible;
+  position: relative;
+  width: fit-content;
+}
+.error .input {
+  border: 2px solid var(--color-striking);
+}
+.error .textArea {
+  border: 2px solid var(--color-striking);
+}
+.error::after {
+  content: "!";
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: var(--color-striking);
+  color: var(--color-surface);
+  border: 1px solid var(--color-striking);
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.errorText {
+  font-size: smaller;
+  margin: 0px 0px 10px 0px;
+  color: var(--color-striking);
+}

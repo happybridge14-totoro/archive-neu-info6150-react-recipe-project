@@ -40,7 +40,7 @@
 .clickable:focus {
   color: var(--color-solid);
 } */
-.clickable:after {
+.clickable::after {
   content: "";
   position: absolute;
   width: 0%;
@@ -50,7 +50,7 @@
   background-color: var(--color-decorated);
   transition: width 0.3s;
 }
-.clickable:hover:after {
+.clickable:hover::after {
   width: 100%;
 }
 .baseButton {
