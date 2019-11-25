@@ -25,6 +25,9 @@
 }
 .category {
   font-size: 2rem;
+  cursor: pointer;
+  width: fit-content;
+  color: var(--color-decorated);
 }
 .itemContainer {
   padding-top: 20px;
