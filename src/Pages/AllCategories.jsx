@@ -1,9 +1,75 @@
-import React,{ Component } from 'react'
+import React from 'react'
 import styles from "./AllCategories.module.css"
 import NavigationBar from "../Widgets/NavigationBar"
 import {getCategories, getItem} from "../Proxy/Data"
 
 const positions= [true,true]
+let allCategoriesObj = getCategories();
+let allCategoriesItem = getItem();
+
+const getCategoriesPic = () =>{
+  let result = [];
+  let index = 0;
+  let allCategories = allCategoriesObj;
+    allCategories.forEach((v) => {
+      result.push(<div className={styles.box} key={index++}>
+          <img className={styles.picbox} src={v.imageURL} alt={v.name}/>
+      </div>)
+    }
+    )
+    return result;
+}
+
+const getCategoriesName = () =>{
+  let result = [];
+  let index = 0;
+  let allCategories = allCategoriesObj;
+    allCategories.forEach((v) => {
+      result.push(<div key={index++}>
+          <a className={` clickable ${styles.title}`} href={`/Category/${v.id}`}>{v.name}</a>
+      </div>)
+    }
+    )
+    return result;
+} 
+const getItemsBreakfast = () =>{
+  let result = [];
+  let index = 0;
+  let allItems = allCategoriesItem;
+    allItems.forEach((v) => {
+      result.push(<div key={index++} >
+          <a className={` clickable ${styles.subtitle}`} href={`/detail/${v.id}`}>{v.title}</a>
+      </div>)
+    }
+    )
+    return result.slice(5,10);
+} 
+const getItemsDinner = () =>{
+  let result = [];
+  let index = 0;
+  let allItems = allCategoriesItem;
+    allItems.forEach((v) => {
+      result.push(<div key={index++} >
+          <a className={` clickable ${styles.subtitle}`} href={`/detail/${v.id}`}>{v.title}</a>
+      </div>)
+    }
+    )
+    return result.slice(10,15);
+} 
+
+const getItemsDessert = () =>{
+  let result = [];
+  let index = 0;
+  let allItems = allCategoriesItem;
+    allItems.forEach((v) => {
+      result.push(<div key={index++} >
+          <a className={` clickable ${styles.subtitle}`} href={`/detail/${v.id}`}>{v.title}</a>
+      </div>)
+    }
+    )
+    return result.slice(0,5);
+} 
+
 const AllCategories= () => {
     return (
       <div className={styles.allCategories}>
@@ -11,27 +77,19 @@ const AllCategories= () => {
         <div className={styles.container}>
           <h2 className={styles.header2}>Browse All Categories</h2>
         </div>
-        <div className={styles.box}>
-          <div className={styles.subbox}>
-            <img className={styles.picbox} src="" alt="" />
-            <a className={` clickable ${styles.title}`} href="/">NAME</a>
-            <ul className={styles.list}>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Pineapple – Topped New York Cheesecake</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Ice Cream Sandwich</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Deep-Dish Layered Banana Pudding</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Chip Cookies</a>
-              </li>
-              <li>
-                <a className={`clickable ${styles.subtitle}`} href="/">Chocolate Brownies</a>
-              </li>
-            </ul>
+        <div>
+          <div>
+            <div className={styles.box}>
+              {getCategoriesPic()}
+            </div>
+            <div className={styles.box}>
+              {getCategoriesName()}
+            </div>
+            <div className={styles.box}>
+              <div>{getItemsBreakfast()}</div>
+              <div>{getItemsDinner()}</div>
+              <div>{getItemsDessert()}</div>
+            </div>
           </div>  
         </div>
      </div>
