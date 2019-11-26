@@ -1,3 +1,4 @@
+import {ulid} from 'ulid';
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import styles from "./Search.module.css";
@@ -38,21 +39,20 @@ export default class Search extends Component {
   renderSearchResults = () => {
     let keys = Object.keys(this.state.data);
     let result = [];
-    let index = 0;
     if (keys.length === 0) {
-      result.push(<div key={index++} className={styles.noresult}>Sorry, no results for "{this.props.keyword}".</div>);
-      result.push(<div tabIndex="0" key={index++} className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>);
+      result.push(<div key={ulid()} className={styles.noresult}>Sorry, no results for "{this.props.keyword}".</div>);
+      result.push(<div tabIndex="0" key={ulid()} className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>);
     } else {
       keys.forEach((cid) => {
-        result.push(<h2 className={styles.category} key={index++} tabIndex="0" onClick={e=>{e.preventDefault();this.handleCategoryClick(cid);}}>{getCategoryById(cid).name}</h2>);
+        result.push(<h2 className={styles.category} key={ulid()} tabIndex="0" onClick={e=>{e.preventDefault();this.handleCategoryClick(cid);}}>{getCategoryById(cid).name}</h2>);
         let items = this.state.data[cid];
         items.forEach((v) => {
-          result.push(<div tabIndex="0" onClick={(e)=>{e.preventDefault();this.handleClick(v.id);}} className={styles.itemContainer} key={index++}>
+          result.push(<div tabIndex="0" onClick={(e)=>{e.preventDefault();this.handleClick(v.id);}} className={styles.itemContainer} key={ulid()}>
               <img className={styles.image} src={v.imageURL} alt={v.shortName}></img>
               <div className={styles.text}>
                   <div>{v.title}</div>
                   {v.videoURL !== "" &&
-                      <img className={styles.playSign} src="/images/video-icon.png" alt="video" key={index++}/>
+                      <img className={styles.playSign} src="/images/video-icon.png" alt="video" key={ulid()}/>
                   }
               </div>
           </div>);
