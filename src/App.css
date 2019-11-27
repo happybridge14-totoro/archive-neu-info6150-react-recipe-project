@@ -2,7 +2,7 @@
 :root {
   --color-surface: white;
   --color-solid: #232323;
-  --color-decorated: teal;
+  --color-decorated: rgb(247, 124, 9);
   --color-minor: #727272;
   --color-striking: #f05000;
   --color-opacity-black: rgba(0, 0, 0, 0.4);
