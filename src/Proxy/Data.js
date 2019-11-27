@@ -32,15 +32,15 @@ let getCategories = () => {
 };
 let getItemById = (id) => {
   return getIDMaker(id, items);
-}
+};
 let getCategoryById = (id) => {
   return getIDMaker(id, categories);
-}
+};
 let getItemsByCategoryId = (id) => {
   return items.filter((v)=>{
     return v.categoryId === id;
   });
-}
+};
 let getItemsByCategoryIds = (ids) => {
     if (!(ids && ids.length)) {
         throw new Error("Params should be an array!");
@@ -59,7 +59,12 @@ let getItemsByCategoryIds = (ids) => {
         ret[index].push(v);
     });
     return ret;
-}
+};
+let getItemsByTag = (tag) => {
+  return items.filter((v) => {
+    return v.tags && v.tags.indexOf(tag) > -1;
+  });
+};
 let searchCache = {};
 let lruCacheAry = [];
 let search = (keyWord) => {
@@ -86,4 +91,4 @@ let search = (keyWord) => {
   return result;
 };
 
-export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, getItemsByCategoryIds, search, getError};
+export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, getItemsByCategoryIds, search, getError, getItemsByTag};
