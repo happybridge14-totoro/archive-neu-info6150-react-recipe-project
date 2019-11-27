@@ -28,7 +28,7 @@ function App() {
         <Route path="/category/:categoryId" exact render={({match})=> <Category id={match.params.categoryId}/>}/>
         <Route path="/detail/:itemId" exact render={({match})=> <Detail id={match.params.itemId}/>}/>
         <Route path="/search/:keyword" exact render={({match})=> <Search keyword={match.params.keyword}/>}/>
-        <Route path="/error" exact component={Error}/>
+        <Route path="/404" exact component={Error}/>
         <Route component={Error} />
       </Switch>
       <Footer/>
