@@ -13,9 +13,14 @@ const generateThirdPart = (content) => {
   shaObj.setHMACKey(secret_Token, TEXT)
   shaObj.update(content);
   let hmac = shaObj.getHMAC("B64");
-  hmac = hmac.replace(/(={0,2})$/, "");
-  hmac = hmac.replace(/\//g, "_");
-  hmac = hmac.replace(/\+/g, "-");
+  hmac = hmac.replace(/([/+=])/g, (match) => {
+    if (match === "/")
+      return "_";
+    else if (match === "+")
+      return "-";
+    else
+      return "";
+  });
   return hmac
 };
 const verifyPayload = (payloadObj, userID) => {
