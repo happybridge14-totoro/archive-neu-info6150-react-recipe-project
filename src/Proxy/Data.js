@@ -41,6 +41,25 @@ let getItemsByCategoryId = (id) => {
     return v.categoryId === id;
   });
 }
+let getItemsByCategoryIds = (ids) => {
+    if (!(ids && ids.length)) {
+        throw new Error("Params should be an array!");
+    }
+    let hash = {};
+    let ret = [];
+    ids.forEach((v, i) => {
+        hash[v] = i;
+        ret[i] = [];
+    });
+    items.forEach((v) => {
+        let index = hash[v.categoryId];
+        if (index === undefined) {
+            return;
+        }
+        ret[index].push(v);
+    });
+    return ret;
+}
 let searchCache = {};
 let lruCacheAry = [];
 let search = (keyWord) => {
@@ -67,4 +86,4 @@ let search = (keyWord) => {
   return result;
 };
 
-export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, search, getError};
+export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, getItemsByCategoryIds, search, getError};
