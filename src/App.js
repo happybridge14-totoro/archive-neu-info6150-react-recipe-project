@@ -2,17 +2,17 @@ import React from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Home from "./Home/Home.jsx";
-import Header from "./Pages/Header.jsx";
-import Footer from "./Pages/Footer.jsx";
-import About from "./Pages/About.jsx";
-import Contact from "./Pages/Contact.jsx";
-import Error from "./Pages/Error.jsx";
-import Search from "./Pages/Search.jsx";
-import AllCategories from "./Pages/AllCategories.jsx";
-import Category from "./Pages/Category.jsx";
-import Detail from "./Pages/Detail.jsx";
-import Popup from "./Pages/Popup.jsx";
+import Home from "./Home/Home";
+import Header from "./Pages/Header";
+import Footer from "./Pages/Footer";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Error from "./Pages/Error";
+import Search from "./Pages/Search";
+import AllCategories from "./Pages/AllCategories";
+import Category from "./Pages/Category";
+import Detail from "./Pages/Detail";
+import Popup from "./Pages/Popup";
 
 import styles from "./App.css"
 
