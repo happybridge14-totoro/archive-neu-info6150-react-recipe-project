@@ -65,6 +65,15 @@ let getItemsByTag = (tag) => {
     return v.tags && v.tags.indexOf(tag) > -1;
   });
 };
+let getMostPopularItems = (count=3) => {
+  let length = items.length;
+  let ret = [];
+  let luckyIndex = Math.getRandomInt(length - count);
+  for (let i = 0; i < count; i++) {
+    ret.push(items[luckyIndex + i]);
+  }
+  return ret;
+};
 let searchCache = {};
 let lruCacheAry = [];
 let search = (keyWord) => {
@@ -91,4 +100,4 @@ let search = (keyWord) => {
   return result;
 };
 
-export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, getItemsByCategoryIds, search, getError, getItemsByTag};
+export {getItem, getContractInfo, getCategories, getCategoryById, getItemById, getItemsByCategoryId, getItemsByCategoryIds, search, getError, getItemsByTag, getMostPopularItems};
