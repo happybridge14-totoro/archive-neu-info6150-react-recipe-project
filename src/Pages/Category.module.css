@@ -43,7 +43,7 @@
 }
 .subtitle{
    font-size:23px;
-   color:rgb(00, 80, 80);
+   color: var(--color-decorated);
    text-decoration: none;
 }
 .text{

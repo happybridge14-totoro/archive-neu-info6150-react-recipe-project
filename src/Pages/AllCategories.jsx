@@ -8,6 +8,10 @@ const positions= [true,true]
 const allCategoriesObj = getCategories();
 const allCategoriesItem = getItemsByCategoryIds(allCategoriesObj.map(v=>{return v.id}));
 
+const handleClick = (id) =>{
+  window.location.href = `/Category/${id}`;
+}
+
 const getEachCategories = () =>{
   let result = [];
       
@@ -23,7 +27,7 @@ const getEachCategories = () =>{
         result.push(
           <div key={ulid()}>
             <div key={ulid()}>
-              <img className={styles.picbox} src={v.imageURL} alt={v.name}/>
+              <img onClick={(e)=>{handleClick(v.id)}} className={styles.picbox} src={v.imageURL} alt={v.name}/>
               <a className={` clickable ${styles.title}`} href={`/Category/${v.id}`}>{v.name}</a> 
               </div>
             {eachCategoriesItems}
