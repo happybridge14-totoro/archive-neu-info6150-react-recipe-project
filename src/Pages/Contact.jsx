@@ -27,11 +27,9 @@ export default class Contact extends Component {
   }
 
   onSubmit = async (values) => {
-    console.log("Contact.onSubmit");
     let promise = new Promise((resolve, reject) => {
       this.popupPromiseResolver = resolve;
     });
-    console.log(values);
     let ret = await submitMessage(values);
     if (ret) {
       window.dispatchEvent(new CustomEvent(EVENT.DISPLAY_POPUP, {detail:{

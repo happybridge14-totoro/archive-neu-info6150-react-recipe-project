@@ -10,4 +10,13 @@ const submitMessage = (messageObj) => {
     return false;
   });
 }
-export {submitMessage};
+const signin = (username, pwd) => {
+
+};
+const usernameCheck = (username) => {
+
+};
+const signup = (username, pwd) => {
+
+};
+export {submitMessage, signin, signup, usernameCheck};

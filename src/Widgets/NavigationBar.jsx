@@ -21,8 +21,8 @@ export default class NavigationBar extends Component {
       newState.secondLabelName = "Search";
     } else if (secondParam === "contact") {
       newState.secondLabelName = "Contact";
-    } else if (secondParam === "error") {
-      newState.secondLabelName = "Error";
+    } else if (secondParam === "404") {
+      newState.secondLabelName = "404";
     } else if (this.props.positions[1]) {
       newState.secondLabelName = "Categories";
       if (this.props.positions[2]) {

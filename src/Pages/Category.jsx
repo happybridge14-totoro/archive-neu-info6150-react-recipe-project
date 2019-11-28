@@ -13,7 +13,6 @@ export default class Category extends Component {
       detail: getItemsByCategoryId(this.props.id)
 
     };
-    this.navbarPosition = [true, true, this.state.category.id];
   }
 
   handleClick = (id) => {
@@ -42,12 +41,13 @@ export default class Category extends Component {
 
   render() {
     if (this.state.category === null) {
-      window.location.href = '/error';
+      window.location.replace('/404');
       return;
     }
+    let navbarPosition = [true, true, this.props.id];
     return (
       <div className={styles.category}>
-         <NavigationBar positions={this.navbarPosition}/>
+         <NavigationBar positions={navbarPosition}/>
         <div className={styles.picBox}>
           <img className={styles.picDessert} src={this.state.category.imageURL} alt={this.state.category.name}/>
         </div>

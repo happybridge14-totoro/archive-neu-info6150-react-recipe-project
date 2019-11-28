@@ -18,7 +18,7 @@ export default class Category extends Component {
 
   render() {
     if (this.state.detail === null) {
-      window.location.href = '/404';
+      window.location.replace('/404');
       return;
     }
     return (
