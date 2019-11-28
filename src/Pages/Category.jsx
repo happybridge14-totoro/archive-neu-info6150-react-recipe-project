@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {ulid} from 'ulid';
 import PropTypes from 'prop-types';
 import {getCategoryById, getItemsByCategoryId} from "../Proxy/Data";
 import styles from "./Category.module.css"
@@ -21,18 +22,17 @@ export default class Category extends Component {
 
   renderGetResults = () => {
     let result = [];
-    let index = 0;
     let items = this.state.detail;
       items.forEach((v) => {
-        result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemBox} key={index++}>
+        result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemBox} key={ulid()}>
             <img className={styles.pic} src={v.imageURL} alt={v.title}></img>
             <div>
               {v.videoURL !== "" &&
-                <img className={styles.playSign} src="/images/video-icon.png" alt="video" key={index++}/>
+                <img className={styles.playSign} src="/images/video-icon.png" alt="video" key={ulid()}/>
               }
             </div>
             <div>
-              <a className={styles.subtitle} href={`/detail/${v.id}`}>{v.title}</a>
+              <a  tabIndex="-1" className={styles.subtitle} href={`/detail/${v.id}`}>{v.title}</a>
               <div className={styles.text}>{v.time}</div>
             </div>
           </div>);

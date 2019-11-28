@@ -32,6 +32,7 @@
     display:grid;
     grid-template-columns: 19rem 5rem 30rem;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .title{
