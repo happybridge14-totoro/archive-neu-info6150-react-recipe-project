@@ -32,6 +32,7 @@ export default class Form extends Component {
       isInitialStatus: false,
     };
     let hasError = false;
+    let valueObj = {};
     this.props.param.items.forEach((v) => {
       let targetError = v.id + "Error";
       let targetValue = v.id + "Value";
@@ -39,12 +40,13 @@ export default class Form extends Component {
       if (errorResult) {
         hasError = true;
       }
+      valueObj[v.id] = this.state[targetValue];
       newState[targetError] = errorResult;
     });
     if (!hasError) {
       newState.isSubmitting = true;
       this.setState(newState);
-      let result = await this.props.param.dataSubmit();
+      let result = await this.props.param.dataSubmit(valueObj);
       if (result) {
         this.reset();
       } else {

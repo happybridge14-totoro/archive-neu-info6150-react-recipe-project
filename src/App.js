@@ -13,10 +13,13 @@ import AllCategories from "./Pages/AllCategories";
 import Category from "./Pages/Category";
 import Detail from "./Pages/Detail";
 import Popup from "./Pages/Popup";
+import Server from "./Proxy/MockServer/Server";
+import UserData from "./Proxy/UserData";
+import styles from "./App.css";
 
-import styles from "./App.css"
-
+// console.log(UserData);
 function App() {
+  Server.test();
   return (
     <Router className={styles.container}>
       <Header/>

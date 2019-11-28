@@ -7,7 +7,7 @@ const METHOD_JSON_BASE64 = window.btoa(JSON.stringify(METHOD));
 const secret_Token = "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
 const TEXT = "TEXT";
 const EXPIRED_DATE = "expriedDate";
-const USER_ID = "userID";
+const USERNAME = "username";
 const generateThirdPart = (content) => {
   let shaObj = new jsSHA("SHA-256", TEXT);
   shaObj.setHMACKey(secret_Token, TEXT)
@@ -23,13 +23,13 @@ const generateThirdPart = (content) => {
   });
   return hmac
 };
-const verifyPayload = (payloadObj, userID) => {
+const verifyPayload = (payloadObj, username) => {
   let ret = false;
   try {
-    if (payloadObj[USER_ID] === userID) {
+    if (payloadObj[USERNAME] === username) {
       let expiredTime = payloadObj[EXPIRED_DATE];
       if (expiredTime) {
-        ret = (expiredTime > Date.now()) && payloadObj[USER_ID] === userID;
+        ret = (expiredTime > Date.now()) && payloadObj[USERNAME] === username;
       } else {
         ret = true;
       }

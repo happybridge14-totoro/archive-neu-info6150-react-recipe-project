@@ -4,6 +4,7 @@ import {getContractInfo} from '../Proxy/Data';
 import EVENT from "../Proxy/Event"
 import NavigationBar from "../Widgets/NavigationBar";
 import Form from "../Widgets/Form";
+import {submitMessage} from "../Proxy/UserData";
 
 const EMAIL_VALIDATOR = /^\S+@\S+\.\S+$/;
 
@@ -25,13 +26,13 @@ export default class Contact extends Component {
     return result;
   }
 
-  onSubmit = async () => {
+  onSubmit = async (values) => {
     console.log("Contact.onSubmit");
     let promise = new Promise((resolve, reject) => {
       this.popupPromiseResolver = resolve;
     });
-    // let ret = await ....
-    let ret = true;
+    console.log(values);
+    let ret = await submitMessage(values);
     if (ret) {
       window.dispatchEvent(new CustomEvent(EVENT.DISPLAY_POPUP, {detail:{
         "title": "Success!",

@@ -1,3 +1,4 @@
+import {ulid} from "ulid";
 import React, { Component } from "react";
 import styles from "./Popup.module.css";
 import EVENT from "../Proxy/Event";
@@ -58,16 +59,20 @@ export default class Popup extends Component {
     e.preventDefault();
   }
   render() {
-    return (
-      <div className={`${styles.popup} + ${this.state.display ? "" : " " + styles.hidden}`}>
-        <section className={styles.container}>
-          <h1 className={styles.head}>{this.state.title}</h1>
-          {this.state.body.map((v) => {
-            return <p className={styles.body}>{v}</p>;
-          })}
-          <button id="confirm" className={`baseButton ${styles.button}`} autoFocus={true} onClick={this.clickHandler}>{this.state.buttonText}</button>
-        </section>
-      </div>
-    )
+    if (this.state.display) {
+      return (
+        <div className={`${styles.popup} + ${this.state.display ? "" : " " + styles.hidden}`}>
+          <section className={styles.container}>
+            <h1 className={styles.head}>{this.state.title}</h1>
+            {this.state.body.map((v) => {
+              return <p className={styles.body} key={ulid()}>{v}</p>;
+            })}
+            <button id="confirm" className={`baseButton ${styles.button}`} autoFocus={true} onClick={this.clickHandler}>{this.state.buttonText}</button>
+          </section>
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 }
