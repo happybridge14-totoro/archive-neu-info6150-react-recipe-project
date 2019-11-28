@@ -13,6 +13,7 @@ import AllCategories from "./Pages/AllCategories";
 import Category from "./Pages/Category";
 import Detail from "./Pages/Detail";
 import Popup from "./Pages/Popup";
+import Login from "./Pages/Login";
 import Server from "./Proxy/MockServer/Server";
 import UserData from "./Proxy/UserData";
 import styles from "./App.css";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/about" exact component={About} />
         <Route path="/contact" exact component={Contact} />
+        <Route path="/login" exact component={Login} />
         <Route path="/allcategories" exact component={AllCategories} />
         <Route path="/category/:categoryId" exact render={({match})=> <Category id={match.params.categoryId}/>}/>
         <Route path="/detail/:itemId" exact render={({match})=> <Detail id={match.params.itemId}/>}/>

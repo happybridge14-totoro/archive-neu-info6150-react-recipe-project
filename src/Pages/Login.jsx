@@ -4,34 +4,19 @@ import Form from "../Widgets/Form";
 import {signin} from "../Proxy/UserData";
 
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.navbarPosition = [true, "contact"];
-    this.contactInfo = getContractInfo();
-    this.popupPromiseResolver = null;
-  }
-  createNodes = () => {
-    let result = [];
-    this.contactInfo.forEach((v, i) => {
-      result.push(<h2 key={2*i}>{v.name}</h2>);
-      result.push(<address key={2*i+1}>
-        <a href={`mailto:${v.email}`} className={styles.mailto}>{v.email}</a>
-      </address>);
-    });
-    return result;
-  }
+const PAGE_SIGNIN = "signin";
+const PAGE_SIGNUP = "signup";
 
+export default class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      page: PAGE_SIGNIN
+    }
+  }
   onSubmit = async (values) => {
     console.log("login.onSubmit");
     return signin(values);
-  }
-
-  popupDismissedHandler = () => {
-    if (this.popupPromiseResolver) {
-      this.popupPromiseResolver(true);
-      this.popupPromiseResolver = null;
-    }
   }
 
   loginFormParam = {
@@ -61,7 +46,7 @@ export default class Login extends Component {
     return (
         <div className={styles.login}>
           <div className={styles.container}>
-              <Form param={this.formParam}></Form>
+              <Form param={this.loginFormParam}></Form>
           </div>
         </div>
     )
