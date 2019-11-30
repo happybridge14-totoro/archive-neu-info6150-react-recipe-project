@@ -6,6 +6,9 @@ import {signIn} from "../Proxy/UserData";
 
 const PAGE_SIGNIN = "signin";
 const PAGE_SIGNUP = "signup";
+const VALIDATOR = (value) => {
+  return value !== "";
+};
 
 export default class Login extends Component {
   constructor() {
@@ -23,41 +26,47 @@ export default class Login extends Component {
         "controlType": "input",
         "type": "text",
         "errorString": "Please input your user name",
-        "validator": (value) => {
-          return value !== "";
-        }
+        "validator": VALIDATOR
       }, {
         "id": "pwd",
         "name": "Password",
         "controlType": "input",
         "type": "password",
         "errorString": "Please input your password",
-        "validator": (value) => {
-          return value !== "";
-        }
+        "validator": VALIDATOR
       }]
     };
     this.createFormParam = {
         dataSubmit: this.onCreateAccountSubmit,
-        buttonText: "Sign in",
+        buttonText: "Create",
         items: [{
           "id": "username",
           "name": "User Name",
           "controlType": "input",
           "type": "text",
           "errorString": "Please input your user name",
-          "validator": (value) => {
-            return value !== "";
-          }
+          "validator": VALIDATOR
         }, {
           "id": "pwd",
           "name": "Password",
           "controlType": "input",
           "type": "password",
-          "errorString": "",
-          "validator": (value) => {
-            return true;
-          }
+          "errorString": "Please input your password",
+          "validator": VALIDATOR
+        },{
+          "id": "pwdcheck",
+          "name": "Re-enter password",
+          "controlType": "input",
+          "type": "password",
+          "errorString": "Please input your password",
+          "validator": VALIDATOR
+        },{
+          "id": "nickname",
+          "name": "Nickname",
+          "controlType": "input",
+          "type": "text",
+          "errorString": "Please input your nickname",
+          "validator": VALIDATOR
         }]
       };
   }
@@ -78,9 +87,10 @@ export default class Login extends Component {
   onCreateAccountSubmit = async (values) => {
     console.log("onCreateAccountSubmit.onSubmit");
     console.log(values);
-    let ret = await signIn(values);
-    console.log(ret);
-    return ret;
+    // let ret = await signIn(values);
+    // console.log(ret);
+    // return ret;
+    return true;
     // return signin(values);
   }
 
@@ -95,17 +105,18 @@ export default class Login extends Component {
     if (this.state.page === PAGE_SIGNUP) {
       return (
         <div className={styles.login}>
-          <div className={styles.container}>
-              <Form param={this.createFormParam}></Form>
+          <div key="login" className={styles.container}>
+              <div className={styles.error}>{this.state.error}</div>
+              <Form id="create" param={this.createFormParam}></Form>
           </div>
         </div>
       );
     } else if (this.state.page === PAGE_SIGNIN){
       return (
           <div className={styles.login}>
-            <div className={styles.container}>
+            <div key="signin" className={styles.container}>
               <div className={styles.error}>{this.state.error}</div>
-              <Form param={this.loginFormParam}></Form>
+              <Form  param={this.loginFormParam}></Form>
               <button className={`baseButton ${styles.createButton}`} onClick={this.handleCreateAccountClick}>Create an account</button>
             </div>
           </div>
