@@ -58,6 +58,7 @@ export default class Contact extends Component {
 
   formParam = {
     dataSubmit: this.onSubmit,
+    buttonText: "Submit",
     items: [{
       "id": "name",
       "name": "Name",

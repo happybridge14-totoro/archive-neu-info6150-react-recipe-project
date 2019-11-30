@@ -9,19 +9,19 @@ class DB {
       storeName: storeageName
     });
   }
-  getItem = (key) => {
+  getItem = async (key) => {
     return this._instance.getItem(key);
   }
-  setItem = (key, value) => {
+  setItem = async (key, value) => {
     return this._instance.setItem(key, value);
   }
-  removeItem = (key) => {
+  removeItem = async (key) => {
     return this._instance.removeItem(key);
   }
-  clear = () => {
+  clear = async () => {
     return this._instance.clear();
   }
-  getAll = () => {
+  getAll = async () => {
     let ret = [];
     return this._instance.iterate((value, key, index) => {
       ret.push([key, value]);

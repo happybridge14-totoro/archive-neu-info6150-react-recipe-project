@@ -15,15 +15,15 @@ import Detail from "./Pages/Detail";
 import Popup from "./Pages/Popup";
 import Login from "./Pages/Login";
 import Server from "./Proxy/MockServer/Server";
-import UserData from "./Proxy/UserData";
+import {getStatus} from "./Proxy/UserData";
 import styles from "./App.css";
 
-// console.log(UserData);
 function App() {
-  Server.test();
+  // Server.test();
+  let userInfo = getStatus();
   return (
     <Router className={styles.container}>
-      <Header/>
+      <Header userInfo={userInfo}/>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/about" exact component={About} />

@@ -23,16 +23,14 @@ const generateThirdPart = (content) => {
   });
   return hmac
 };
-const verifyPayload = (payloadObj, username) => {
+const verifyPayload = (payloadObj, userName) => {
   let ret = false;
   try {
-    if (payloadObj[USERNAME] === username) {
-      let expiredTime = payloadObj[EXPIRED_DATE];
-      if (expiredTime) {
-        ret = (expiredTime > Date.now()) && payloadObj[USERNAME] === username;
-      } else {
-        ret = true;
-      }
+    let expiredTime = payloadObj[EXPIRED_DATE];
+    if (expiredTime) {
+      ret = (expiredTime > Date.now()) && payloadObj[USERNAME] === userName;
+    } else {
+      ret = true;
     }
   } catch(e) {
     console.error(e);
@@ -52,23 +50,36 @@ const encrypt = (payload) => {
   }
   return ret;
 };
-const verify = (token, userID) => {
+const verify = (token, userName=null) => {
   let ret = false;
   try {
-    userID = userID.toString();
     let tokenAry = token.split(".");
     if (generateThirdPart(tokenAry[0] + "." + tokenAry[1]) === tokenAry[2]) {
       let payloadObj = JSON.parse(window.atob(tokenAry[1]));
-      ret = verifyPayload(payloadObj, userID);
+      if (userName === null) {
+        userName = payloadObj[USERNAME];
+      } else {
+        userName = userName.toString();
+      }
+      ret = verifyPayload(payloadObj, userName);
     }
   } catch(e) {
     console.error(e);
   }
   return ret;
-}
+};
+const getInfoByToken = (token) => {
+  if (verify(token)) {
+    let tokenAry = token.split(".");
+    return JSON.parse(window.atob(tokenAry[1]));
+  } else {
+    return null;
+  }
+};
 const JWT = {
   encrypt: encrypt,
-  verify: verify
+  verify: verify,
+  getInfoByToken: getInfoByToken
 };
 
 export default JWT;

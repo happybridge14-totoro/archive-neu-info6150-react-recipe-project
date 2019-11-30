@@ -105,7 +105,7 @@ export default class Form extends Component {
       <form action="submit" onSubmit={this.onSubmit} className={styles.form}>
         <div className={styles.formContainer}>
           {this.createNodes()}
-          <button type="submit" disabled={this.hasError() || this.state.isSubmitting} className={`${this.hasError()  ? "disabled" : ""} baseButton ${styles.submitButton}`}>Submit</button>
+          <button type="submit" disabled={this.hasError() || this.state.isSubmitting} className={`${this.hasError()  ? "disabled" : ""} baseButton reverse ${styles.submitButton}`}>{this.props.param.buttonText}</button>
         </div>
       </form>
     )

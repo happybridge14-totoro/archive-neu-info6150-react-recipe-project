@@ -64,12 +64,17 @@
   color: var(--color-decorated);
   border: 2px solid var(--color-decorated)
 }
+.baseButton.reverse {
+  background-color: var(--color-decorated);
+  color: var(--color-surface);
+  border: 2px solid var(--color-surface);
+}
 .baseButton.disabled {
   cursor: default;
   opacity: 0.5;
 }
 .baseButton:not(.disabled):hover {
-  background-color: var(--color-decorated);
+  background-color: var(--color-striking);
   color: var(--color-surface);
   border-color: var(--color-surface);
 }

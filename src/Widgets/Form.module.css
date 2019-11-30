@@ -5,11 +5,8 @@
 .formContainer {
 }
 .label {
-  /* display: inline-block; */
   font-size: 1.4rem;
   font-weight: bold;
-  /* margin-top: var(--gap);
-  margin-bottom: var(--gap); */
 }
 .input {
   display: block;
@@ -19,7 +16,7 @@
   line-height: 40px;
   font-size: 1.2rem;
   padding: 0px 40px 0px 10px;
-  width: var(--min-width);
+  width: 100%;
   box-sizing: border-box;
 }
 .contact .mailto {
@@ -29,7 +26,7 @@
 .textArea {
   display: block;
   resize: none;
-  width: var(--min-width);
+  width: 100%;
   box-sizing: border-box;
   border: 2px solid var(--color-minor);
   border-radius: 5px;
@@ -39,6 +36,7 @@
   margin-top: var(--gap);
   height: 50px;
   line-height: 50px;
+  width: 100%;
   font-size: 1rem;
   padding: 0px 10px;
 }

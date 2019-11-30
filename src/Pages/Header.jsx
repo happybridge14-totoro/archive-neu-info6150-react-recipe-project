@@ -2,14 +2,22 @@ import React, { Component } from "react";
 import styles from "./Header.module.css";
 import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
+import {signOut} from "../Proxy/UserData";
 
 export default class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    let state = {
       value: "",
-      redirect: false
+      username: "",
+      nickname: ""
     };
+    this.userInfo = {};
+    if (this.props.userInfo) {
+      state.username = this.props.userInfo.username;
+      state.nickname = this.props.userInfo.nickname;
+    }
+    this.state = state;
     let categories = getCategories();
     this.categoryDropdown = {
       "title": {
@@ -27,7 +35,7 @@ export default class Header extends Component {
 
   search = () => {
     if (this.state.value !== "") {
-      this.setState({redirect: true});
+      window.location.href = `/search/${this.state.value}`;
     }
   }
 
@@ -44,12 +52,27 @@ export default class Header extends Component {
       this.search();
     }
   }
+  handleSignOut = (e) => {
+    e.preventDefault();
+    signOut();
+    this.setState({
+      username: "",
+      nickname: ""
+    });
+  }
 
-  render() {
-    if (this.state.redirect) {
-      window.location.href = `/search/${this.state.value}`;
-      return;
+  renderUser = () => {
+    console.log(this.state.username)
+    if (this.state.username !== "") {
+      return (<div className={styles.userInfo}>
+        <div>Hello, {this.state.nickname}</div>
+        <div tabIndex="0" onClick={this.handleSignOut} className={`${styles.signOut} clickable`}>Sign Out</div>
+      </div>);
+    } else {
+      return (<a className={`clickable ${styles.signIn} ${styles.navButton}`} href="/login">Sign in</a>);
     }
+  }
+  render() {
     return (
       <header className={`${styles.header} background-color`}>
         <nav className={styles.nav}>
@@ -57,11 +80,12 @@ export default class Header extends Component {
           <div className={styles.dropDownContainer}>
             <DropDown data={this.categoryDropdown}/>
           </div>
-          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
+          {this.renderUser()}
           <div className={styles.search}>
             <input type="text" value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} maxLength="16"/>
             <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={this.onSearch}/>
           </div>
+          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
         </nav>
       </header>
     )
