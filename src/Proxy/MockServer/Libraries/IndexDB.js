@@ -15,12 +15,12 @@ class DB {
   setItem = async (key, value) => {
     return this._instance.setItem(key, value);
   }
-  removeItem = async (key) => {
-    return this._instance.removeItem(key);
-  }
-  clear = async () => {
-    return this._instance.clear();
-  }
+  // removeItem = async (key) => {
+  //   return this._instance.removeItem(key);
+  // }
+  // clear = async () => {
+  //   return this._instance.clear();
+  // }
   getAll = async () => {
     let ret = [];
     return this._instance.iterate((value, key, index) => {

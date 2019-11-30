@@ -91,6 +91,7 @@ export default class Login extends Component {
         this.setState({
           error: "Password not match"
         });
+        return;
       }
       let ret = await signUp(values);
       if (ret.errorCode === 1) {

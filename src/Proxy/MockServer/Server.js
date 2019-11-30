@@ -26,7 +26,7 @@ const checkPasswordAndGetUserInfo = async (username, pwd) => {
 };
 
 const Server = {
-  test: () => {
+  test: async () => {
     // let test = {"a": "hello"};
     // let c = JWT.encrypt(test);
     // let zz = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIzMyJ9.jWFHtIB3_n7qaQPurcuYlvF_IutNp_zGH8LDUBySIKc";
@@ -42,6 +42,9 @@ const Server = {
       nickname: "Tester 3",
       pwd: "111111"
     }];
+    let ret = await customersDB.getAll();
+    console.log("getAll");
+    console.log(ret);
     return Promise.all(testData.map((v) => {
       v.pwd = encryptPWD(v.pwd);
       return customersDB.setItem(v.username, v);
