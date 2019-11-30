@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styles from './Login.module.css';
 import Form from "../Widgets/Form";
-import {signIn} from "../Proxy/UserData";
+import {signIn, signUp} from "../Proxy/UserData";
+import EVENT from "../Proxy/Event";
 
 
 const PAGE_SIGNIN = "signin";
@@ -85,13 +86,34 @@ export default class Login extends Component {
     }
   }
   onCreateAccountSubmit = async (values) => {
-    console.log("onCreateAccountSubmit.onSubmit");
-    console.log(values);
-    // let ret = await signIn(values);
-    // console.log(ret);
-    // return ret;
-    return true;
-    // return signin(values);
+    if (values) {
+      if (values.pwd !== values.pwdcheck) {
+        this.setState({
+          error: "Password not match"
+        });
+      }
+      let ret = await signUp(values);
+      if (ret.errorCode === 1) {
+        this.setState({
+          error: "User name already exists."
+        });
+      } else if (ret.errorCode === 2) {
+        this.setState({
+          error: "System error. Please try again later."
+        });
+      } else if (ret.errorCode === -1) {
+        window.dispatchEvent(new CustomEvent(EVENT.DISPLAY_POPUP, {detail:{
+              "title": "Success!",
+              "body": ["You hava successfully created an account!"],
+              "buttonText": "OK",
+              "callBack": this.popupDismissedHandler
+            }}));
+      } else {
+        this.setState({
+          error: "Unknown error."
+        });
+      }
+    }
   }
 
   handleCreateAccountClick = (e) => {
@@ -99,6 +121,10 @@ export default class Login extends Component {
     this.setState({
       page: PAGE_SIGNUP
     });
+  }
+
+  popupDismissedHandler = () => {
+    window.history.back();
   }
 
   render() {

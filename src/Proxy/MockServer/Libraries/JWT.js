@@ -78,7 +78,6 @@ const getInfoByToken = (token) => {
 };
 const JWT = {
   encrypt: encrypt,
-  verify: verify,
   getInfoByToken: getInfoByToken
 };
 

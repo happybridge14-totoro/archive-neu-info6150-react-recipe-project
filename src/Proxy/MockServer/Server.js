@@ -25,15 +25,6 @@ const checkPasswordAndGetUserInfo = async (username, pwd) => {
   return null;
 };
 
-// const checkPassword = async (username, pwd) => {
-//   let data = await customersDB.getItem(username);
-//   let ret = false;
-//   if (data) {
-//       ret = data.pwd === encryptPWD(pwd);
-//   }
-//   return ret;
-// };
-
 const Server = {
   test: () => {
     // let test = {"a": "hello"};
@@ -67,22 +58,28 @@ const Server = {
 
   addNewUser: async (userObj) => {
     let data = await customersDB.getItem(userObj.username);
-    if (data) {
-      Promise.reject("User exists");
-    } else {
+    let errorCode = -1;
+    let token = "";
+    if (!data) {
       userObj.pwd = encryptPWD(userObj.pwd);
-      return await customersDB.setItem(userObj.username, userObj);
+      let ret = await customersDB.setItem(userObj.username, userObj);
+      if (ret) {
+        token = JWT.encrypt({
+          username: userObj.username,
+          nickname: userObj.nickname
+        });
+      } else {
+        errorCode = 2;
+      }
+    } else {
+      errorCode = 1;
     }
-
-    // return customersDB.getItem(userObj.username).then((data) => {
-    //   if (data) {
-    //     Promise.reject("User exists");
-    //   }
-    //   return null;
-    // }).then(() => {
-    //   userObj.pwd = encryptPWD(userObj.pwd);
-    //   return customersDB.setItem(userObj.username, userObj);
-    // });
+    console.log("herererere");
+    console.log(token, errorCode);
+    return {
+      token: token,
+      errorCode: errorCode
+    };
   },
   addMessages: async (messageObj) => {
     return await messageDB.setItem(messageObj.id, messageObj);
