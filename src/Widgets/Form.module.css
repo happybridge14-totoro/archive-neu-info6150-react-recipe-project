@@ -46,7 +46,6 @@
 .error {
   visibility: visible;
   position: relative;
-  width: fit-content;
 }
 .error .input {
   border: 2px solid var(--color-striking);

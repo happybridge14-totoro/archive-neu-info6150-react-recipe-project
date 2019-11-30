@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import {getCategoryById, getItemById} from "../Proxy/Data";
 import styles from "./NavigationBar.module.css";
+import {ulid} from "ulid";
 
 export default class NavigationBar extends Component {
   constructor(props) {
@@ -39,22 +40,21 @@ export default class NavigationBar extends Component {
   }
 
   renderNavbarItems = (ary) => {
-    let index = 0;
-    ary.push(<a className={`clickable ${styles.item}`} href="/" key={index++}>Home</a>);
+    ary.push(<a className={`clickable ${styles.item}`} href="/" key={ulid()}>Home</a>);
     if (this.state.secondLabelName !== "") {
-      ary.push(<div className={styles.sign} key={index++}>›</div>);
+      ary.push(<div className={styles.sign} key={ulid()}>›</div>);
       if (this.state.category) {
-        ary.push(<a className={`clickable ${styles.item}`} href="/allcategories/" key={index++}>Categories</a>);
-        ary.push(<div className={styles.sign} key={index++}>›</div>);
+        ary.push(<a className={`clickable ${styles.item}`} href="/allcategories/" key={ulid()}>Categories</a>);
+        ary.push(<div className={styles.sign} key={ulid()}>›</div>);
         if (this.state.item) {
-          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={index++}>{this.state.category.name}</a>);
-          ary.push(<div className={styles.sign} key={index++}>›</div>);
-          ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.item.title}</span>);
+          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={ulid()}>{this.state.category.name}</a>);
+          ary.push(<div className={styles.sign} key={ulid()}>›</div>);
+          ary.push(<span className={styles.nonClickableItem} key={ulid()}>{this.state.item.title}</span>);
         } else {
-          ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.category.name}</span>);
+          ary.push(<span className={styles.nonClickableItem} key={ulid()}>{this.state.category.name}</span>);
         }
       } else {
-        ary.push(<span className={styles.nonClickableItem} key={index++}>{this.state.secondLabelName}</span>);
+        ary.push(<span className={styles.nonClickableItem} key={ulid()}>{this.state.secondLabelName}</span>);
       }
     }
   }

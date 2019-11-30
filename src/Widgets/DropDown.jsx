@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from "./DropDown.module.css";
+import {ulid} from "ulid";
 
 
 const DropDown = (props) => {
-  let index = 0;
   const linkAry = props.data.items.map((v) => {
-    return (<a key={index++} href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
+    return (<a key={ulid()} href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
   });
   return (
     <div className={styles.dropDown}>

@@ -70,7 +70,7 @@
   border: 2px solid var(--color-surface);
 }
 .baseButton.disabled {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 .baseButton:not(.disabled):hover {
