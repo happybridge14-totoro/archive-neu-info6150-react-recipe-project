@@ -5,7 +5,7 @@ import styles from "./Search.module.css";
 import {search, getCategoryById} from "../Proxy/Data";
 import NavigationBar from "../Widgets/NavigationBar";
 
-const navbarPosition = [true, "search"];
+const navbarPosition = ["search"];
 
 export default class Search extends Component {
   constructor(props) {

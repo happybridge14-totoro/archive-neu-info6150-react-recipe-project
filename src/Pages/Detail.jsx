@@ -13,7 +13,7 @@ export default class Category extends Component {
     this.state = {
       detail: detail
     };
-    this.navbarPosition = [true, true, detail.categoryId, detail.id];
+    this.navbarPosition = [true, detail.categoryId, detail.id];
   }
 
   render() {

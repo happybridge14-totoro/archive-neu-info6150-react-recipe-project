@@ -44,7 +44,7 @@ export default class Category extends Component {
       window.location.replace('/404');
       return;
     }
-    let navbarPosition = [true, true, this.props.id];
+    let navbarPosition = [ true, this.props.id];
     return (
       <div className={styles.category}>
          <NavigationBar positions={navbarPosition}/>

@@ -11,7 +11,7 @@ const EMAIL_VALIDATOR = /^\S+@\S+\.\S+$/;
 export default class Contact extends Component {
   constructor(props) {
     super(props);
-    this.navbarPosition = [true, "contact"];
+    this.navbarPosition = ["contact"];
     this.contactInfo = getContractInfo();
     this.popupPromiseResolver = null;
   }

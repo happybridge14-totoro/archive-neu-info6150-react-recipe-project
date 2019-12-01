@@ -4,7 +4,7 @@ import styles from "./AllCategories.module.css"
 import NavigationBar from "../Widgets/NavigationBar"
 import {getCategories, getItemsByCategoryIds} from "../Proxy/Data"
 
-const positions= [true,true]
+const positions= [true]
 const allCategoriesObj = getCategories();
 const allCategoriesItem = getItemsByCategoryIds(allCategoriesObj.map(v=>{return v.id}));
 
@@ -14,12 +14,12 @@ const handleClick = (id) =>{
 
 const getEachCategories = () =>{
   let result = [];
-      
+
   allCategoriesObj.forEach((v,i) => {
       let eachCategoriesItems = [];
       allCategoriesItem[i].forEach((v) => {
         eachCategoriesItems.push(
-          <div key={ulid()}> 
+          <div key={ulid()}>
             <a className={` clickable ${styles.subtitle}`} href={`/detail/${v.id}`}>{v.title}</a>
         </div>)
       }
@@ -28,7 +28,7 @@ const getEachCategories = () =>{
           <div key={ulid()}>
             <div key={ulid()}>
               <img onClick={(e)=>{handleClick(v.id)}} className={styles.picbox} src={v.imageURL} alt={v.name}/>
-              <a className={` clickable ${styles.title}`} href={`/Category/${v.id}`}>{v.name}</a> 
+              <a className={` clickable ${styles.title}`} href={`/Category/${v.id}`}>{v.name}</a>
               </div>
             {eachCategoriesItems}
           </div>)
