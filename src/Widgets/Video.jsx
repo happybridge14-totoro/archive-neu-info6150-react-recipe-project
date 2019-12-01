@@ -15,4 +15,4 @@ Video.propTypes = {
   url: PropTypes.string.isRequired
 };
 
-export default Video
+export default Video;
