@@ -34,6 +34,7 @@ export default class Popup extends Component {
   }
   dismissPopup = (e) => {
     document.body.style.cssText = "";
+    window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
     window.removeEventListener("keydown", this.keyUpHandler, true);
     window.removeEventListener("scroll", this.scrollHandler, true);
     let callBack = this.state.callBack;

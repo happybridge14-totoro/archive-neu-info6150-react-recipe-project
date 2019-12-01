@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -16,27 +16,42 @@ import Popup from "./Pages/Popup";
 import Login from "./Pages/Login";
 import Server from "./Proxy/MockServer/Server";
 import {getStatus} from "./Proxy/UserData";
-import styles from "./App.css";
+import "./App.css";
+import EVENT from "./Proxy/Event";
 
 function App() {
   // Server.test();
-  let userInfo = getStatus();
+  const [hasPopup, setHasPopup] = useState(false);
+  const handleDisplay = (e) => { setHasPopup(true); };
+  const handleDismiss = (e) => { setHasPopup(false); };
+  useEffect(() => {
+    window.addEventListener(EVENT.DISPLAY_POPUP, handleDisplay);
+    window.addEventListener(EVENT.DISMISS_POPUP, handleDismiss);
+    return () => {
+      window.removeEventListener(EVENT.DISPLAY_POPUP, handleDisplay);
+      window.removeEventListener(EVENT.DISMISS_POPUP, handleDismiss);
+    };
+  });
   return (
-    <Router className={styles.container}>
-      <Header userInfo={userInfo}/>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" exact component={About} />
-        <Route path="/contact" exact component={Contact} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/allcategories" exact component={AllCategories} />
-        <Route path="/category/:categoryId" exact render={({match})=> <Category id={match.params.categoryId}/>}/>
-        <Route path="/detail/:itemId" exact render={({match})=> <Detail id={match.params.itemId}/>}/>
-        <Route path="/search/:keyword" exact render={({match})=> <Search keyword={match.params.keyword}/>}/>
-        <Route path="/404" exact component={Error}/>
-        <Route component={Error} />
-      </Switch>
-      <Footer/>
+    <Router >
+      <div className={hasPopup ? "blur" : ""}>
+        <Header userInfo={getStatus()}/>
+        <div className="container">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" exact component={About} />
+            <Route path="/contact" exact component={Contact} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/allcategories" exact component={AllCategories} />
+            <Route path="/category/:categoryId" exact render={({match})=> <Category id={match.params.categoryId}/>}/>
+            <Route path="/detail/:itemId" exact render={({match})=> <Detail id={match.params.itemId}/>}/>
+            <Route path="/search/:keyword" exact render={({match})=> <Search keyword={match.params.keyword}/>}/>
+            <Route path="/404" exact component={Error}/>
+            <Route component={Error} />
+          </Switch>
+        </div>
+        <Footer/>
+      </div>
       <Popup/>
     </Router>
   );

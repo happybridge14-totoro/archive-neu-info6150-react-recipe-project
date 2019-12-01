@@ -21,12 +21,12 @@ const DropDown = memo((props) => {
 DropDown.propTypes = {
   data: PropTypes.exact({
     title: PropTypes.exact({
-      name: PropTypes.string,
-      link: PropTypes.string
+      name: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired
     }).isRequired,
     items: PropTypes.arrayOf(PropTypes.exact({
-      name: PropTypes.string,
-      link: PropTypes.string
+      name: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired
     })).isRequired
   }).isRequired
 };

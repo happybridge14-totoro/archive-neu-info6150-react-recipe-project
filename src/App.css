@@ -6,6 +6,7 @@
   --color-minor: #727272;
   --color-striking: #f05000;
   --color-opacity-black: rgba(0, 0, 0, 0.4);
+  --filter-blur: blur(4px);
 }
 .clickable {
   cursor: pointer;
@@ -51,6 +52,9 @@
   background-color: var(--color-striking);
   color: var(--color-surface);
   border-color: var(--color-surface);
+}
+.blur .container {
+  filter: var(--filter-blur);
 }
 
 body {

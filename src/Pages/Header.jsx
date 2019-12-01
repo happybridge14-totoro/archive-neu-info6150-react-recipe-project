@@ -62,7 +62,6 @@ export default class Header extends Component {
   }
 
   renderUser = () => {
-    console.log(this.state.username)
     if (this.state.username !== "") {
       return (<div className={styles.userInfo}>
         <div>Hello, {this.state.nickname}</div>

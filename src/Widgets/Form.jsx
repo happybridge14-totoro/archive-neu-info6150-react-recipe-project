@@ -1,113 +1,102 @@
-import React, { Component } from "react";
+import React, { memo, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import styles from './Form.module.css';
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.getResetState();
-  }
-  checkError = (targetID, value) => {
-    return !this.state[targetID + "Validator"](value);
-  }
-
-  handleChange = (e) => {
-    e.preventDefault();
-    let id = e.target.id;
-    let value = e.target.value;
-    let targetKey = id + "Value";
-    if (this.state[targetKey] !== value) {
-      let newState = {};
-      if (!this.state.isInitialStatus) {
-        let targetError = id + "Error";
-        newState[targetError] = this.checkError(id, value);
-      }
-      newState[targetKey] = value;
-      this.setState(newState);
-    }
-  }
-
-  onSubmit = async (e) => {
-    e.preventDefault();
-    let newState = {
-      isInitialStatus: false,
-    };
-    let hasError = false;
-    let valueObj = {};
-    this.props.param.items.forEach((v) => {
-      let targetError = v.id + "Error";
-      let targetValue = v.id + "Value";
-      let errorResult = this.checkError(v.id, this.state[targetValue]);
-      if (errorResult) {
-        hasError = true;
-      }
-      valueObj[v.id] = this.state[targetValue];
-      newState[targetError] = errorResult;
+const Form = memo((props) => {
+  const {dataSubmit, buttonText, items} = props.param;
+  const [initStatus, setInitStatus] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  let values = [];
+  let setValues= [];
+  let errors = [];
+  let setErrors= [];
+  items.forEach((v, i) => {
+    [values[i], setValues[i]] = useState("");
+    [errors[i], setErrors[i]] = useState(true);
+  });
+  const reset = () => {
+    setInitStatus(true);
+    setHasError(false);
+    setIsSubmitting(false);
+    items.forEach((v, i) => {
+      setValues[i]("");
+      setErrors[i](true);
     });
-    if (!hasError) {
-      newState.isSubmitting = true;
-      this.setState(newState);
-      let result = await this.props.param.dataSubmit(valueObj);
-      if (result) {
-        this.reset();
-      } else {
-        this.setState({isSubmitting: false});
-      }
-    } else {
-      this.setState(newState);
-    }
-  }
-
-  getResetState = () => {
-    let state = {
-      isSubmitting: false,
-      isInitialStatus: true,
-    };
-    this.props.param.items.forEach((v) => {
-      state[v.id + "Error"] = false;
-      state[v.id + "Value"] = "";
-      state[v.id + "Validator"] = v.validator;
-    });
-    return state;
-  }
-  reset = () => {
-    this.setState(this.getResetState());
   };
-
-  createNodes = () => {
-    let nodes = [];
-    let index = 0;
-    this.props.param.items.forEach((v) => {
-      let errorKey = v.id + "Error";
-      let valueKey = v.id + "Value";
-      nodes.push(<label className={styles.label} htmlFor={v.id} key={index++}>{v.name}</label>);
-      let inputControl;
+  useEffect(() => {
+    if (!initStatus) {
+      setHasError(errors.reduce((prev, v) => prev||v, false));
+    }
+  }, [initStatus, errors]);
+  const handleChange = (e, i) => {
+    const value = e.target.value;
+    e.preventDefault();
+    setErrors[i](!items[i].validator(value));
+    setValues[i](value);
+  };
+  const createNodes = () => {
+    return items.map((v, i) => {
+      let control;
       if (v.controlType === "input") {
-        inputControl = <input className={styles.input} type={v.type} name={v.id} id={v.id} value={this.state[valueKey]} onChange={this.handleChange}/>
+        control = <input className={styles.input} type={v.type} name={v.id} id={v.id} value={values[i]} onChange={(e)=>{handleChange(e, i);}}/>
       } else if (v.controlType === "textArea") {
-        inputControl = <textarea className={styles.textArea} name={v.id} id={v.id} rows="5" value={this.state[valueKey]} onChange={this.handleChange}/>
+        control = <textarea className={styles.textArea} name={v.id} id={v.id} rows="5" value={values[i]} onChange={(e)=>{handleChange(e, i);}}/>
       }
-      nodes.push(<div className={this.state[errorKey] ? styles.error : ""} key={index++}>
-        {inputControl}
-      </div>);
-      nodes.push(<p className={`${styles.errorText} + " " + ${this.state[errorKey] ? "" : styles.hiddenError}`} key={index++}>{v.errorString}</p>)
-    });
-    return nodes;
-  }
-
-  hasError = () => {
-    return this.props.param.items.some(v => {
-      return this.state[v.id + "Error"];
-    });
-  }
-
-  render() {
-    return (
-      <form action="submit" onSubmit={this.onSubmit} className={styles.form}>
-        <div className={styles.formContainer}>
-          {this.createNodes()}
-          <button type="submit" disabled={this.hasError() || this.state.isSubmitting} className={`${this.hasError()  ? "disabled" : ""} baseButton reverse ${styles.submitButton}`}>{this.props.param.buttonText}</button>
+      return (
+        <div key={v.key}>
+          <label className={styles.label} htmlFor={v.id}>{v.name}</label>
+          <div className={errors[i] && !initStatus ? styles.error : ""}>
+            {control}
+          </div>
+          <p className={`${styles.errorText} + " " + ${errors[i] && !initStatus ? "" : styles.hiddenError}`}>{v.errorString}</p>
         </div>
-      </form>
-    )
-  }
-}
+      );
+      });
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setInitStatus(false);
+    const hasError = errors.reduce((prev, v) => prev||v, false);
+    setHasError(hasError);
+    if (!hasError) {
+      setIsSubmitting(true);
+      let paramObj = {};
+      items.forEach((v, i) => {
+        paramObj[v.id] = values[i];
+      });
+      let result = await dataSubmit(paramObj);
+      if (result) {
+        reset();
+      } else {
+        setIsSubmitting(false);
+      }
+    }
+  };
+  return (
+    <form action="submit" onSubmit={onSubmit} className={styles.form}>
+      <div className={styles.formContainer}>
+        {createNodes()}
+        <button type="submit" disabled={hasError || isSubmitting} className={`${hasError ? "disabled" : ""} baseButton reverse ${styles.submitButton}`}>{buttonText}</button>
+      </div>
+    </form>
+  );
+});
+
+Form.propTypes = {
+  param: PropTypes.exact({
+    dataSubmit: PropTypes.func.isRequired,
+    buttonText: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.exact({
+      key: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      controlType: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      errorString: PropTypes.string.isRequired,
+      validator: PropTypes.func.isRequired
+    }).isRequired)
+  }).isRequired
+};
+
+export default Form;

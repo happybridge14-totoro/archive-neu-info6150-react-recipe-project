@@ -3,6 +3,7 @@ import styles from './Login.module.css';
 import Form from "../Widgets/Form";
 import {signIn, signUp} from "../Proxy/UserData";
 import EVENT from "../Proxy/Event";
+import {ulid}  from "ulid";
 
 
 const PAGE_SIGNIN = "signin";
@@ -22,6 +23,7 @@ export default class Login extends Component {
       dataSubmit: this.onLoginSubmit,
       buttonText: "Sign in",
       items: [{
+        "key": ulid(),
         "id": "username",
         "name": "User Name",
         "controlType": "input",
@@ -29,6 +31,7 @@ export default class Login extends Component {
         "errorString": "Please input your user name",
         "validator": VALIDATOR
       }, {
+        "key": ulid(),
         "id": "pwd",
         "name": "Password",
         "controlType": "input",
@@ -41,6 +44,7 @@ export default class Login extends Component {
         dataSubmit: this.onCreateAccountSubmit,
         buttonText: "Create",
         items: [{
+          "key": ulid(),
           "id": "username",
           "name": "User Name",
           "controlType": "input",
@@ -48,6 +52,7 @@ export default class Login extends Component {
           "errorString": "Please input your user name",
           "validator": VALIDATOR
         }, {
+          "key": ulid(),
           "id": "pwd",
           "name": "Password",
           "controlType": "input",
@@ -55,6 +60,7 @@ export default class Login extends Component {
           "errorString": "Please input your password",
           "validator": VALIDATOR
         },{
+          "key": ulid(),
           "id": "pwdcheck",
           "name": "Re-enter password",
           "controlType": "input",
@@ -62,6 +68,7 @@ export default class Login extends Component {
           "errorString": "Please input your password",
           "validator": VALIDATOR
         },{
+          "key": ulid(),
           "id": "nickname",
           "name": "Nickname",
           "controlType": "input",

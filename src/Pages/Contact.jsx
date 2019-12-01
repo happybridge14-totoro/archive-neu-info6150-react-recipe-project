@@ -5,6 +5,7 @@ import EVENT from "../Proxy/Event"
 import NavigationBar from "../Widgets/NavigationBar";
 import Form from "../Widgets/Form";
 import {submitMessage} from "../Proxy/UserData";
+import {ulid} from 'ulid';
 
 const EMAIL_VALIDATOR = /^\S+@\S+\.\S+$/;
 
@@ -60,6 +61,7 @@ export default class Contact extends Component {
     dataSubmit: this.onSubmit,
     buttonText: "Submit",
     items: [{
+      "key": ulid(),
       "id": "name",
       "name": "Name",
       "controlType": "input",
@@ -69,6 +71,7 @@ export default class Contact extends Component {
         return value !== "";
       }
     }, {
+      "key": ulid(),
       "id": "email",
       "name": "Email",
       "controlType": "input",
@@ -78,6 +81,7 @@ export default class Contact extends Component {
         return EMAIL_VALIDATOR.test(value);
       }
     }, {
+      "key": ulid(),
       "id": "message",
       "name": "Message",
       "controlType": "textArea",
