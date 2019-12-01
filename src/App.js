@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, createContext} from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -18,6 +18,7 @@ import Server from "./Proxy/MockServer/Server";
 import {getStatus} from "./Proxy/UserData";
 import "./App.css";
 import EVENT from "./Proxy/Event";
+import {PopupContext, SHOW, HIDE} from "./context/showPopupContext";
 
 function App() {
   // Server.test();
@@ -34,9 +35,9 @@ function App() {
   });
   return (
     <Router >
-      <div className={hasPopup ? "blur" : ""}>
-        <Header userInfo={getStatus()}/>
-        <div className="container">
+      <PopupContext.Provider value={hasPopup ? SHOW : HIDE}>
+        <Header userInfo={getStatus()} hasPopup={hasPopup}/>
+        <div className={hasPopup ? "showPopup" : ""}>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
@@ -50,8 +51,8 @@ function App() {
             <Route component={Error} />
           </Switch>
         </div>
-        <Footer/>
-      </div>
+        <Footer hasPopup={hasPopup}/>
+      </PopupContext.Provider>
       <Popup/>
     </Router>
   );

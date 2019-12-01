@@ -34,7 +34,6 @@ export default class Popup extends Component {
   }
   dismissPopup = (e) => {
     document.body.style.cssText = "";
-    window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
     window.removeEventListener("keydown", this.keyUpHandler, true);
     window.removeEventListener("scroll", this.scrollHandler, true);
     let callBack = this.state.callBack;
@@ -49,11 +48,11 @@ export default class Popup extends Component {
       e.preventDefault();
       document.getElementById("confirm").focus()  ;
     } else if (e.keyCode === 13) {
-      this.dismissPopup();
+      window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
     }
   }
   clickHandler = (e) => {
-    this.dismissPopup();
+    window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
   }
   scrollHandler = (e) => {
     e.stopImmediatePropagation();
@@ -63,12 +62,12 @@ export default class Popup extends Component {
     if (this.state.display) {
       return (
         <div className={`${styles.popup} + ${this.state.display ? "" : " " + styles.hidden}`}>
-          <section className={styles.container}>
+          <section className={styles.container} autoFocus={true}>
             <h1 className={styles.head}>{this.state.title}</h1>
             {this.state.body.map((v) => {
               return <p className={styles.body} key={ulid()}>{v}</p>;
             })}
-            <button id="confirm" className={`baseButton ${styles.button}`} autoFocus={true} onClick={this.clickHandler}>{this.state.buttonText}</button>
+            <button id="confirm" className={`baseButton ${styles.button}`}  onClick={this.clickHandler}>{this.state.buttonText}</button>
           </section>
         </div>
       )

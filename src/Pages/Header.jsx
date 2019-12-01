@@ -3,6 +3,7 @@ import styles from "./Header.module.css";
 import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
 import {signOut} from "../Proxy/UserData";
+import {PopupContext, SHOW} from "../context/showPopupContext";
 
 export default class Header extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <header className={`${styles.header} background-color`}>
+      <header className={`${styles.header} background-color ${this.context===SHOW ? styles.showPopup : ""}`}>
         <nav className={styles.nav}>
           <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
           <div className={styles.dropDownContainer}>
@@ -90,3 +91,4 @@ export default class Header extends Component {
     )
   }
 }
+Header.contextType = PopupContext;

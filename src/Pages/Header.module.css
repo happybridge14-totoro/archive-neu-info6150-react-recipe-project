@@ -109,3 +109,6 @@
 .signOut:focus {
   opacity: 1;
 }
+.showPopup {
+  filter: var(--filter-blur);
+}
