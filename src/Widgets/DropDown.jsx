@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from "./DropDown.module.css";
 import {ulid} from "ulid";
 
-
 const DropDown = (props) => {
   const linkAry = props.data.items.map((v) => {
     return (<a key={ulid()} href={v.link} className={`clickable ${styles.item}`}>{v.name}</a>);
@@ -21,7 +20,16 @@ const DropDown = (props) => {
 }
 
 DropDown.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.exact({
+    title: PropTypes.exact({
+      name: PropTypes.string,
+      link: PropTypes.string
+    }).isRequired,
+    items: PropTypes.arrayOf(PropTypes.exact({
+      name: PropTypes.string,
+      link: PropTypes.string
+    })).isRequired
+  }).isRequired
 };
 
 export default DropDown

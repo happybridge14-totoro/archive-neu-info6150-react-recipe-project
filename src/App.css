@@ -7,28 +7,6 @@
   --color-striking: #f05000;
   --color-opacity-black: rgba(0, 0, 0, 0.4);
 }
-
-/* .main-text-color {
-  color: var(--color-solid);
-}
-.minior-text-color {
-  color: var(--color-minor);
-}
-.striking-color {
-  color: var(--color-striking);
-}
-.decorated-color {
-  color: var(--color-decorated);
-}
-.text-color-with-colorful-background {
-  color: var(--color-surface);
-}
-.background-color {
-  background-color: var(--color-surface);
-}
-.button-background-color {
-  background-color: var(--color-decorated);
-} */
 .clickable {
   cursor: pointer;
   text-decoration: none;
@@ -37,10 +15,6 @@
   box-sizing: border-box;
   width: fit-content;
 }
-/* .clickable.selected,
-.clickable:focus {
-  color: var(--color-solid);
-} */
 .clickable::after {
   content: "";
   position: absolute;
