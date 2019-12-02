@@ -110,7 +110,8 @@ const Login = memo((props) => {
           <div key="login" className={styles.container}>
               <div className={styles.error}>{error}</div>
               <Form param={createFormParam}></Form>
-              <button className={`baseButton ${styles.createButton}`} onClick={(e) => {setPage(PAGE_SIGNIN)}}>Sign in</button>
+              <div className={styles.label}>Already have an account?</div>
+              <button className={`baseButton ${styles.anotherButton}`} onClick={(e) => {setPage(PAGE_SIGNIN)}}>Sign in</button>
           </div>
         </div>
       );
@@ -120,7 +121,8 @@ const Login = memo((props) => {
           <div key="signin" className={styles.container}>
             <div className={styles.error}>{error}</div>
             <Form param={loginFormParam}></Form>
-            <button className={`baseButton ${styles.createButton}`} onClick={(e) => {setPage(PAGE_SIGNUP)}}>Create an account</button>
+            <div className={styles.label}>Don't have an account?</div>
+            <button className={`baseButton ${styles.anotherButton}`} onClick={(e) => {setPage(PAGE_SIGNUP)}}>Create an account</button>
           </div>
         </div>
       )

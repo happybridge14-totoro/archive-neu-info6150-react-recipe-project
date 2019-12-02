@@ -33,7 +33,6 @@
   padding: 0px 40px 0px 10px;
 }
 .submitButton {
-  margin-top: var(--gap);
   height: 50px;
   line-height: 50px;
   width: 100%;
