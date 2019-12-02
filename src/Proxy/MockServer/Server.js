@@ -77,8 +77,6 @@ const Server = {
     } else {
       errorCode = 1;
     }
-    console.log("herererere");
-    console.log(token, errorCode);
     return {
       token: token,
       errorCode: errorCode

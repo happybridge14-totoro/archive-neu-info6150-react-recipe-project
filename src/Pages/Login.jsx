@@ -1,4 +1,4 @@
-import React, { Component, useState, memo} from "react";
+import React, {useState, memo} from "react";
 import styles from './Login.module.css';
 import Form from "../Widgets/Form";
 import {signIn, signUp} from "../Proxy/UserData";
