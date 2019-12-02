@@ -1,10 +1,13 @@
 .search {
   margin-top: 30px;
-}
-.container {
   max-width: 60rem;
   margin: 0px auto 120px auto;
   min-height: 50vh;
+}
+.container {
+  /* max-width: 60rem;
+  margin: 0px auto 120px auto;
+  min-height: 50vh; */
 }
 @media screen and (max-height: 600px) {
   .container {
@@ -22,6 +25,9 @@
 }
 .category {
   font-size: 2rem;
+  cursor: pointer;
+  width: fit-content;
+  color: var(--color-decorated);
 }
 .itemContainer {
   padding-top: 20px;

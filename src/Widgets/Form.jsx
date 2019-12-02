@@ -1,27 +1,102 @@
-import React, { Component } from "react";
+import React, { memo, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+import styles from './Form.module.css';
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submittedForm: null
-    };
-  }
-
-  onSubmit = async e => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    this.setState({ submittedForm: data });
+const Form = memo((props) => {
+  const {dataSubmit, buttonText, items} = props.param;
+  const [initStatus, setInitStatus] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  let values = [];
+  let setValues= [];
+  let errors = [];
+  let setErrors= [];
+  items.forEach((v, i) => {
+    [values[i], setValues[i]] = useState("");
+    [errors[i], setErrors[i]] = useState(true);
+  });
+  const reset = () => {
+    setInitStatus(true);
+    setHasError(false);
+    setIsSubmitting(false);
+    items.forEach((v, i) => {
+      setValues[i]("");
+      setErrors[i](true);
+    });
   };
+  useEffect(() => {
+    if (!initStatus) {
+      setHasError(errors.reduce((prev, v) => prev||v, false));
+    }
+  }, [initStatus, errors]);
+  const handleChange = (e, i) => {
+    const value = e.target.value;
+    e.preventDefault();
+    setErrors[i](!items[i].validator(value));
+    setValues[i](value);
+  };
+  const createNodes = () => {
+    return items.map((v, i) => {
+      let control;
+      if (v.controlType === "input") {
+        control = <input className={styles.input} type={v.type} name={v.id} id={v.id} value={values[i]} onChange={(e)=>{handleChange(e, i);}}/>
+      } else if (v.controlType === "textArea") {
+        control = <textarea className={styles.textArea} name={v.id} id={v.id} rows="5" value={values[i]} onChange={(e)=>{handleChange(e, i);}}/>
+      }
+      return (
+        <div key={v.key}>
+          <label className={styles.label} htmlFor={v.id}>{v.name}</label>
+          <div className={errors[i] && !initStatus ? styles.error : ""}>
+            {control}
+          </div>
+          <p className={`${styles.errorText} + " " + ${errors[i] && !initStatus ? "" : styles.hiddenError}`}>{v.errorString}</p>
+        </div>
+      );
+      });
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setInitStatus(false);
+    const hasError = errors.reduce((prev, v) => prev||v, false);
+    setHasError(hasError);
+    if (!hasError) {
+      setIsSubmitting(true);
+      let paramObj = {};
+      items.forEach((v, i) => {
+        paramObj[v.id] = values[i];
+      });
+      let result = await dataSubmit(paramObj);
+      if (result) {
+        reset();
+      } else {
+        setIsSubmitting(false);
+      }
+    }
+  };
+  return (
+    <form action="submit" onSubmit={onSubmit} className={styles.form}>
+      <div className={styles.formContainer}>
+        {createNodes()}
+        <button type="submit" disabled={hasError || isSubmitting} className={`${hasError ? "disabled" : ""} baseButton reverse ${styles.submitButton}`}>{buttonText}</button>
+      </div>
+    </form>
+  );
+});
 
-  render() {
-    return this.state.submittedForm ? (
-      <div>Your form entry was {this.state.submittedForm.get("myText")}</div>
-    ) : (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" name="myText" />
-        <input type="submit" value="Send it" />
-      </form>
-    );
-  }
-}
+Form.propTypes = {
+  param: PropTypes.exact({
+    dataSubmit: PropTypes.func.isRequired,
+    buttonText: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.exact({
+      key: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      controlType: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      errorString: PropTypes.string.isRequired,
+      validator: PropTypes.func.isRequired
+    }).isRequired)
+  }).isRequired
+};
+
+export default Form;

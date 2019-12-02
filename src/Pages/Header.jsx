@@ -1,69 +1,75 @@
-import React, { Component } from "react";
+import React, {memo, useContext, useState, useEffect} from "react";
 import styles from "./Header.module.css";
 import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
+import {signOut} from "../Proxy/UserData";
+import {PopupContext, SHOW} from "../context/showPopupContext";
 
-export default class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-      redirect: false
-    };
-    let categories = getCategories();
-    this.categoryDropdown = {
-      "title": {
-        "name": "Category",
-        "link": "/allcategories"
-      },
-      "items": categories.map((v) => {
-        return {
-          "name": v.name,
-          "link": `/category/${v.id}`
-        };
-      })
+const Header = memo((props) => {
+  const [keyword, setKeyword] = useState("");
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  useEffect(() => {
+    if (props.userInfo) {
+      setUsername(props.userInfo.username);
+      setNickname(props.userInfo.nickname);
+    }
+  }, [props.userInfo]);
+  const categoryDropdown = {
+    "title": {
+      "name": "Category",
+      "link": "/allcategories"
+    },
+    "items": getCategories().map((v) => {
+      return {
+        "name": v.name,
+        "link": `/category/${v.id}`
+      };
+    })
+  };
+  const showPopup = useContext(PopupContext);
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    signOut();
+    setUsername("");
+    setNickname("");
+  };
+  const handleSearch = (e) => {
+    if (keyword !== "" && (!e.key || (e.key && e.key === 'Enter'))) {
+        e.preventDefault();
+        window.location= `/search/${keyword}`;
+    }
+  };
+  const renderUser = () => {
+    if (username !== "") {
+      return (<div className={styles.userInfo}>
+        <div>Hello, {nickname}</div>
+        <div tabIndex="0" onClick={handleSignOut} className={`${styles.signOut} clickable`}>Sign Out</div>
+      </div>);
+    } else {
+      return (<a className={`clickable ${styles.signIn} ${styles.navButton}`} href="/login">Sign in</a>);
     }
   }
-
-  search = () => {
-    if (this.state.value !== "") {
-      this.setState({redirect: true});
-    }
-  }
-
-  onSearch = (e) => {
-    this.search();
-  }
-
-  handleChange = (e) => {
-    this.setState({value: e.target.value});
-  }
-
-  handleKeyPress = (e) => {
-    if(e.key === 'Enter'){
-      this.search();
-    }
-  }
-
-  render() {
-    if (this.state.redirect) {
-      window.location.href = `/search/${this.state.value}`;
-      return;
-    }
-    return (
-      <header className={`${styles.header} background-color`}>
-        <nav className={styles.nav}>
-          <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
-          <div className={styles.dropDownContainer}>
-            <DropDown data={this.categoryDropdown}/>
-          </div>
-          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
-          <div className={styles.search}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} onKeyPress={this.handleKeyPress} maxLength="16"/>
-            <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={this.onSearch}/>
-          </div>
-        </nav>
-      </header>
-    )
-  }
-}
+  return (
+    <header className={`${styles.header} background-color ${showPopup===SHOW ? styles.showPopup : ""}`}>
+      <nav className={styles.nav}>
+        <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
+        <div className={styles.dropDownContainer}>
+          <DropDown data={categoryDropdown}/>
+        </div>
+        {renderUser()}
+        <div className={styles.search}>
+          <input
+            type="text"
+            value={keyword}
+            onChange={(e)=>{setKeyword(e.target.value)}}
+            onKeyPress={handleSearch}
+            maxLength="16"/>
+          <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
+        </div>
+        <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
+      </nav>
+    </header>
+  )
+});
+export default Header;

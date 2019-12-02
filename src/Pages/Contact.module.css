@@ -1,7 +1,11 @@
-.container {
+.contact {
   max-width: 60rem;
   margin: 0px auto 120px auto;
   min-height: 50vh;
+}
+.container {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
 }
 
 @media screen and (max-height: 600px) {

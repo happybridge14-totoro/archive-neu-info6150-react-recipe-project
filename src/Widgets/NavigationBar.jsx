@@ -1,62 +1,47 @@
-import React, { Component } from "react";
+import React, {memo} from "react";
 import PropTypes from 'prop-types';
 import {getCategoryById, getItemById} from "../Proxy/Data";
 import styles from "./NavigationBar.module.css";
+import {ulid} from "ulid";
 
-export default class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayAllCategory: false,
-      category: null,
-      item: null
+const NavigationBar = memo((props) => {
+  const [secondLabel, categoryId, itemId] = props.positions;
+  const displayLabel = (label) => {
+    if (label === true) {
+      return "Category";
     }
-  }
-  componentDidMount() {
-    let newState = {};
-    if (this.props.positions[1]) {
-      newState.displayAllCategory = true;
-    }
-    if (this.props.positions[2]) {
-      newState.category = getCategoryById(this.props.positions[2]);
-      if (this.props.positions[3]) {
-        newState.item = getItemById(this.props.positions[3]);
+    return label.replace(/^\w/, v=>v.toUpperCase());
+  };
+  const renderNavbarItems = () => {
+    let ary = [];
+    ary.push(<a className={`clickable ${styles.item}`} href="/" key={ulid()}>Home</a>);
+    if (secondLabel) {
+      ary.push(<div className={styles.sign} key={ulid()}>›</div>);
+      if (categoryId && categoryId !== true) {
+        ary.push(<a className={`clickable ${styles.item}`} href="/allcategories/" key={ulid()}>Category</a>);
+        ary.push(<div className={styles.sign} key={ulid()}>›</div>);
+        if (itemId) {
+          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${categoryId}`} key={ulid()}>{getCategoryById(categoryId).name}</a>);
+          ary.push(<div className={styles.sign} key={ulid()}>›</div>);
+          ary.push(<span className={styles.nonClickableItem} key={ulid()}>{getItemById(itemId).title}</span>);
+        } else {
+          ary.push(<span className={styles.nonClickableItem} key={ulid()}>{getCategoryById(categoryId).name}</span>);
+        }
+      } else {
+        ary.push(<span className={styles.nonClickableItem} key={ulid()}>{displayLabel(secondLabel)}</span>);
       }
     }
-    this.setState(newState);
-  }
-  handleChange = (e) => {
-    this.setState({value: e.target.value});
-  }
-
-  renderNavbarItems = (ary) => {
-    let index = 0;
-    ary.push(<a className={`clickable ${styles.item}`} href="/" key={index++}>Home</a>);
-    if (this.state.displayAllCategory) {
-      ary.push(<div className={styles.sign} key={index++}>›</div>);
-      ary.push(<a className={`clickable ${styles.item}`} href={`/allcategories`} key={index++}>Categories</a>);
-    }
-    if (this.state.category) {
-      ary.push(<div className={styles.sign} key={index++}>›</div>);
-      ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={index++}>{this.state.category.name}</a>);
-      if (this.state.item) {
-        ary.push(<div className={styles.sign} key={index++}>›</div>);
-        ary.push(<a className={`clickable ${styles.item}`} href={`/detail/${this.state.item.id}`} key={index++}>{this.state.item.title}</a>);
-      }
-    }
-  }
-
-  render() {
-    let items = [];
-    this.renderNavbarItems(items);
-    return (
-      <div className={styles.container}>
-        {items}
-      </div>
-    )
-  }
-}
+    return ary;
+  };
+  return (
+    <div className={styles.container}>
+      {renderNavbarItems()}
+    </div>
+  );
+});
 
 NavigationBar.propTypes = {
-  positions: PropTypes.array.isRequired
+  positions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.bool, PropTypes.string])).isRequired
 };
+
+export default NavigationBar;

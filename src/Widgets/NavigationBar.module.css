@@ -7,6 +7,11 @@
   display: inline-block;
   color: var(--color-decorated);
 }
+.container .nonClickableItem {
+  display: inline-block;
+  color: var(--color-solid);
+  cursor: default;
+}
 .sign {
   display: inline-block;
   margin: 0px 10px;

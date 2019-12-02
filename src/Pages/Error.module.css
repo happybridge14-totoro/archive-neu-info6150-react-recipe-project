@@ -1,9 +1,9 @@
 .error {
   font-size: 16px;
-}
-.container {
   max-width: 60rem;
   margin: 0px auto 120px auto;
+}
+.container {
 }
 @media screen and (max-height: 600px) {
   .container {

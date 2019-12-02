@@ -3,13 +3,14 @@ import Form from "../Widgets/Form";
 import styles from "./Home.module.css";
 
 const Home = () => {
+
     return (
         <div className={styles.container}>
         
             <div className={styles.text}>
-                <img className={styles.pic}src="https://images.ctfassets.net/3vz37y2qhojh/178xZGmkliIRlyvzYGOT3X/c8a20ab9d976aa6362ee43378a5bd29c/Sliced-Step_15_Thanksgiving_Roasted_Turkey_With_Stuffing.00_00_00_00.Still001.jpg?w=927&fit=fill&fm=webp" alt="Food collection" />
-                <div className={styles.text}>
-                    <div className={styles.title}><a className={`clickable `} href="/AllCategories">Must try turkey recipe for Thanksgiving</a></div>
+                <img className={styles.pic}src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Duck-with-Orange-Hazelnut-Stuffing_EXPS_TOHCA20_9947_E08_09_1b-696x696.jpg" alt="Duck" />
+                <div className={styles.txt}>
+                    <div className={styles.title}>Must try Duck Recipe for Christmas</div>
                 </div>    
             </div>
             
@@ -39,6 +40,7 @@ const Home = () => {
                         <div className={styles.word}>
                             <a className={`clickable`} href="/AllCategories">The Best Pan-Fried Breakfast Patatoes</a>
                         </div>
+                        
                     </div>
                     <div className={styles.gri}>5</div>
                     <div className={styles.gri}>6</div> 

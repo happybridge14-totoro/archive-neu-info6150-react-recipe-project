@@ -32,6 +32,7 @@
     display:grid;
     grid-template-columns: 19rem 5rem 30rem;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .title{
@@ -42,7 +43,7 @@
 }
 .subtitle{
    font-size:23px;
-   color:rgb(00, 80, 80);
+   color: var(--color-decorated);
    text-decoration: none;
 }
 .text{

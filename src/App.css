@@ -2,31 +2,11 @@
 :root {
   --color-surface: white;
   --color-solid: #232323;
-  --color-decorated: teal;
+  --color-decorated: rgb(247, 124, 9);
   --color-minor: #727272;
   --color-striking: #f05000;
-}
-
-.main-text-color {
-  color: var(--color-solid);
-}
-.minior-text-color {
-  color: var(--color-minor);
-}
-.striking-color {
-  color: var(--color-striking);
-}
-.decorated-color {
-  color: var(--color-decorated);
-}
-.text-color-with-colorful-background {
-  color: var(--color-surface);
-}
-.background-color {
-  background-color: var(--color-surface);
-}
-.button-background-color {
-  background-color: var(--color-decorated);
+  --color-opacity-black: rgba(0, 0, 0, 0.4);
+  --filter-blur: blur(4px);
 }
 .clickable {
   cursor: pointer;
@@ -36,11 +16,7 @@
   box-sizing: border-box;
   width: fit-content;
 }
-/* .clickable.selected,
-.clickable:focus {
-  color: var(--color-solid);
-} */
-.clickable:after {
+.clickable::after {
   content: "";
   position: absolute;
   width: 0%;
@@ -50,8 +26,35 @@
   background-color: var(--color-decorated);
   transition: width 0.3s;
 }
-.clickable:hover:after {
+.clickable:hover::after {
   width: 100%;
+}
+.baseButton {
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-surface);
+  color: var(--color-decorated);
+  border: 2px solid var(--color-decorated)
+}
+.baseButton.reverse {
+  background-color: var(--color-decorated);
+  color: var(--color-surface);
+  border: 2px solid var(--color-surface);
+}
+.baseButton.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.baseButton:not(.disabled):hover {
+  background-color: var(--color-striking);
+  color: var(--color-surface);
+  border-color: var(--color-surface);
+}
+.showPopup {
+  filter: var(--filter-blur);
 }
 
 body {

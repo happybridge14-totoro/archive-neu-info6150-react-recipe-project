@@ -4,22 +4,27 @@ import {getItemById} from "../Proxy/Data";
 import styles from "./Detail.module.css";
 import items from "../data/items.json";
 import ReactPlayer from "react-player";
+import NavigationBar from "../Widgets/NavigationBar"
+        // <items = {Object.values(items)}>
 
 export default class Category extends Component {
   constructor(props) {
     super(props);
+    let detail = getItemById(this.props.id);
     this.state = {
-      detail: getItemById(this.props.id)
+      detail: detail
     };
+    this.navbarPosition = [true, detail.categoryId, detail.id];
   }
 
   render() {
     if (this.state.detail === null) {
-      window.location.href = '/error';
+      window.location.replace('/404');
       return;
     }
     return (
       <article className = {styles.container}>
+        <NavigationBar positions={this.navbarPosition}/>
         <div className = {styles.topleft}>
           <h1 >{this.state.detail.title}</h1>
           <h2>Rating: {this.state.detail.rating}</h2>

@@ -83,3 +83,32 @@
   height: 50px;
   line-height: 50px;
 }
+.header .signIn {
+  float: right;
+  color: var(--color-decorated);
+  font-size: smaller;
+}
+.header .userInfo {
+  font-family: auto;
+  float: right;
+  font-size: smaller;
+  cursor: pointer;
+  color: var(--color-decorated)
+}
+/* .userInfo:focus-within {
+  outline: -webkit-focus-ring-color auto 5px;
+} */
+.signOut {
+  height: auto;
+  line-height: normal;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.userInfo:hover .signOut,
+.signOut:focus {
+  opacity: 1;
+}
+.showPopup {
+  filter: var(--filter-blur);
+}
