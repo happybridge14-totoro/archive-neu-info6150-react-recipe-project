@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import styles from './Contact.module.css';
 import {getContractInfo} from '../Proxy/Data';
 import EVENT from "../Proxy/Event"
@@ -8,28 +8,20 @@ import {submitMessage} from "../Proxy/UserData";
 import {ulid} from 'ulid';
 
 const EMAIL_VALIDATOR = /^\S+@\S+\.\S+$/;
+const navbarPosition = ["contact"];
 
-export default class Contact extends Component {
-  constructor(props) {
-    super(props);
-    this.navbarPosition = ["contact"];
-    this.contactInfo = getContractInfo();
-    this.popupPromiseResolver = null;
-  }
-  createNodes = () => {
-    let result = [];
-    this.contactInfo.forEach((v, i) => {
-      result.push(<h2 key={2*i}>{v.name}</h2>);
-      result.push(<address key={2*i+1}>
-        <a href={`mailto:${v.email}`} className={styles.mailto}>{v.email}</a>
-      </address>);
-    });
-    return result;
-  }
-
-  onSubmit = async (values) => {
+const Contact = memo(() => {
+  let popupPromiseResolver = null;
+  let contactInfo = getContractInfo();
+  const popupDismissedHandler = () => {
+    if (this.popupPromiseResolver) {
+      popupPromiseResolver(true);
+      popupPromiseResolver = null;
+    }
+  };
+  const onSubmit = async (values) => {
     let promise = new Promise((resolve, reject) => {
-      this.popupPromiseResolver = resolve;
+      popupPromiseResolver = resolve;
     });
     let ret = await submitMessage(values);
     if (ret) {
@@ -37,28 +29,20 @@ export default class Contact extends Component {
         "title": "Success!",
         "body": ["We have received your message.", "Thank you."],
         "buttonText": "OK",
-        "callBack": this.popupDismissedHandler
+        "callBack": popupDismissedHandler
       }}));
     } else {
       window.dispatchEvent(new CustomEvent(EVENT.DISPLAY_POPUP, {detail:{
         "title": "Error!",
         "body": ["Something wrong happened.", "Please try again."],
         "buttonText": "OK",
-        "callBack": this.popupDismissedHandler
+        "callBack": popupDismissedHandler
       }}));
     }
     return promise;
-  }
-
-  popupDismissedHandler = () => {
-    if (this.popupPromiseResolver) {
-      this.popupPromiseResolver(true);
-      this.popupPromiseResolver = null;
-    }
-  }
-
-  formParam = {
-    dataSubmit: this.onSubmit,
+  };
+  const formParam = {
+    dataSubmit: onSubmit,
     buttonText: "Submit",
     items: [{
       "key": ulid(),
@@ -91,27 +75,30 @@ export default class Contact extends Component {
         return value !== "";
       }
     }]
-  }
-
-  render() {
-    return (
-        <div className={styles.contact}>
-          <NavigationBar positions={this.navbarPosition}/>
-          <div className={styles.container}>
-            <section className={styles.leftContainer}>
-              <h1>
-                Contact Us
-              </h1>
-              {this.createNodes()}
-            </section>
-            <section className={styles.rightontainer}>
-              <h1>
-                Leave a message
-              </h1>
-              <Form param={this.formParam}></Form>
-            </section>
-          </div>
-        </div>
-    )
-  }
-}
+  };
+  return (
+    <div className={styles.contact}>
+      <NavigationBar positions={navbarPosition}/>
+      <div className={styles.container}>
+        <section className={styles.leftContainer}>
+          <h1>Contact Us</h1>
+          {contactInfo.map((v, i) => {
+            return (
+              <section key={ulid()}>
+                <h2>{v.name}</h2>
+                <address>
+                  <a href={`mailto:${v.email}`} className={styles.mailto}>{v.email}</a>
+                </address>
+              </section>
+            )
+          })}
+        </section>
+        <section className={styles.rightontainer}>
+          <h1>Leave a message</h1>
+          <Form param={formParam}></Form>
+        </section>
+      </div>
+    </div>
+  );
+});
+export default Contact;
