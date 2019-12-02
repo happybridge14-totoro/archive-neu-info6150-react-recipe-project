@@ -21,7 +21,7 @@ const NavigationBar = memo((props) => {
         ary.push(<a className={`clickable ${styles.item}`} href="/allcategories/" key={ulid()}>Category</a>);
         ary.push(<div className={styles.sign} key={ulid()}>›</div>);
         if (itemId) {
-          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${this.state.category.id}`} key={ulid()}>{getCategoryById(categoryId).name}</a>);
+          ary.push(<a className={`clickable ${styles.item}`} href={`/category/${categoryId}`} key={ulid()}>{getCategoryById(categoryId).name}</a>);
           ary.push(<div className={styles.sign} key={ulid()}>›</div>);
           ary.push(<span className={styles.nonClickableItem} key={ulid()}>{getItemById(itemId).title}</span>);
         } else {
