@@ -14,7 +14,7 @@ const Contact = memo(() => {
   let popupPromiseResolver = null;
   let contactInfo = getContractInfo();
   const popupDismissedHandler = () => {
-    if (this.popupPromiseResolver) {
+    if (popupPromiseResolver) {
       popupPromiseResolver(true);
       popupPromiseResolver = null;
     }
