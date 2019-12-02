@@ -1,11 +1,9 @@
 import {ulid} from 'ulid';
-import React, { Component, useState, useEffect, useMemo } from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from 'prop-types';
 import styles from "./Search.module.css";
 import {search, getCategoryById} from "../Proxy/Data";
 import NavigationBar from "../Widgets/NavigationBar";
-import { Link } from 'react-router-dom';
-
 
 const navbarPosition = ["search"];
 const Search = (props) => {

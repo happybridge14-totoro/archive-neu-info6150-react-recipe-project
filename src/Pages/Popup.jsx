@@ -1,48 +1,18 @@
 import {ulid} from "ulid";
-import React, { Component } from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./Popup.module.css";
 import EVENT from "../Proxy/Event";
 
-export default class Popup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.getInitialState();
-    window.addEventListener(EVENT.DISPLAY_POPUP, this.displayPopup);
-    window.addEventListener(EVENT.DISMISS_POPUP, this.dismissPopup);
-  }
-  getInitialState = () => {
-    return {
-      display: false,
-      title: "",
-      body: [],
-      buttonText: "",
-      callBack: null
-    };
-  }
-  displayPopup = (e) => {
-    document.body.style.cssText = "overflow: hidden;";
-    window.addEventListener("keydown", this.keyUpHandler, true);
-    window.addEventListener("scroll", this.scrollHandler, true);
-    let newState = {
-      display: true,
-      title: e.detail.title,
-      body: e.detail.body,
-      buttonText: e.detail.buttonText,
-      callBack: e.detail.callBack
-    }
-    this.setState(newState);
-  }
-  dismissPopup = (e) => {
-    document.body.style.cssText = "";
-    window.removeEventListener("keydown", this.keyUpHandler, true);
-    window.removeEventListener("scroll", this.scrollHandler, true);
-    let callBack = this.state.callBack;
-    this.setState(this.getInitialState());
-    if (callBack) {
-      callBack();
-    }
-  }
-  keyUpHandler = (e) => {
+const Popup = (props) => {
+  const initState = {
+    display: false,
+    title: "",
+    body: [],
+    buttonText: "",
+    callBack: null
+  };
+  const [state, setState] = useState(initState);
+  const keyUpHandler = (e) => {
     if (e.keyCode === 9) {
       e.stopImmediatePropagation();
       e.preventDefault();
@@ -51,28 +21,52 @@ export default class Popup extends Component {
       window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
     }
   }
-  clickHandler = (e) => {
+  const clickHandler = (e) => {
     window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
   }
-  scrollHandler = (e) => {
+  const scrollHandler = (e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
   }
-  render() {
-    if (this.state.display) {
-      return (
-        <div className={`${styles.popup} + ${this.state.display ? "" : " " + styles.hidden}`}>
-          <section className={styles.container} autoFocus={true}>
-            <h1 className={styles.head}>{this.state.title}</h1>
-            {this.state.body.map((v) => {
-              return <p className={styles.body} key={ulid()}>{v}</p>;
-            })}
-            <button id="confirm" className={`baseButton ${styles.button}`}  onClick={this.clickHandler}>{this.state.buttonText}</button>
-          </section>
-        </div>
-      )
-    } else {
-      return null;
+  const displayPopup = (e) => {
+    if (!state.display) {
+      document.body.style.overflow = "hidden;";
+      window.addEventListener("keydown", keyUpHandler, true);
+      window.addEventListener("scroll", scrollHandler, true);
     }
+    setState({...e.detail, display: true});
+  };
+  const dismissPopup = (e) => {
+    document.body.style.overflow = "unset";
+    window.removeEventListener("keydown", keyUpHandler, true);
+    window.removeEventListener("scroll", scrollHandler, true);
+    setState(initState);
+    if (state.callBack) {
+      state.callBack();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener(EVENT.DISPLAY_POPUP, displayPopup);
+    window.addEventListener(EVENT.DISMISS_POPUP, dismissPopup);
+    return () => {
+      window.removeEventListener(EVENT.DISPLAY_POPUP, displayPopup);
+      window.removeEventListener(EVENT.DISMISS_POPUP, dismissPopup);
+    }
+  });
+  if (state.display) {
+    return (
+      <div className={styles.popup}>
+        <section className={styles.container} autoFocus={true}>
+          <h1 className={styles.head}>{state.title}</h1>
+          {state.body.map((v) => {
+            return <p className={styles.body} key={ulid()}>{v}</p>;
+          })}
+          <button id="confirm" className={`baseButton ${styles.button}`}  onClick={clickHandler}>{state.buttonText}</button>
+        </section>
+      </div>
+    )
+  } else {
+    return null;
   }
-}
+};
+export default Popup;

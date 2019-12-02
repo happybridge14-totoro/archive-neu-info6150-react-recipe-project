@@ -9,9 +9,6 @@
   display: flex;
   font-size: 1.4rem;
 }
-.hidden {
-  display: none;
-}
 .container {
   box-sizing: border-box;
   margin: auto;
