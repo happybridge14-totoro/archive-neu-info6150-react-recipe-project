@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {getItemById} from "../Proxy/Data";
 import styles from "./Detail.module.css";
 import items from "../data/items.json";
-        // <items = {Object.values(items)}>
+import ReactPlayer from "react-player";
 
 export default class Category extends Component {
   constructor(props) {
@@ -21,20 +21,31 @@ export default class Category extends Component {
     return (
       <article className = {styles.container}>
         <div className = {styles.topleft}>
-        <h1 >{this.state.detail.title}</h1>
-        <h2>ratings: 4.6</h2>
+          <h1 >{this.state.detail.title}</h1>
+          <h2>Rating: {this.state.detail.rating}</h2>
+          <h2>Time: {this.state.detail.time}</h2>
         </div>
 
-        <div className = {styles.low}>
-        <p className ={styles.sectionTitle}> Ingredients: </p>
-        {items[0].ingredients.map((val,index) =>{
-          return <li key = {index}> {val} </li>
-        })}
-        <p className ={styles.sectionTitle}>Directions: </p>
-        {items[0].directions.map((val,index) =>{
-          return <ol>{index+1} : {val} </ol>
-        })}
+        <div > 
+          <ReactPlayer
+            url = {this.state.detail.videoURL}
+            />
         </div>
+
+        <div className = {styles.ingredients}>
+          <p className ={styles.sectionTitle}> Ingredients: </p>
+          {this.state.detail.ingredients.map((val,index) =>{
+            return <li key = {index}> {val} </li>
+          })}
+        </div>
+
+        <div className = {styles.directions}>
+          <p className ={styles.sectionTitle}> Directions: </p>
+          {this.state.detail.directions.map((val,index) =>{
+            return <ol> {index+1} : {val} </ol>
+          })}
+        </div>
+
       </article>
     );
   }
