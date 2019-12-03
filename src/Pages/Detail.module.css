@@ -20,12 +20,35 @@
 
 }
 
-@media (max-width: 370px) {
+.imageWrapper {
+  margin:20px;
+  width:400px;
+  height:300px;
+}
+
+.videoWrapper{
+  margin:20px;
+  width : 500px;
+  height : 400px;
+}
+
+@media screen and (max-width: 370px) {
   .container {
     grid-template-columns: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
   }
+
+.imageWrapper{
+  width:300px;
+  height:200px;
+}
+.videoWrapper{
+  width : 300px;
+  height : 200px;
+  position: relative;
+}
+
 }
 /*@media (min-width: 370px) {
   .container {
@@ -41,6 +64,13 @@
     grid-row-gap: 20px;
     font-size: 1.1rem;
   }
+
+.imageWrapper{
+  width:500px;
+  height:350px;
+}
+
+
 }
 
 
