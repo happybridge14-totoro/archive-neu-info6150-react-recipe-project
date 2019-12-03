@@ -38,7 +38,7 @@ export default class Category extends Component {
   async componentDidMount() {
     if (this.state.user) {
       const rating = await getRating(this.props.id);
-      this.setState({userRating: rating.toString()});
+      this.setState({userRating: (rating || 0).toString()});
     }
     window.addEventListener(EVENT.SIGN_OUT, this.signoutHandler);
   }

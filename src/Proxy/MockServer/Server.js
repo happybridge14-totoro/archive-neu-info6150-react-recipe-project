@@ -108,7 +108,6 @@ const Server = {
       let shaObj = new jsSHA("SHA-256", "TEXT");
       shaObj.update(username + ";" + itemId);
       const hash = shaObj.getHash("HEX");
-      console.log(hash);
       return rateitDB.getItem(hash);
     } catch(e) {
       console.error(e);
