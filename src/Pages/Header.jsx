@@ -53,21 +53,25 @@ const Header = memo((props) => {
   return (
     <header className={`${styles.header} background-color ${showPopup===SHOW ? styles.showPopup : ""}`}>
       <nav className={styles.nav}>
-        <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
-        <div className={styles.dropDownContainer}>
-          <DropDown data={categoryDropdown}/>
+        <div className={styles.group}>
+          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
+          <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
+          <div className={styles.dropDownContainer}>
+            <DropDown data={categoryDropdown}/>
+          </div>
         </div>
-        {renderUser()}
-        <div className={styles.search}>
-          <input
-            type="text"
-            value={keyword}
-            onChange={(e)=>{setKeyword(e.target.value)}}
-            onKeyPress={handleSearch}
-            maxLength="16"/>
-          <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
+        <div className={styles.group}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              value={keyword}
+              onChange={(e)=>{setKeyword(e.target.value)}}
+              onKeyPress={handleSearch}
+              maxLength="16"/>
+            <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
+          </div>
+          {renderUser()}
         </div>
-        <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
       </nav>
     </header>
   )
