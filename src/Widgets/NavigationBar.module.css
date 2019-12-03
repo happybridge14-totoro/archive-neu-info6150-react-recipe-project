@@ -16,3 +16,19 @@
   display: inline-block;
   margin: 0px 10px;
 }
+
+@media screen and (min-width: 414px) and (max-width: 540px) {
+  .container {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 540px) and (max-width: 640px) {
+  .container {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 640px) and (max-width: 720px) {
+  .container {
+    font-size: 1.2rem;
+  }
+}
