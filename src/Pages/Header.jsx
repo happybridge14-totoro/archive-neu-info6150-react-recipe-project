@@ -4,6 +4,7 @@ import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
 import {signOut} from "../Proxy/UserData";
 import {PopupContext, SHOW} from "../context/showPopupContext";
+import EVENT  from "../Proxy/Event";
 
 const Header = memo((props) => {
   const [keyword, setKeyword] = useState("");
@@ -33,6 +34,7 @@ const Header = memo((props) => {
     signOut();
     setUsername("");
     setNickname("");
+    window.dispatchEvent(new Event(EVENT.SIGN_OUT));
   };
   const handleSearch = (e) => {
     if (keyword !== "" && (!e.key || (e.key && e.key === 'Enter'))) {

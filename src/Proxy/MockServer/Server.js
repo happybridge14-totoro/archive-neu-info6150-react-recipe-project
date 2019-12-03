@@ -101,6 +101,30 @@ const Server = {
     } else {
       return null;
     }
+  },
+  getRating: async (token, itemId) => {
+    try {
+      const {username} = JWT.getInfoByToken(token);;
+      let shaObj = new jsSHA("SHA-256", "TEXT");
+      shaObj.update(username + ";" + itemId);
+      const hash = shaObj.getHash("HEX");
+      console.log(hash);
+      return rateitDB.getItem(hash);
+    } catch(e) {
+      console.error(e);
+      return "0";
+    }
+  },
+  rateIt: async (token, itemId, score) => {
+    try {
+      const {username} = JWT.getInfoByToken(token);;
+      let shaObj = new jsSHA("SHA-256", "TEXT");
+      shaObj.update(username + ";" + itemId);
+      const hash = shaObj.getHash("HEX");
+      return rateitDB.setItem(hash, score);
+    } catch(e) {
+      console.error(e);
+    }
   }
 };
 export default Server;

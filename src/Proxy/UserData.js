@@ -21,7 +21,7 @@ const submitMessage = (messageObj) => {
   });
 };
 const getStatus = () => {
-  let token  = getJWTToken();
+  const token  = getJWTToken();
   if (token) {
     return Server.getUserInfoByJoken(token);
   } else {
@@ -29,9 +29,9 @@ const getStatus = () => {
   }
 };
 const signIn = async (username, pwd) => {
-  let result = await Server.signIn(username, pwd);
+  const result = await Server.signIn(username, pwd);
   if (result) {
-    let token = result.token;
+    const token = result.token;
     if (token) {
       storeJWTToken(token);
     }
@@ -57,4 +57,12 @@ const signUp = async (username, pwd, nickname) => {
   }
   return {errorCode: ret.errorCode};
 };
-export {submitMessage, signIn, signUp, signOut, usernameCheck, getStatus};
+const rateIt = async (itemid, score) => {
+  const token  = getJWTToken();
+  return Server.rateIt(token, itemid, score);
+};
+const getRating = async (itemid) => {
+  const token  = getJWTToken();
+  return Server.getRating(token, itemid);
+};
+export {submitMessage, signIn, signUp, signOut, usernameCheck, getStatus, rateIt, getRating};

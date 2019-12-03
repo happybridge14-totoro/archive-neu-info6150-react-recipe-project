@@ -44,5 +44,9 @@
 }
 
 
-
-
+/**********************TO ADD*******/
+.clickable {
+  color: var(--color-decorated);
+  cursor: pointer;
+}
+/*********************************/
