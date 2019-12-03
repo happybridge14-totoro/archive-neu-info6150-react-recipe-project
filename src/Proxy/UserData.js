@@ -45,7 +45,12 @@ const usernameCheck = (username) => {
 const signOut = () => {
   return clearToken();
 }
-const signUp = async (paramObj) => {
+const signUp = async (username, pwd, nickname) => {
+  const paramObj = {
+    username: username,
+    pwd: pwd,
+    nickname: nickname
+  };
   let ret = await Server.addNewUser(paramObj);
   if (ret ||  ret.errorCode === -1) {
     storeJWTToken(ret.token);

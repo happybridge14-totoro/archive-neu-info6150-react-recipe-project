@@ -29,7 +29,8 @@ const Login = memo((props) => {
         setError("Password not match");
         return;
       }
-      let ret = await signUp(values);
+      const {username, pwd, nickname} = values;
+      let ret = await signUp(username, pwd, nickname);
       if (ret.errorCode === 1) {
         setError("User name already exists");
       } else if (ret.errorCode === 2) {
