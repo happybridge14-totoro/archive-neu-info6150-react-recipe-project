@@ -33,3 +33,8 @@
 .showPopup {
   filter: var(--filter-blur);
 }
+@media screen and (min-width: 414px) and (max-width: 480px) {
+  .footer {
+    font-size: smaller;
+  }
+}
