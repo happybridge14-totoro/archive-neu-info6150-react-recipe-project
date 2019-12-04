@@ -39,7 +39,7 @@ const Search = (props) => {
       return keys.map((cid) => {
         const items = renderData[cid].map((v) => {
           return (
-            <div tabIndex="0" onClick={(e)=>{handleClick(e, v.id, false)}} className={styles.itemContainer} key={ulid()}>
+            <div tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && handleClick(e, v.id, false);}} onClick={(e)=>{handleClick(e, v.id, false)}} className={styles.itemContainer} key={ulid()}>
               <img className={styles.image} src={v.imageURL} alt={v.shortName}></img>
               <div className={styles.text}>
                 <div>{v.title}</div>
@@ -52,7 +52,7 @@ const Search = (props) => {
         });
         return (
           <section key={ulid()} className={styles.container}>
-            <h2 className={styles.category} tabIndex="0" onClick={e=>{handleClick(e, cid, true)}}>{getCategoryById(cid).name}</h2>
+            <h2 className={styles.category} tabIndex="0" onKeyPress={(e) => {e.key === 'Enter' && handleClick(e, cid, true)}} onClick={e=>{handleClick(e, cid, true)}}>{getCategoryById(cid).name}</h2>
             {items}
           </section>
       )});
