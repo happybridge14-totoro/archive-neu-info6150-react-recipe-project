@@ -3,11 +3,13 @@ import {ulid} from 'ulid';
 import PropTypes from 'prop-types';
 import {getItemById} from "../Proxy/Data";
 import styles from "./Detail.module.css";
-import ReactPlayer from "react-player";
 import NavigationBar from "../Widgets/NavigationBar"
 import EVENT from "../Proxy/Event";
 import RatingStar from "../Widgets/RatingStar";
 import {getStatus, rateIt, getRating} from "../Proxy/UserData";
+import Video from "../Widgets/Video";
+// import ReactPlayer from "react-player";
+
 
 export default class Detail extends Component {
   constructor(props) {
@@ -49,7 +51,6 @@ export default class Detail extends Component {
     return (
       <article className = {styles.wholePage}>
         <NavigationBar positions={this.navbarPosition}/>
-
         <section className = {styles.container}>
             <div className = {styles.topleft}>
               <h1 >{this.state.detail.title}</h1>
@@ -62,22 +63,20 @@ export default class Detail extends Component {
               <h2>Time: {this.state.detail.time}</h2>
             </div>
             
-            {this.state.detail.videoURL !==""&&
-            <div > 
-              <ReactPlayer 
-                className = {styles.videoWrapper}
-
+            {this.state.detail.videoURL !== ""&&
+            <div className = {styles.videoWrapper}> 
+              <Video 
                 url = {this.state.detail.videoURL}
-                alt = {this.state.detail.shortName} dish video
+                alt = {`${this.state.detail.shortName} dish `}
                 />
             </div>}
 
-            {this.state.detail.videoURL ==""&&
+            {this.state.detail.videoURL === ""&&
             <div > 
               <img
                 className = {styles.imageWrapper}
                 src = {this.state.detail.imageURL}
-                alt = {this.state.detail.shortName} dish image
+                alt = {`${this.state.detail.shortName} dish `}
                 />
             </div>}
 

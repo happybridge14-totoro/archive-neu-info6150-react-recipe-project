@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Video = (props) => {
     return (
       <div>
-        <iframe title={props.title} width="560" height="315" src={props.url} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        <iframe title={props.title} width="100%" height="350px" src={props.url} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </div>
     )
 }
