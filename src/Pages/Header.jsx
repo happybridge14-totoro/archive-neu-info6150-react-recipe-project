@@ -42,11 +42,16 @@ const Header = memo((props) => {
         window.location= `/search/${keyword}`;
     }
   };
+  const handleKeyPress = (e) => {
+    if (e && e.key === 'Enter') {
+      handleSignOut(e);
+    }
+  }
   const renderUser = () => {
     if (username !== "") {
       return (<div className={styles.userInfo}>
         <div>Hello, {nickname}</div>
-        <div tabIndex="0" onClick={handleSignOut} className={`${styles.signOut} clickable`}>Sign Out</div>
+        <div tabIndex="0" onKeyPress={handleKeyPress} onClick={handleSignOut} className={`${styles.signOut} clickable`}>Sign Out</div>
       </div>);
     } else {
       return (<a className={`clickable ${styles.signIn} ${styles.navButton}`} href="/login">Sign in</a>);
