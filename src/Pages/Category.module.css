@@ -57,6 +57,10 @@
     padding-top: 25px;
     font-size: 15px;
 }
+.rating{
+    padding-top: 25px;
+    font-size: 15px;
+}
 @media(min-width:414px) and (max-width:510px) {
     .picDessert{
         width: 410px;
@@ -104,5 +108,9 @@
         padding-top: 0px;
         font-size: 15px;
         margin-bottom: 20px;
+    }
+    .rating{
+        padding-top: 0px;
+        font-size: 15px;
     }
 }
