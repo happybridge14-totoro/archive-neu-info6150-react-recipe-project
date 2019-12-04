@@ -23,7 +23,7 @@ export default class Category extends Component {
     let result = [];
     let items = this.state.detail;
       items.forEach((v) => {
-        result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemBox} key={ulid()}>
+        result.push(<div tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && this.handleClick(v.id)}} onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemBox} key={ulid()}>
             <img className={styles.pic} src={v.imageURL} alt={v.title}></img>
             <div className={styles.signbox}>
               {v.videoURL !== "" &&

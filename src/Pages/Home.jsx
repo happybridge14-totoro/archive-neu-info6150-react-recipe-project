@@ -16,7 +16,7 @@ const itemsByTag = () =>{
     if(itemsChristmas.length>=4){
     for (let i = 1; i < 4; i++){
         let v = itemsChristmas[i];
-        result.push(<div className={styles.gri} tabIndex="0" onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
+        result.push(<div className={styles.gri} tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && handleClick(v.id)}} onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
             <img className={styles.image} src={v.imageURL} alt={v.title}/>
             <div className={styles.word}>{v.title}</div>
         </div>);
@@ -24,7 +24,7 @@ const itemsByTag = () =>{
     return result;}
     else{
         itemsChristmas.forEach((v) => {
-            result.push(<div className={styles.gri} tabIndex="0" onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
+            result.push(<div className={styles.gri} tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && handleClick(v.id)}} onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
                 <img className={styles.image} src={v.imageURL} alt={v.title}/>
                 <div className={styles.word}>{v.title}</div>
             </div>    )
@@ -38,7 +38,7 @@ const popularItems = () =>{
     
 
     popular.forEach((v) => {
-        picks.push(<div className={styles.gri} tabIndex="0" onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
+        picks.push(<div className={styles.gri} tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && handleClick(v.id)}} onClick={(e)=>{handleClick(v.id)}} key={ulid()}>
             <img className={styles.image} src={v.imageURL} alt={v.title}/>
             <div className={styles.word}>{v.title}</div>
         </div>    )
@@ -53,12 +53,12 @@ const Home = () => {
 
     return (
         <div className={styles.container}>
-        
-            <div className={styles.text} tabIndex="0" onClick={(e)=>{handleClick(itemsChristmas[0].id)}}>
+
+            <div className={styles.text} tabIndex="0" onKeyPress={(e)=>{e.key === 'Enter' && handleClick(itemsChristmas[0].id)}} onClick={(e)=>{handleClick(itemsChristmas[0].id)}}>
                 <img className={styles.pic}src={itemsChristmas[0].imageURL} alt={itemsChristmas[0].title} />
                 <div className={styles.txt}>
                     <div className={styles.title}>Must try Duck Recipe for Christmas</div>
-                </div>    
+                </div>
             </div>
             
             <div className={styles.text}>
