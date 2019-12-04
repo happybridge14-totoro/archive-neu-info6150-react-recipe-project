@@ -45,8 +45,16 @@
     padding:0px 20px;
     font-size: 9px;
   }
+  .imageContainer {
+    min-height: 320px;
+    margin-left: 0px;
+    text-align: center;
+    margin-right: 0px;
+  }
   .image{
-    
+    float: unset;
+    max-width: 372px;
+    margin-right: 0px;
   }
 }
 
