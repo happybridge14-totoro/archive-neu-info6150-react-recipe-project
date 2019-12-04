@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./Popup.module.css";
 import EVENT from "../Proxy/Event";
 
+let gScrollHandler, gKeyUpHandler = null;
 const Popup = (props) => {
   const initState = {
     display: false,
@@ -31,6 +32,8 @@ const Popup = (props) => {
   const displayPopup = (e) => {
     if (!state.display) {
       document.body.style.overflow = "hidden;";
+      gKeyUpHandler = keyUpHandler;
+      gScrollHandler = scrollHandler;
       window.addEventListener("keydown", keyUpHandler, true);
       window.addEventListener("scroll", scrollHandler, true);
     }
@@ -38,8 +41,14 @@ const Popup = (props) => {
   };
   const dismissPopup = (e) => {
     document.body.style.overflow = "unset";
-    window.removeEventListener("keydown", keyUpHandler, true);
-    window.removeEventListener("scroll", scrollHandler, true);
+    if (gKeyUpHandler) {
+      window.removeEventListener("keydown", gKeyUpHandler, true);
+      gKeyUpHandler = null;
+    }
+    if (gScrollHandler) {
+      window.removeEventListener("scroll", gScrollHandler, true);
+      gScrollHandler = null;
+    }
     setState(initState);
     if (state.callBack) {
       state.callBack();
