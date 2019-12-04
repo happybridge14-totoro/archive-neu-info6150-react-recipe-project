@@ -15,9 +15,15 @@
   height: 40px;
   margin: auto;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+.group {
+  display: flex;
 }
 .navButton {
-  font-size: 24px;
+  font-size: 1.6em;
+  /* font-size: 24px; */
   display: inline-block;
   line-height: var(--nav-size);
   height: var(--nav-size);
@@ -39,12 +45,9 @@
   margin-top: 5px;
 }
 .search {
-  display: inline-block;
   height: var(--nav-size);
   line-height: var(--nav-size);
-  float: right;
   margin-right: 20px;
-  position: relative;
   border: 1px solid var(--color-solid);
   border-radius: 10px;
   width: 240px;
@@ -55,14 +58,7 @@
 
 }
 .search input {
-  font-size: 20px;
-  height: 40px;
-  width: 180px;
-  border: none;
-  margin-left: 10px;
-}
-.search input {
-  font-size: 20px;
+  font-size: 1.4em;
   height: 40px;
   width: 180px;
   border: none;
@@ -73,25 +69,24 @@
   outline: none;
 }
 .logo {
-  float: right;
-  /* width: var(--nav-size); */
   height: var(--nav-size);
+  margin-right: 20px;
 }
 .dropDownContainer {
   display: inline-block;
-  font-size: 24px;
+  font-size: 1.6em;
   height: 50px;
   line-height: 50px;
 }
 .header .signIn {
   float: right;
   color: var(--color-decorated);
-  font-size: smaller;
+  font-size: 1.2em;
 }
 .header .userInfo {
   font-family: auto;
   float: right;
-  font-size: smaller;
+  font-size: 1.2em;
   cursor: pointer;
   color: var(--color-decorated)
 }
@@ -111,4 +106,52 @@
 }
 .showPopup {
   filter: var(--filter-blur);
+}
+@media screen and (max-width: 1000px) {
+  .header {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 640px) {
+  .logo {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 540px) {
+  .header {
+    font-size: 0.6rem;
+    min-width: 0px;
+  }
+}
+@media screen and (max-width: 510px) {
+  .header {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .search {
+    width: 160px;
+  }
+  .search input {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .nav {
+    width: fit-content;
+    margin: 0px 0px 0px 20px;
+  }
+  .home {
+    margin-right: 10px;
+    vertical-align: top;
+  }
 }

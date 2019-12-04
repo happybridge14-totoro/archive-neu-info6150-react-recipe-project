@@ -1,4 +1,10 @@
 /* Css templates */
+@font-face {
+  font-family: "button-icons";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/button-icons.woff") format("woff");
+}
 :root {
   --color-surface: white;
   --color-solid: #232323;

@@ -1,0 +1,20 @@
+.ratingStar {
+  display: inline-block;
+}
+.star::before {
+  font-family: "button-icons"!important;
+  speak: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  margin: 0px;
+  color: var(--color-decorated);
+  cursor: pointer;
+}
+.star.full::before {
+  content: "\e613";
+}
+.star.empty::before {
+  content: "\e611";
+}

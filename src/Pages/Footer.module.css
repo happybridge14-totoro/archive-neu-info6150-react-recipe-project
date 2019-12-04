@@ -20,6 +20,7 @@
   list-style: none;
   height: 80px;
   line-height: 80px;
+  padding: 0px;
 }
 .container li {
   display: inline-block;
@@ -32,4 +33,16 @@
 }
 .showPopup {
   filter: var(--filter-blur);
+}
+@media screen and (max-width: 414px) {
+  .footer {
+    position: static;
+    box-shadow: none;
+    border-top: 1px solid var(--color-minor);
+  }
+}
+@media screen and (min-width: 414px) and (max-width: 480px) {
+  .footer {
+    font-size: smaller;
+  }
 }

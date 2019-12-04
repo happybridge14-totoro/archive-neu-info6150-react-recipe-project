@@ -4,6 +4,7 @@ import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
 import {signOut} from "../Proxy/UserData";
 import {PopupContext, SHOW} from "../context/showPopupContext";
+import EVENT  from "../Proxy/Event";
 
 const Header = memo((props) => {
   const [keyword, setKeyword] = useState("");
@@ -33,6 +34,7 @@ const Header = memo((props) => {
     signOut();
     setUsername("");
     setNickname("");
+    window.dispatchEvent(new Event(EVENT.SIGN_OUT));
   };
   const handleSearch = (e) => {
     if (keyword !== "" && (!e.key || (e.key && e.key === 'Enter'))) {
@@ -53,21 +55,25 @@ const Header = memo((props) => {
   return (
     <header className={`${styles.header} background-color ${showPopup===SHOW ? styles.showPopup : ""}`}>
       <nav className={styles.nav}>
-        <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
-        <div className={styles.dropDownContainer}>
-          <DropDown data={categoryDropdown}/>
+        <div className={styles.group}>
+          <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
+          <a className={`clickable ${styles.home} ${styles.navButton}`} href="/">Home</a>
+          <div className={styles.dropDownContainer}>
+            <DropDown data={categoryDropdown}/>
+          </div>
         </div>
-        {renderUser()}
-        <div className={styles.search}>
-          <input
-            type="text"
-            value={keyword}
-            onChange={(e)=>{setKeyword(e.target.value)}}
-            onKeyPress={handleSearch}
-            maxLength="16"/>
-          <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
+        <div className={styles.group}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              value={keyword}
+              onChange={(e)=>{setKeyword(e.target.value)}}
+              onKeyPress={handleSearch}
+              maxLength="16"/>
+            <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
+          </div>
+          {renderUser()}
         </div>
-        <img className={styles.logo} src="../../images/logo2.png" alt="logo"/>
       </nav>
     </header>
   )

@@ -5,17 +5,41 @@ import {getItemById} from "../Proxy/Data";
 import styles from "./Detail.module.css";
 import ReactPlayer from "react-player";
 import NavigationBar from "../Widgets/NavigationBar"
-        // <items = {Object.values(items)}>
+import EVENT from "../Proxy/Event";
+import RatingStar from "../Widgets/RatingStar";
+import {getStatus, rateIt, getRating} from "../Proxy/UserData";
 
 export default class Detail extends Component {
   constructor(props) {
     super(props);
     let detail = getItemById(this.props.id);
     this.state = {
+      user: getStatus(),
+      userRating: "0",
       detail: detail
     };
     this.navbarPosition = [true, detail.categoryId, detail.id];
   }
+  signoutHandler = (e) => {
+    this.setState({user: null});
+  }
+  rateItHandler = async (value) => {
+    const ret = await rateIt(this.props.id, value);
+    if (ret) {
+      this.setState({userRating: ret.toString()});
+    }
+  }
+  async componentDidMount() {
+    if (this.state.user) {
+      const rating = await getRating(this.props.id);
+      this.setState({userRating: (rating || 0).toString()});
+    }
+    window.addEventListener(EVENT.SIGN_OUT, this.signoutHandler);
+  }
+  componentWillUnmount() {
+    window.removeEventListener(EVENT.SIGN_OUT, this.signoutHandler);
+  }
+
 
   render() {
     if (this.state.detail === null) {
@@ -25,10 +49,16 @@ export default class Detail extends Component {
     return (
       <article className = {styles.wholePage}>
         <NavigationBar positions={this.navbarPosition}/>
+
         <section className = {styles.container}>
             <div className = {styles.topleft}>
               <h1 >{this.state.detail.title}</h1>
               <h2>Rating: {this.state.detail.rating}</h2>
+              <section>
+                <span>Your rating:  </span>
+                {this.state.user &&<RatingStar score={this.state.userRating} callBack={this.rateItHandler}/>}
+                {!this.state.user && <a className={styles.clickable} href="/login">Login to rate me!</a>}
+              </section>
               <h2>Time: {this.state.detail.time}</h2>
             </div>
             
