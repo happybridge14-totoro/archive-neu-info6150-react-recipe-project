@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from "react";
+import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -14,14 +14,12 @@ import Category from "./Pages/Category";
 import Detail from "./Pages/Detail";
 import Popup from "./Pages/Popup";
 import Login from "./Pages/Login";
-import Server from "./Proxy/MockServer/Server";
 import {getStatus} from "./Proxy/UserData";
 import "./App.css";
 import EVENT from "./Proxy/Event";
 import {PopupContext, SHOW, HIDE} from "./context/showPopupContext";
 
 function App() {
-  // Server.test();
   const [hasPopup, setHasPopup] = useState(false);
   const handleDisplay = (e) => { setHasPopup(true); };
   const handleDismiss = (e) => { setHasPopup(false); };

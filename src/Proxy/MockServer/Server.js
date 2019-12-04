@@ -26,39 +26,6 @@ const checkPasswordAndGetUserInfo = async (username, pwd) => {
 };
 
 const Server = {
-  test: async () => {
-    // let test = {"a": "hello"};
-    // let c = JWT.encrypt(test);
-    // let zz = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIzMyJ9.jWFHtIB3_n7qaQPurcuYlvF_IutNp_zGH8LDUBySIKc";
-    // // let b = JWT.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIzMyJ9.AL_7wBjAXM9djXUTe5I4OX40DSdq-4aG-lNWI-NVsxQ", "33");
-    // let b = JWT.verify(zz, "33");
-    // console.log(b);
-    const testData = [{
-      username: "test1",
-      nickname: "Tester 1",
-      pwd: "111111"
-      }, {
-      username: "test2",
-      nickname: "Tester 3",
-      pwd: "111111"
-    }];
-    let ret = await customersDB.getAll();
-    console.log("getAll");
-    console.log(ret);
-    return Promise.all(testData.map((v) => {
-      v.pwd = encryptPWD(v.pwd);
-      return customersDB.setItem(v.username, v);
-    })).then((r) => {
-      console.log("here?")
-      console.log(r);
-    }).then(() => {
-      return customersDB.getItem("test1");
-    }).then((v) => {
-      console.log("get");
-      console.log(v);
-    });
-  },
-
   addNewUser: async (userObj) => {
     let data = await customersDB.getItem(userObj.username);
     let errorCode = -1;
