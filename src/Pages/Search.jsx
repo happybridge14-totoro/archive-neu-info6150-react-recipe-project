@@ -32,7 +32,7 @@ const Search = (props) => {
       return (
         <section className={styles.container}>
           <div className={styles.noresult}>Sorry, no results for "{props.keyword}".</div>
-          <div tabIndex="0" className={`${styles.back} clickable`} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>
+          <div tabIndex="0" className={`${styles.back} clickable`} onKeyPress={(e)=>{e.key === 'Enter' && window.history.back();}} onClick={(e)=>{e.preventDefault();window.history.back()}}>Back</div>
         </section>
       );
     } else {
