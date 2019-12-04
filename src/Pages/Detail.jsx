@@ -20,7 +20,10 @@ export default class Detail extends Component {
       userRating: "0",
       detail: detail
     };
-    this.navbarPosition = [true, detail.categoryId, detail.id];
+    if (detail !== null) {
+      this.navbarPosition = [true, detail.categoryId, detail.id];
+    }
+    
   }
   signoutHandler = (e) => {
     this.setState({user: null});
