@@ -1,19 +1,18 @@
 import {ulid} from "ulid";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import styles from "./Popup.module.css";
 import EVENT from "../Proxy/Event";
 
-let gScrollHandler, gKeyUpHandler = null;
+const initState = {
+  display: false,
+  title: "",
+  body: [],
+  buttonText: "",
+  callBack: null
+};
 const Popup = (props) => {
-  const initState = {
-    display: false,
-    title: "",
-    body: [],
-    buttonText: "",
-    callBack: null
-  };
   const [state, setState] = useState(initState);
-  const keyUpHandler = (e) => {
+  const keyUpHandler = useCallback((e) => {
     if (e.keyCode === 9) {
       e.stopImmediatePropagation();
       e.preventDefault();
@@ -21,39 +20,31 @@ const Popup = (props) => {
     } else if (e.keyCode === 13) {
       window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
     }
-  }
-  const clickHandler = (e) => {
+  }, []);
+  const clickHandler = useCallback((e) => {
     window.dispatchEvent(new Event(EVENT.DISMISS_POPUP));
-  }
-  const scrollHandler = (e) => {
+  }, []);
+  const scrollHandler = useCallback((e) => {
     e.stopImmediatePropagation();
     e.preventDefault();
-  }
-  const displayPopup = (e) => {
+  }, []);
+  const displayPopup = useCallback((e) => {
     if (!state.display) {
       document.body.style.overflow = "hidden;";
-      gKeyUpHandler = keyUpHandler;
-      gScrollHandler = scrollHandler;
       window.addEventListener("keydown", keyUpHandler, true);
       window.addEventListener("scroll", scrollHandler, true);
     }
     setState({...e.detail, display: true});
-  };
-  const dismissPopup = (e) => {
+  }, [keyUpHandler, scrollHandler, state.display]);
+  const dismissPopup = useCallback((e) => {
     document.body.style.overflow = "unset";
-    if (gKeyUpHandler) {
-      window.removeEventListener("keydown", gKeyUpHandler, true);
-      gKeyUpHandler = null;
-    }
-    if (gScrollHandler) {
-      window.removeEventListener("scroll", gScrollHandler, true);
-      gScrollHandler = null;
-    }
+    window.removeEventListener("keydown", keyUpHandler, true);
+    window.removeEventListener("scroll", scrollHandler, true);
     setState(initState);
     if (state.callBack) {
       state.callBack();
     }
-  };
+  }, [keyUpHandler, scrollHandler, state]);
   useEffect(() => {
     window.addEventListener(EVENT.DISPLAY_POPUP, displayPopup);
     window.addEventListener(EVENT.DISMISS_POPUP, dismissPopup);

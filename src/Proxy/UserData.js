@@ -51,7 +51,7 @@ const signUp = async (username, pwd, nickname) => {
     pwd: pwd,
     nickname: nickname
   };
-  let ret = await Server.addNewUser(paramObj);
+  const ret = await Server.addNewUser(paramObj);
   if (ret ||  ret.errorCode === -1) {
     storeJWTToken(ret.token);
   }

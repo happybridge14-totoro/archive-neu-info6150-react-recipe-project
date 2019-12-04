@@ -1,4 +1,4 @@
-import React, {memo, useReducer, useEffect} from 'react';
+import React, {memo, useReducer, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styles from "./RatingStar.module.css";
 import {ulid} from "ulid";
@@ -8,11 +8,11 @@ const ACTION_LEAVE = Symbol("leave");
 const ACTION_CLICK = Symbol("click");
 const UPDATE_VALUE = Symbol("update");
 const RatingStar = memo((props) => {
-  const originScore = props.score;
-  const reducer = (state, action) => {
+  const [originScore, callBack] = props;
+  const reducer = useCallback((state, action) => {
     switch (action.type) {
       case ACTION_CLICK:
-        props.callBack(action.value);
+        callBack(action.value);
         // falls through
       case ACTION_HOVER:
       case UPDATE_VALUE:
@@ -22,7 +22,7 @@ const RatingStar = memo((props) => {
       default:
         break;
     }
-  };
+  }, [originScore, callBack]);
   const [starScore, dispatch] = useReducer(reducer, originScore);
   useEffect(() => {
     dispatch({type: UPDATE_VALUE, value: originScore});

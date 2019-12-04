@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useCallback } from "react";
 import PropTypes from 'prop-types';
 import styles from './Form.module.css';
 
@@ -15,7 +15,7 @@ const Form = memo((props) => {
     [values[i], setValues[i]] = useState("");
     [errors[i], setErrors[i]] = useState(true);
   });
-  const reset = () => {
+  const reset = useCallback(() => {
     setInitStatus(true);
     setHasError(false);
     setIsSubmitting(false);
@@ -23,19 +23,19 @@ const Form = memo((props) => {
       setValues[i]("");
       setErrors[i](true);
     });
-  };
+  }, [items, setErrors, setIsSubmitting, setInitStatus, setValues]);
   useEffect(() => {
     if (!initStatus) {
       setHasError(errors.reduce((prev, v) => prev||v, false));
     }
   }, [initStatus, errors]);
-  const handleChange = (e, i) => {
+  const handleChange = useCallback((e, i) => {
     const value = e.target.value;
     e.preventDefault();
     setErrors[i](!items[i].validator(value));
     setValues[i](value);
-  };
-  const createNodes = () => {
+  }, [setErrors, setValues, items]);
+  const createNodes = useCallback(() => {
     return items.map((v, i) => {
       let control;
       if (v.controlType === "input") {
@@ -53,7 +53,7 @@ const Form = memo((props) => {
         </div>
       );
       });
-  };
+  }, [items, errors, initStatus, handleChange, values]);
   const onSubmit = async (e) => {
     e.preventDefault();
     setInitStatus(false);

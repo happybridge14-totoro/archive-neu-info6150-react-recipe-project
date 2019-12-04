@@ -1,18 +1,18 @@
-import React, {memo} from "react";
+import React, {memo, useCallback} from "react";
 import PropTypes from 'prop-types';
 import {getCategoryById, getItemById} from "../Proxy/Data";
 import styles from "./NavigationBar.module.css";
 import {ulid} from "ulid";
 
+const displayLabel = (label) => {
+  if (label === true) {
+    return "Category";
+  }
+  return label.replace(/^\w/, v=>v.toUpperCase());
+};
 const NavigationBar = memo((props) => {
   const [secondLabel, categoryId, itemId] = props.positions;
-  const displayLabel = (label) => {
-    if (label === true) {
-      return "Category";
-    }
-    return label.replace(/^\w/, v=>v.toUpperCase());
-  };
-  const renderNavbarItems = () => {
+    const renderNavbarItems = useCallback(() => {
     let ary = [];
     ary.push(<a className={`clickable ${styles.item}`} href="/" key={ulid()}>Home</a>);
     if (secondLabel) {
@@ -32,7 +32,7 @@ const NavigationBar = memo((props) => {
       }
     }
     return ary;
-  };
+  }, [secondLabel, categoryId, itemId]);
   return (
     <div className={styles.container}>
       {renderNavbarItems()}

@@ -30,7 +30,7 @@ class DB {
     });
   }
 }
-let indexDB = (dbName, storeageName) => {
+const indexDB = (dbName, storeageName) => {
   return new DB(dbName, storeageName);
 }
 export default indexDB;

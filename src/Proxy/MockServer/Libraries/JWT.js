@@ -26,7 +26,7 @@ const generateThirdPart = (content) => {
 const verifyPayload = (payloadObj, userName) => {
   let ret = false;
   try {
-    let expiredTime = payloadObj[EXPIRED_DATE];
+    const expiredTime = payloadObj[EXPIRED_DATE];
     if (expiredTime) {
       ret = (expiredTime > Date.now()) && payloadObj[USERNAME] === userName;
     } else {

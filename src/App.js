@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -21,8 +21,8 @@ import {PopupContext, SHOW, HIDE} from "./context/showPopupContext";
 
 function App() {
   const [hasPopup, setHasPopup] = useState(false);
-  const handleDisplay = (e) => { setHasPopup(true); };
-  const handleDismiss = (e) => { setHasPopup(false); };
+  const handleDisplay = useCallback((e) => { setHasPopup(true); }, []);
+  const handleDismiss = useCallback((e) => { setHasPopup(false); }, []);
   useEffect(() => {
     window.addEventListener(EVENT.DISPLAY_POPUP, handleDisplay);
     window.addEventListener(EVENT.DISMISS_POPUP, handleDismiss);

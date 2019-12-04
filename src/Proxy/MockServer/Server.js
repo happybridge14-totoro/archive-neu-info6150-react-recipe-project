@@ -18,7 +18,7 @@ const encryptPWD = (pwd) => {
     return pwd;
 };
 const checkPasswordAndGetUserInfo = async (username, pwd) => {
-  let data = await customersDB.getItem(username);
+  const data = await customersDB.getItem(username);
   if (data && data.pwd === encryptPWD(pwd)) {
     return data;
   }
@@ -27,12 +27,12 @@ const checkPasswordAndGetUserInfo = async (username, pwd) => {
 
 const Server = {
   addNewUser: async (userObj) => {
-    let data = await customersDB.getItem(userObj.username);
+    const data = await customersDB.getItem(userObj.username);
     let errorCode = -1;
     let token = "";
     if (!data) {
       userObj.pwd = encryptPWD(userObj.pwd);
-      let ret = await customersDB.setItem(userObj.username, userObj);
+      const ret = await customersDB.setItem(userObj.username, userObj);
       if (ret) {
         token = JWT.encrypt({
           username: userObj.username,
@@ -56,14 +56,13 @@ const Server = {
     return JWT.getInfoByToken(token);
   },
   signIn: async (username, pwd) => {
-    let userInfo = await checkPasswordAndGetUserInfo(username, pwd);
+    const userInfo = await checkPasswordAndGetUserInfo(username, pwd);
     if (userInfo) {
       let infoObj = {
         username: userInfo.username,
         nickname: userInfo.nickname
       };
-      let jwtToken = JWT.encrypt(infoObj);
-      infoObj.token = jwtToken;
+      infoObj.token = JWT.encrypt(infoObj);
       return infoObj;
     } else {
       return null;
