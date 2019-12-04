@@ -28,7 +28,7 @@ const Error = () => {
                 <span>?</span>
               </p>
               <div className={styles.gap}></div>
-              <p>
+              <p className={styles.miss}>
                 <span>Click and find the secret of this </span>
                 <a href={errorObj.link} className="clickable">{errorObj.name}</a>
                 <span>!</span>

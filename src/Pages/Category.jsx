@@ -32,6 +32,7 @@ export default class Category extends Component {
             </div>
             <div className={styles.textContainer}>
               <a  tabIndex="-1" className={styles.subtitle} href={`/detail/${v.id}`}>{v.title}</a>
+              <div className={styles.rating}>Rating: {v.rating}</div>
               <div className={styles.text}>{v.time}</div>
             </div>
           </div>);
