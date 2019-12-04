@@ -14,17 +14,18 @@
     max-width: 100%;
     max-height: 100%;
     margin-top: 20px;
+    cursor: pointer;
+    border-radius: 15px;
     
 }
 .title{
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--color-surface);
-    padding: 30px 70px 10px 70px;
-    border: solid var(--color-minor);
+    padding: 30px 70px 30px 70px;
     background: var(--color-decorated);
     font-family: cursive;
-    height: 80px;
+    
     width: 530px;
     display: inline-block;
     
@@ -33,6 +34,7 @@
 .txt{
     text-align: center;
     margin-top: -45px;
+    cursor: pointer;
 }
 .text{
     text-align: center;
@@ -52,6 +54,8 @@
 .gri{
     border: 1px solid var(--color-minor);
     width: 212px;
+    cursor: pointer;
+    margin: auto;
 }
 .image{
     height:188px;
@@ -65,5 +69,52 @@
     font-weight: bold;
     
 }
+
+@media (max-width: 600px){
+    .grid{
+        grid-template-columns: 1fr;
+        
+    }
+    .gri{
+        width: 290px;
+        margin: auto;
+    }
+    .image{
+        width: 290px;
+    }
+    .pic{
+        width: 330px;
+        height: 200px;
+    }
+    .title{
+        width: 150px;
+        
+        font-size: 0.9rem;
+        
+    }
+}
+
+@media (max-width: 760px ) and (min-width: 600px){
+    .grid{
+        grid-template-columns: 1fr 1fr;
+    }
+    .gri{
+        margin: auto;
+        width: 250px;
+    }
+    .image{
+        width: 250px;
+    }
+    .pic{
+        width: 650px;
+        height: 400px;
+    }
+    .title{
+        width: 400px;
+        
+        font-size: 1.5rem;
+    }
+}
+
 
 

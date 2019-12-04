@@ -68,7 +68,7 @@ let getItemsByTag = (tag) => {
 let getMostPopularItems = (count=3) => {
   let length = items.length;
   let ret = [];
-  let luckyIndex = Math.getRandomInt(length - count);
+  let luckyIndex = Math.floor(Math.random() * (length - count));
   for (let i = 0; i < count; i++) {
     ret.push(items[luckyIndex + i]);
   }
