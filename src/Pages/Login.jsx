@@ -12,7 +12,7 @@ const Login = memo((props) => {
   const [page, setPage] = useState(PAGE_SIGNIN);
   const [error, setError] = useState("");
   const onLoginSubmit = async (values) => {
-    let ret = await signIn(values.username, values.pwd);
+    const ret = await signIn(values.username, values.pwd);
     if (ret) {
       if (window.history.length > 0) {
         window.history.back();
@@ -30,7 +30,7 @@ const Login = memo((props) => {
         return;
       }
       const {username, pwd, nickname} = values;
-      let ret = await signUp(username, pwd, nickname);
+      const ret = await signUp(username, pwd, nickname);
       if (ret.errorCode === 1) {
         setError("User name already exists");
       } else if (ret.errorCode === 2) {

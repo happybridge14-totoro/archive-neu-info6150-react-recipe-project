@@ -1,5 +1,5 @@
 import {ulid} from 'ulid';
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import PropTypes from 'prop-types';
 import styles from "./Search.module.css";
 import {search, getCategoryById} from "../Proxy/Data";
@@ -22,11 +22,11 @@ const Search = (props) => {
     setRenderData(result);
     setIsLoading(false);
   },[props.keyword]);
-  const handleClick = (e, id, isCategory) => {
+  const handleClick = useCallback((e, id, isCategory) => {
     e.preventDefault();
     window.location = `/${isCategory ? "category" : "detail"}/${id}`;
-  };
-  const renderSearchResults = () => {
+  }, []);
+  const renderSearchResults = useCallback(() => {
     const keys = Object.keys(renderData);
     if (keys.length === 0) {
       return (
@@ -57,7 +57,7 @@ const Search = (props) => {
           </section>
       )});
     }
-  };
+  }, [props.keyword, handleClick, renderData]);
   if (isLoading) {
     return (
         <div>

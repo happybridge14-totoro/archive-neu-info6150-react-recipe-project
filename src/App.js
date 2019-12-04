@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Home from "./Home/Home";
+import Home from "./Pages/Home";
 import Header from "./Pages/Header";
 import Footer from "./Pages/Footer";
 import About from "./Pages/About";

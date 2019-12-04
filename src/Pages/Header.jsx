@@ -1,11 +1,22 @@
-import React, {memo, useContext, useState, useEffect} from "react";
+import React, {memo, useContext, useState, useEffect, useCallback, useMemo} from "react";
 import styles from "./Header.module.css";
 import DropDown from "../Widgets/DropDown";
 import {getCategories} from "../Proxy/Data";
 import {signOut} from "../Proxy/UserData";
 import {PopupContext, SHOW} from "../context/showPopupContext";
 import EVENT  from "../Proxy/Event";
-
+const categoryDropdown = {
+  "title": {
+    "name": "Category",
+    "link": "/allcategories"
+  },
+  "items": getCategories().map((v) => {
+    return {
+      "name": v.name,
+      "link": `/category/${v.id}`
+    };
+  })
+};
 const Header = memo((props) => {
   const [keyword, setKeyword] = useState("");
   const [username, setUsername] = useState("");
@@ -16,38 +27,26 @@ const Header = memo((props) => {
       setNickname(props.userInfo.nickname);
     }
   }, [props.userInfo]);
-  const categoryDropdown = {
-    "title": {
-      "name": "Category",
-      "link": "/allcategories"
-    },
-    "items": getCategories().map((v) => {
-      return {
-        "name": v.name,
-        "link": `/category/${v.id}`
-      };
-    })
-  };
   const showPopup = useContext(PopupContext);
-  const handleSignOut = (e) => {
+  const handleSignOut = useCallback((e) => {
     e.preventDefault();
     signOut();
     setUsername("");
     setNickname("");
     window.dispatchEvent(new Event(EVENT.SIGN_OUT));
-  };
-  const handleSearch = (e) => {
+  }, [setUsername, setNickname]);
+  const handleSearch = useCallback((e) => {
     if (keyword !== "" && (!e.key || (e.key && e.key === 'Enter'))) {
         e.preventDefault();
         window.location= `/search/${keyword}`;
     }
-  };
-  const handleKeyPress = (e) => {
+  }, [keyword]);
+  const handleKeyPress = useCallback((e) => {
     if (e && e.key === 'Enter') {
       handleSignOut(e);
     }
-  }
-  const renderUser = () => {
+  }, [handleSignOut]);
+  const renderUser = useMemo(() => {
     if (username !== "") {
       return (<div className={styles.userInfo}>
         <div>Hello, {nickname}</div>
@@ -56,7 +55,7 @@ const Header = memo((props) => {
     } else {
       return (<a className={`clickable ${styles.signIn} ${styles.navButton}`} href="/login">Sign in</a>);
     }
-  }
+  }, [nickname, username, handleKeyPress, handleSignOut]);
   return (
     <header className={`${styles.header} background-color ${showPopup===SHOW ? styles.showPopup : ""}`}>
       <nav className={styles.nav}>
@@ -77,7 +76,7 @@ const Header = memo((props) => {
               maxLength="16"/>
             <img className={styles.searchIcon} src="../../images/search.png" alt="logo" onClick={handleSearch}/>
           </div>
-          {renderUser()}
+          {renderUser}
         </div>
       </nav>
     </header>

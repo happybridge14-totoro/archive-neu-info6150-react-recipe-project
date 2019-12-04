@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Error.module.css";
 import {getError} from "../Proxy/Data";
 
-let errorObj = getError();
+const errorObj = getError();
 const Error = () => {
     return (
         <div className={styles.error}>
