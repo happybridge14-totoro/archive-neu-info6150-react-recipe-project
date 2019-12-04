@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from "./RatingStar.module.css";
 import {ulid} from "ulid";
 const STAR_NUMBER = 5;
+const MIN_SCORE = 1;
 const ACTION_HOVER = Symbol("hover");
 const ACTION_LEAVE = Symbol("leave");
 const ACTION_CLICK = Symbol("click");
@@ -24,6 +25,24 @@ const RatingStar = memo((props) => {
     }
   }, [score, callBack]);
   const [starScore, dispatch] = useReducer(reducer, score);
+  const handleKeyUp = useCallback((e) => {
+    e.preventDefault();
+    let value = starScore;
+    switch (e.key) {
+      case "Enter":
+        dispatch({type: ACTION_CLICK, value: value});
+        return;
+      case "ArrowRight":
+        value = value >= STAR_NUMBER ? STAR_NUMBER : ++value;
+        break;
+      case "ArrowLeft":
+        value = value <= MIN_SCORE ? MIN_SCORE : --value;
+        break;
+      default:
+        break;
+    }
+    dispatch({type: UPDATE_VALUE, value: value});
+  }, [starScore]);
   useEffect(() => {
     dispatch({type: UPDATE_VALUE, value: score});
   },[score]);
@@ -37,7 +56,7 @@ const RatingStar = memo((props) => {
                   onMouseLeave={(e)=> {dispatch({type: ACTION_LEAVE})}}
                   onMouseEnter={(e)=> {dispatch({type: ACTION_HOVER, value: i+1})}}></i>);
   }
-  return (<section className={styles.ratingStar}>{stars}</section>);
+  return (<section tabIndex="0" className={styles.ratingStar} onKeyUp={handleKeyUp}>{stars}</section>);
 });
 
 RatingStar.propTypes = {
