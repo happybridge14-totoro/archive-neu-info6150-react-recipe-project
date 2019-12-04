@@ -70,6 +70,7 @@ export default class Detail extends Component {
             <div className = {styles.videoWrapper}> 
               <Video 
                 url = {this.state.detail.videoURL}
+                title = {this.state.detail.title}
                 alt = {`${this.state.detail.shortName} dish `}
                 />
             </div>}

@@ -45,8 +45,6 @@
   .image{
     max-width: 320px;
   }
-
-
 }
 @media (max-width:700px){
   .container {
@@ -65,9 +63,6 @@
   .gap {
     height: 0px;
   }
-
-  
-
 }
 @media(max-width:414px){
   .miss{
