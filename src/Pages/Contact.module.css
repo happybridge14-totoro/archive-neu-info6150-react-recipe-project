@@ -13,3 +13,24 @@
     margin-bottom: 40px;
   }
 }
+
+@media(max-width:500px){
+  .container {
+    display: grid;
+    grid-template-columns: 2fr;
+    row-gap: 2em;
+  }
+  .contact{
+    padding: 0px 20px;
+  }
+}
+
+@media(min-width:500px) and (max-width:1000px){
+  .container {
+    grid-template-columns: 2fr 3fr;
+    row-gap: 1em;
+  }
+  .contact{
+    padding: 0px 20px;
+  }
+}

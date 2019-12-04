@@ -12,10 +12,10 @@
 }
 
 .error h1 {
-  font-size: 4rem;
+  font-size: 4em;
 }
 .error p {
-  font-size: 2rem;
+  font-size: 2em;
 }
 .error a {
   color: var(--color-decorated);
@@ -33,3 +33,20 @@
   margin-right: 30px;
   max-width: 500px;
 }
+
+@media(max-width:414px){
+  .gap{
+    display:none;
+  }
+  .miss{
+    display:none;
+  }
+  .error{
+    padding:0px 20px;
+    font-size: 9px;
+  }
+  .image{
+    
+  }
+}
+

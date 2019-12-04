@@ -7,15 +7,21 @@
   width: 100%;
 }
 .about p {
-  font-size: 2rem;
+  font-size: 2em;
 }
 .about a {
-  font-size: 1.5rem;
+  font-size: 1.5em;
   color: var(--color-decorated);
 }
 
 @media screen and (max-height: 600px) {
   .container {
     margin-bottom: 40px;
+  }
+}
+
+@media(max-width:414px){
+  .about{
+    font-size:12px;
   }
 }

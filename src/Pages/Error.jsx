@@ -22,7 +22,7 @@ const Error = () => {
               <a href={errorObj.link}>
                 <img className={styles.image} src={errorObj.imageURL} alt={errorObj.name}/>
               </a>
-              <p>
+              <p className={styles.miss}>
                 <span>Do you like to make your own </span>
                 <a href={errorObj.categoryLink} className="clickable">{errorObj.category}</a>
                 <span>?</span>

@@ -26,7 +26,7 @@ const getEachCategories = () =>{
       )
         result.push(
           <div key={ulid()}>
-            <div key={ulid()}>
+            <div className={styles.divbox} key={ulid()}>
               <img onClick={(e)=>{handleClick(v.id)}} className={styles.picbox} src={v.imageURL} alt={v.name}/>
               <a className={` clickable ${styles.title}`} href={`/Category/${v.id}`}>{v.name}</a>
               </div>

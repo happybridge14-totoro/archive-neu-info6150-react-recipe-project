@@ -25,12 +25,12 @@ export default class Category extends Component {
       items.forEach((v) => {
         result.push(<div tabIndex="0" onClick={(e)=>{this.handleClick(v.id)}} className={styles.itemBox} key={ulid()}>
             <img className={styles.pic} src={v.imageURL} alt={v.title}></img>
-            <div>
+            <div className={styles.signbox}>
               {v.videoURL !== "" &&
                 <img className={styles.playSign} src="/images/video-icon.png" alt="video" key={ulid()}/>
               }
             </div>
-            <div>
+            <div className={styles.textContainer}>
               <a  tabIndex="-1" className={styles.subtitle} href={`/detail/${v.id}`}>{v.title}</a>
               <div className={styles.text}>{v.time}</div>
             </div>
