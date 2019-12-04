@@ -13,7 +13,9 @@ const RatingStar = memo((props) => {
   const reducer = useCallback((state, action) => {
     switch (action.type) {
       case ACTION_CLICK:
-        callBack(action.value);
+        if (action.value !== score) {
+          callBack(action.value);
+        }
         // falls through
       case ACTION_HOVER:
       case UPDATE_VALUE:
@@ -29,9 +31,6 @@ const RatingStar = memo((props) => {
     e.preventDefault();
     let value = starScore;
     switch (e.key) {
-      case "Enter":
-        dispatch({type: ACTION_CLICK, value: value});
-        return;
       case "ArrowRight":
         value = value >= STAR_NUMBER ? STAR_NUMBER : ++value;
         break;
@@ -39,9 +38,10 @@ const RatingStar = memo((props) => {
         value = value <= MIN_SCORE ? MIN_SCORE : --value;
         break;
       default:
+        value = value === "0" ? MIN_SCORE : value;
         break;
     }
-    dispatch({type: UPDATE_VALUE, value: value});
+    dispatch({type: ACTION_CLICK, value: value});
   }, [starScore]);
   useEffect(() => {
     dispatch({type: UPDATE_VALUE, value: score});
