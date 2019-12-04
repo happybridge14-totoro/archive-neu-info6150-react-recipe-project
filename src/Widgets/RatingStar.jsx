@@ -8,7 +8,7 @@ const ACTION_LEAVE = Symbol("leave");
 const ACTION_CLICK = Symbol("click");
 const UPDATE_VALUE = Symbol("update");
 const RatingStar = memo((props) => {
-  const [originScore, callBack] = props;
+  const {score, callBack} = props;
   const reducer = useCallback((state, action) => {
     switch (action.type) {
       case ACTION_CLICK:
@@ -18,15 +18,15 @@ const RatingStar = memo((props) => {
       case UPDATE_VALUE:
         return action.value;
       case ACTION_LEAVE:
-        return originScore;
+        return score;
       default:
         break;
     }
-  }, [originScore, callBack]);
-  const [starScore, dispatch] = useReducer(reducer, originScore);
+  }, [score, callBack]);
+  const [starScore, dispatch] = useReducer(reducer, score);
   useEffect(() => {
-    dispatch({type: UPDATE_VALUE, value: originScore});
-  },[originScore]);
+    dispatch({type: UPDATE_VALUE, value: score});
+  },[score]);
   let stars = [];
   let tmpScore = starScore;
   for (let i = 0; i < STAR_NUMBER; i++) {
