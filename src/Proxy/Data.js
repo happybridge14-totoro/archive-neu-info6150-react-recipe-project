@@ -92,7 +92,7 @@ const search = (keyWord) => {
       });
     });
     if (lruCacheAry.length > 100) {
-      lruCacheAry.unshift();
+      delete searchCache[lruCacheAry.shift()];
     }
     searchCache[keyWord] = result;
   }
