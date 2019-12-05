@@ -37,7 +37,7 @@
 
 
 /*1 breakpoint*/
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 415px) {
 .wholePage{
   margin: 0px 0px 120px;
   padding:0 20px;
@@ -77,7 +77,7 @@
 }
 
 /*2 breakpoint*/
-@media (min-width: 414px) {
+@media (min-width: 415px) {
 .wholePage{
   margin: 0px 0px 120px;
   padding:0 20px;
